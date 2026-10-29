@@ -1,6 +1,6 @@
 extends GridContainer
 
-const TAMAÑO_SLOT: int = 64
+const TAMAÑO_SLOT: int = 32
 
 @export var casilla_scene: PackedScene
 @export var dimensiones: Vector2i
@@ -25,31 +25,47 @@ func init_data_casilla() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()):
+	if not (event is InputEventMouseButton and event.is_pressed()):
 		return
 
 	var item_agarrado = get_tree().get_first_node_in_group("item_agarrado")
-	if item_agarrado == null:
-		_agarrar_item_bajo_el_mouse()
-	else:
-		_soltar_item(item_agarrado)
+	if item_agarrado != null:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			_soltar_item(item_agarrado)
+	elif event.button_index == MOUSE_BUTTON_LEFT:
+		_agarrar_item_bajo_el_mouse(false)
+	elif event.button_index == MOUSE_BUTTON_RIGHT:
+		_agarrar_item_bajo_el_mouse(true)
 
 
-func _agarrar_item_bajo_el_mouse() -> void:
+func _agarrar_item_bajo_el_mouse(solo_uno: bool) -> void:
 	var index = get_index_casilla_desde_coordenadas(Vector2i(get_global_mouse_position()))
 	if index == -1:
 		return
 	var item = data_casilla[index]
 	if item == null:
 		return
-	item.agarrar()
+
+	if solo_uno and item.cantidad > 1:
+		item.dividir_uno().agarrar()
+		return
+
 	sacar_item_de_data_casilla(item)
+	item.agarrar()
 
 
 func _soltar_item(item_agarrado: Node) -> void:
 	var punto = Vector2i(item_agarrado.ancla) + Vector2i.ONE * (TAMAÑO_SLOT / 2)
 	var index = get_index_casilla_desde_coordenadas(punto)
-	if index == -1 or not item_entra(index, item_agarrado.dimensiones):
+	if index == -1:
+		return
+
+	var destino = data_casilla[index]
+	if destino != null and destino.puede_apilar(item_agarrado):
+		destino.apilar(item_agarrado)
+		return
+
+	if not item_entra(index, item_agarrado.dimensiones):
 		return
 	llenar_data_casilla(item_agarrado, index)
 	item_agarrado.colocar(get_coordenadas_desde_index_casilla(index))

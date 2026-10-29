@@ -9,33 +9,42 @@
 [ext_resource type="Texture2D" uid="uid://li0nllsmjtjq" path="res://Grilla/Assets/ItemGreen.png" id="4_s6ksn"]
 [ext_resource type="Texture2D" uid="uid://0sno1oi6ly57" path="res://Grilla/Assets/ItemPurple.png" id="5_8icrg"]
 [ext_resource type="Texture2D" uid="uid://cw5d8287sq6a8" path="res://Grilla/Assets/ItemPink.png" id="6_qxa1s"]
+[ext_resource type="Texture2D" uid="uid://b630hjarlfr7f" path="res://Grilla/Assets/ItemBrown.png" id="7_qxa1s"]
 
 [sub_resource type="Resource" id="Resource_rf6od"]
 script = ExtResource("2_rf6od")
 nombre = "OrangeItem"
-texture = ExtResource("3_egqu4")
 dimensiones = Vector2i(2, 1)
+texture = ExtResource("3_egqu4")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_egqu4"]
 script = ExtResource("2_rf6od")
 nombre = "GreenItem"
-texture = ExtResource("4_s6ksn")
 dimensiones = Vector2i(4, 2)
+texture = ExtResource("4_s6ksn")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_auoqk"]
 script = ExtResource("2_rf6od")
 nombre = "PurpleItem"
-texture = ExtResource("5_8icrg")
 dimensiones = Vector2i(2, 5)
+texture = ExtResource("5_8icrg")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_s6ksn"]
 script = ExtResource("2_rf6od")
 nombre = "PinkItem"
-texture = ExtResource("6_qxa1s")
 dimensiones = Vector2i(2, 2)
+texture = ExtResource("6_qxa1s")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_qxa1s"]
+script = ExtResource("2_rf6od")
+nombre = "BrownItem"
+texture = ExtResource("7_qxa1s")
+stackeable = true
+cantidad_inicial = 10
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [node name="InventarioGrilla" type="Control" unique_id=639028448]
@@ -52,7 +61,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_efp76")
-items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn")])
+items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_qxa1s")])
 item_scene = ExtResource("2_fq556")
 
 [node name="Grilla" type="GridContainer" parent="Inventario" unique_id=662261994]
@@ -62,4 +71,4 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 script = ExtResource("1_fq7lf")
 casilla_scene = ExtResource("2_0a3j7")
-dimensiones = Vector2i(5, 15)
+dimensiones = Vector2i(7, 10)

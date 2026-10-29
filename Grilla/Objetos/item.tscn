@@ -4,3 +4,9 @@
 
 [node name="Item" type="Sprite2D" unique_id=595347924]
 script = ExtResource("1_lft5x")
+
+[node name="Cantidad" type="Label" parent="." unique_id=1681405037]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
