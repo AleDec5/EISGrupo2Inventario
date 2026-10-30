@@ -1,5 +1,7 @@
 extends GridContainer
 
+signal fusion_bloqueada(motivo: String)
+
 const TAMAÑO_SLOT: int = 32
 
 @export var casilla_scene: PackedScene
@@ -61,14 +63,28 @@ func _soltar_item(item_agarrado: Node) -> void:
 		return
 
 	var destino = data_casilla[index]
-	if destino != null and destino.puede_apilar(item_agarrado):
-		destino.apilar(item_agarrado)
+	if destino != null:
+		if destino.puede_apilar(item_agarrado):
+			destino.apilar(item_agarrado)
+		elif destino.puede_fusionar(item_agarrado):
+			destino.fusionar(item_agarrado)
+		else:
+			_avisar_bloqueo(destino, item_agarrado)
 		return
 
 	if not item_entra(index, item_agarrado.dimensiones):
 		return
 	llenar_data_casilla(item_agarrado, index)
 	item_agarrado.colocar(get_coordenadas_desde_index_casilla(index))
+
+
+func _avisar_bloqueo(destino: Node, item: Node) -> void:
+	if not destino.es_mismo_item(item) or destino.data.stackeable:
+		return
+	if destino.tier != item.tier:
+		fusion_bloqueada.emit("tier_distinto")
+	elif destino.tier >= ItemData.TIER_MAXIMO:
+		fusion_bloqueada.emit("tier_maximo")
 
 
 func intentar_agregar_item_data(item: Node) -> bool:

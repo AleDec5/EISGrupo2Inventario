@@ -14,6 +14,7 @@ func agregar_item(item_data: ItemData) -> void:
 	var nuevo_item = item_scene.instantiate()
 	nuevo_item.data = item_data
 	nuevo_item.cantidad = mini(item_data.cantidad_inicial, item_data.cantidad_maxima)
+	nuevo_item.tier = item_data.tier
 	add_child(nuevo_item)
 	var exito = grilla_item.intentar_agregar_item_data(nuevo_item)
 	if not exito:
