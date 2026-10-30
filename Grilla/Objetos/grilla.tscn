@@ -73,4 +73,4 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 script = ExtResource("1_fq7lf")
 casilla_scene = ExtResource("2_0a3j7")
-dimensiones = Vector2i(7, 10)
+dimensiones = Vector2i(10, 7)
