@@ -24,15 +24,15 @@ func init_data_casilla() -> void:
 	data_casilla.fill(null)
 
 
-func _gui_input(event: InputEvent) -> void:
-	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()):
-		return
-
-	var item_agarrado = get_tree().get_first_node_in_group("item_agarrado")
-	if item_agarrado == null:
-		_agarrar_item_bajo_el_mouse()
-	else:
-		_soltar_item(item_agarrado)
+#func _gui_input(event: InputEvent) -> void:
+#	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()):
+#		return
+#
+#	var item_agarrado = get_tree().get_first_node_in_group("item_agarrado")
+#	if item_agarrado == null:
+#		_agarrar_item_bajo_el_mouse()
+#	else:
+#		_soltar_item(item_agarrado)
 
 
 func _agarrar_item_bajo_el_mouse() -> void:
@@ -45,6 +45,12 @@ func _agarrar_item_bajo_el_mouse() -> void:
 	item.agarrar()
 	sacar_item_de_data_casilla(item)
 
+#separe la logica para ver si hay item abajo del mouse en una funcion aparte para usarlo en menu
+func obtener_item_bajo_el_mouse() -> Node:
+	var index = get_index_casilla_desde_coordenadas(Vector2i(get_global_mouse_position()))
+	if index != -1 and data_casilla[index] != null:
+		return data_casilla[index]
+	return null
 
 func _soltar_item(item_agarrado: Node) -> void:
 	var punto = Vector2i(item_agarrado.ancla) + Vector2i.ONE * (TAMAÑO_SLOT / 2)

@@ -1,3 +1,4 @@
+class_name ItemGrilla
 extends Sprite2D
 
 const TAMAÑO_SLOT: int = 64

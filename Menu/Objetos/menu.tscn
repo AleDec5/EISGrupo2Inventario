@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://byvh515pm5fek"]
+
+[ext_resource type="PackedScene" uid="uid://pjwyk6ycpejl" path="res://Grilla/Objetos/grilla.tscn" id="1_53vih"]
+[ext_resource type="Script" uid="uid://bce2s5f0q0hi0" path="res://Menu/Scripts/menu.gd" id="1_nys4u"]
+
+[node name="Menu" type="Control" unique_id=611561086]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_nys4u")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=819823046]
+
+[node name="Inventario" type="VBoxContainer" parent="CanvasLayer" unique_id=2101976262]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Categorias" type="HBoxContainer" parent="CanvasLayer/Inventario" unique_id=12669320]
+layout_mode = 2
+
+[node name="General" type="Button" parent="CanvasLayer/Inventario/Categorias" unique_id=91944749]
+layout_mode = 2
+text = "General"
+
+[node name="Armas" type="Button" parent="CanvasLayer/Inventario/Categorias" unique_id=394966497]
+layout_mode = 2
+text = "Armas"
+
+[node name="Consumibles" type="Button" parent="CanvasLayer/Inventario/Categorias" unique_id=1450585329]
+layout_mode = 2
+text = "Consumibles"
+
+[node name="Indumentaria" type="Button" parent="CanvasLayer/Inventario/Categorias" unique_id=91191718]
+layout_mode = 2
+text = "Indumentaria"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Inventario" unique_id=1987939786]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventarioGrilla" parent="CanvasLayer/Inventario/ScrollContainer" unique_id=639028448 instance=ExtResource("1_53vih")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 700)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1584031717]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TooltipContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer" unique_id=83149271]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HoverTimer" type="Timer" parent="." unique_id=1628367227]
