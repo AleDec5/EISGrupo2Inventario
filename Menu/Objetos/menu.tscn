@@ -12,45 +12,127 @@ script = ExtResource("1_nys4u")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=819823046]
 
-[node name="Inventario" type="VBoxContainer" parent="CanvasLayer" unique_id=2101976262]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Container(CambiarNombre)" type="VBoxContainer" parent="CanvasLayer" unique_id=427150401]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Categorias" type="HBoxContainer" parent="CanvasLayer/Inventario" unique_id=12669320]
+[node name="Spacer" type="Control" parent="CanvasLayer/Container(CambiarNombre)" unique_id=1325360581]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="General" type="Button" parent="CanvasLayer/Inventario/Categorias" unique_id=91944749]
+[node name="ContenedorLabels" type="HBoxContainer" parent="CanvasLayer/Container(CambiarNombre)" unique_id=208832648]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Spacer3" type="Control" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=175786053]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Inicio" type="Button" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=1217760459]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Inicio"
+
+[node name="Spacer4" type="Control" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=439919885]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Inventario" type="Button" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=2006504546]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Inventario"
+
+[node name="Spacer5" type="Control" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=526234500]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="SkillTree" type="Button" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=1847338848]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "SkillTree"
+
+[node name="Spacer6" type="Control" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=29778904]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Mundo" type="Button" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=131693504]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Mundo"
+
+[node name="Spacer7" type="Control" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=1417362385]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Misiones" type="Button" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=1063776859]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Misiones"
+
+[node name="Spacer8" type="Control" parent="CanvasLayer/Container(CambiarNombre)/ContenedorLabels" unique_id=1599910405]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="CanvasLayer/Container(CambiarNombre)" unique_id=2051925385]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Container(CambiarNombre)" unique_id=295087217]
+layout_mode = 2
+
+[node name="ContenedorInventario" type="Control" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer" unique_id=1326992932]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario" unique_id=1487208674]
+layout_mode = 0
+offset_right = 440.0
+offset_bottom = 575.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Inventario" type="VBoxContainer" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario/MarginContainer" unique_id=2101976262]
+layout_mode = 2
+
+[node name="Categorias" type="HBoxContainer" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario/MarginContainer/Inventario" unique_id=12669320]
+layout_mode = 2
+
+[node name="General" type="Button" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario/MarginContainer/Inventario/Categorias" unique_id=91944749]
 layout_mode = 2
 text = "General"
 
-[node name="Armas" type="Button" parent="CanvasLayer/Inventario/Categorias" unique_id=394966497]
+[node name="Armas" type="Button" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario/MarginContainer/Inventario/Categorias" unique_id=394966497]
 layout_mode = 2
 text = "Armas"
 
-[node name="Consumibles" type="Button" parent="CanvasLayer/Inventario/Categorias" unique_id=1450585329]
+[node name="Consumibles" type="Button" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario/MarginContainer/Inventario/Categorias" unique_id=1450585329]
 layout_mode = 2
 text = "Consumibles"
 
-[node name="Indumentaria" type="Button" parent="CanvasLayer/Inventario/Categorias" unique_id=91191718]
+[node name="Indumentaria" type="Button" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario/MarginContainer/Inventario/Categorias" unique_id=91191718]
 layout_mode = 2
 text = "Indumentaria"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Inventario" unique_id=1987939786]
-custom_minimum_size = Vector2(400, 500)
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario/MarginContainer/Inventario" unique_id=1987939786]
+custom_minimum_size = Vector2(600, 400)
+custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InventarioGrilla" parent="CanvasLayer/Inventario/ScrollContainer" unique_id=639028448 instance=ExtResource("1_53vih")]
+[node name="InventarioGrilla" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario/MarginContainer/Inventario/ScrollContainer" unique_id=639028448 instance=ExtResource("1_53vih")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 700)
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1584031717]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario" unique_id=1584031717]
 unique_name_in_owner = true
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TooltipContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer" unique_id=83149271]
+[node name="TooltipContainer" type="VBoxContainer" parent="CanvasLayer/Container(CambiarNombre)/HBoxContainer/ContenedorInventario/PanelContainer" unique_id=83149271]
 unique_name_in_owner = true
 layout_mode = 2
 
