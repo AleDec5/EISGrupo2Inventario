@@ -1,8 +1,8 @@
 extends Control
 
-@onready var contenedor_tooltip: VBoxContainer = %TooltipContainer
-@onready var panel_tooltip: PanelContainer = %PanelContainer
-@onready var escena_inventario = %InventarioGrilla
+@export var contenedor_tooltip: VBoxContainer
+@export var panel_tooltip: PanelContainer
+@export var escena_inventario: Control
 var grilla_inventario = null
 
 # --- Variables para el Umbral de Arrastre ---
