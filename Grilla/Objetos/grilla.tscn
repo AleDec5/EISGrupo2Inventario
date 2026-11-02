@@ -14,6 +14,7 @@
 [sub_resource type="Resource" id="Resource_rf6od"]
 script = ExtResource("2_rf6od")
 nombre = "OrangeItem"
+descripcion = "Item placeholder de color naranja."
 dimensiones = Vector2i(2, 1)
 texture = ExtResource("3_egqu4")
 tier = 2
@@ -23,6 +24,7 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 [sub_resource type="Resource" id="Resource_egqu4"]
 script = ExtResource("2_rf6od")
 nombre = "GreenItem"
+descripcion = "Item placeholder de color verde."
 dimensiones = Vector2i(4, 2)
 texture = ExtResource("4_s6ksn")
 tier = 3
@@ -32,6 +34,7 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 [sub_resource type="Resource" id="Resource_auoqk"]
 script = ExtResource("2_rf6od")
 nombre = "PurpleItem"
+descripcion = "Item placeholder de color violeta."
 dimensiones = Vector2i(2, 5)
 texture = ExtResource("5_8icrg")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
@@ -39,6 +42,7 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 [sub_resource type="Resource" id="Resource_s6ksn"]
 script = ExtResource("2_rf6od")
 nombre = "PinkItem"
+descripcion = "Item placeholder de color rosa."
 dimensiones = Vector2i(2, 2)
 texture = ExtResource("6_qxa1s")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
@@ -46,6 +50,7 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 [sub_resource type="Resource" id="Resource_qxa1s"]
 script = ExtResource("2_rf6od")
 nombre = "BrownItem"
+descripcion = "Item placeholder de color marrón. Futuro consumible. Se puede apilar."
 texture = ExtResource("7_qxa1s")
 stackeable = true
 cantidad_inicial = 10

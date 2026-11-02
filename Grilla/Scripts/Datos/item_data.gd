@@ -5,6 +5,7 @@ const LIMITE_MAXIMO: int = 64
 const TIER_MAXIMO: int = 4
 
 @export var nombre: String
+@export_multiline var descripcion: String
 @export var dimensiones: Vector2i = Vector2i(1, 1)
 @export var texture: Texture2D
 @export_range(1, 4) var tier: int = 1
