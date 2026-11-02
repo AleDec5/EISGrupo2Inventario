@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvfmaahcouem" path="res://Menu/Escenas/SeccionInventario.tscn" id="3_e82yi"]
 [ext_resource type="PackedScene" uid="uid://b82yuyoqdr7m1" path="res://Menu/Escenas/SeccionEquipamiento.tscn" id="4_ofkdj"]
 [ext_resource type="PackedScene" uid="uid://ctvym8gu2887c" path="res://Menu/Escenas/Footer.tscn" id="5_ofkdj"]
+[ext_resource type="PackedScene" uid="uid://o8ba8ii8vcjy" path="res://Menu/Escenas/Informacion.tscn" id="6_w8k61"]
 
 [node name="Menu" type="Control" unique_id=611561086 node_paths=PackedStringArray("contenedor_tooltip", "panel_tooltip", "escena_inventario")]
 layout_mode = 3
@@ -61,6 +62,9 @@ layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_bottom = 15
+
+[node name="PanelDescripcion" parent="CanvasLayer" unique_id=613739064 instance=ExtResource("6_w8k61")]
+visible = false
 
 [node name="HoverTimer" type="Timer" parent="." unique_id=1628367227]
 
