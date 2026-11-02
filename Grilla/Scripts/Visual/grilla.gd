@@ -1,6 +1,8 @@
 extends GridContainer
 
-const TAMAÑO_SLOT: int = 64
+signal fusion_bloqueada(motivo: String)
+
+const TAMAÑO_SLOT: int = 32
 
 @export var casilla_scene: PackedScene
 @export var dimensiones: Vector2i
@@ -24,27 +26,6 @@ func init_data_casilla() -> void:
 	data_casilla.fill(null)
 
 
-#func _gui_input(event: InputEvent) -> void:
-#	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()):
-#		return
-#
-#	var item_agarrado = get_tree().get_first_node_in_group("item_agarrado")
-#	if item_agarrado == null:
-#		_agarrar_item_bajo_el_mouse()
-#	else:
-#		_soltar_item(item_agarrado)
-
-
-func _agarrar_item_bajo_el_mouse() -> void:
-	var index = get_index_casilla_desde_coordenadas(Vector2i(get_global_mouse_position()))
-	if index == -1:
-		return
-	var item = data_casilla[index]
-	if item == null:
-		return
-	item.agarrar()
-	sacar_item_de_data_casilla(item)
-
 #separe la logica para ver si hay item abajo del mouse en una funcion aparte para usarlo en menu
 func obtener_item_bajo_el_mouse() -> Node:
 	var index = get_index_casilla_desde_coordenadas(Vector2i(get_global_mouse_position()))
@@ -52,13 +33,55 @@ func obtener_item_bajo_el_mouse() -> Node:
 		return data_casilla[index]
 	return null
 
+
+func agarrar_item(item: Node) -> void:
+	if get_tree().get_first_node_in_group("item_agarrado") != null:
+		return
+	sacar_item_de_data_casilla(item)
+	item.agarrar()
+
+
+func agarrar_uno(item: Node) -> void:
+	if get_tree().get_first_node_in_group("item_agarrado") != null or item.cantidad < 2:
+		return
+	item.dividir(1).agarrar()
+
+
+func dividir_a_la_mitad(item: Node) -> void:
+	if get_tree().get_first_node_in_group("item_agarrado") != null or item.cantidad < 2:
+		return
+	item.dividir(floori(item.cantidad / 2.0)).agarrar()
+
+
 func _soltar_item(item_agarrado: Node) -> void:
 	var punto = Vector2i(item_agarrado.ancla) + Vector2i.ONE * (TAMAÑO_SLOT / 2)
 	var index = get_index_casilla_desde_coordenadas(punto)
-	if index == -1 or not item_entra(index, item_agarrado.dimensiones):
+	if index == -1:
+		return
+
+	var destino = data_casilla[index]
+	if destino != null:
+		if destino.puede_apilar(item_agarrado):
+			destino.apilar(item_agarrado)
+		elif destino.puede_fusionar(item_agarrado):
+			destino.fusionar(item_agarrado)
+		else:
+			_avisar_bloqueo(destino, item_agarrado)
+		return
+
+	if not item_entra(index, item_agarrado.dimensiones):
 		return
 	llenar_data_casilla(item_agarrado, index)
 	item_agarrado.colocar(get_coordenadas_desde_index_casilla(index))
+
+
+func _avisar_bloqueo(destino: Node, item: Node) -> void:
+	if not destino.es_mismo_item(item) or destino.data.stackeable:
+		return
+	if destino.tier != item.tier:
+		fusion_bloqueada.emit("tier_distinto")
+	elif destino.tier >= ItemData.TIER_MAXIMO:
+		fusion_bloqueada.emit("tier_maximo")
 
 
 func intentar_agregar_item_data(item: Node) -> bool:

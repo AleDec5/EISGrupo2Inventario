@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c8y2ce3kqchib"]
 
 [node name="Casilla" type="Control" unique_id=1924251116]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,10 +13,10 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Fondo" type="ColorRect" parent="." unique_id=1663895680]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_right = 32.0
+offset_bottom = 32.0
 mouse_filter = 2
 color = Color(0.16924527, 0.1692453, 0.16924527, 1)
 
@@ -24,7 +24,7 @@ color = Color(0.16924527, 0.1692453, 0.16924527, 1)
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 63.0
-offset_bottom = 63.0
+offset_right = 32.0
+offset_bottom = 32.0
 mouse_filter = 2
 color = Color(0.5689727, 0.56897277, 0.5689727, 1)

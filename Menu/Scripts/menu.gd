@@ -12,6 +12,8 @@ var _esta_arrastrando: bool = false
 const UMBRAL_ARRASTRE: float = 5.0 # Píxeles que debe moverse para considerar "arrastre"
 
 func _ready() -> void:
+	panel_tooltip.top_level = true
+	panel_tooltip.z_index = 100
 	panel_tooltip.hide()
 	
 	# Buscamos la grilla interna de forma segura
@@ -22,6 +24,18 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	var item_agarrado = get_tree().get_first_node_in_group("item_agarrado")
+
+	# --- 0. CLIC DERECHO: ABRIR EL MENÚ DEL ITEM ---
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		if item_agarrado == null and not _mouse_sobre_tooltip():
+			var item = null
+			if _mouse_esta_sobre(grilla_inventario):
+				item = grilla_inventario.obtener_item_bajo_el_mouse()
+			if item != null:
+				mostrar_tooltip(item)
+			else:
+				ocultar_tooltip()
+		return
 
 	# --- 1. CLIC IZQUIERDO (PRESIONAR O SOLTAR) ---
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -35,10 +49,10 @@ func _input(event: InputEvent) -> void:
 				grilla_inventario._soltar_item(item_agarrado)
 				return
 
-			if not _mouse_esta_sobre(panel_tooltip):
+			if not _mouse_sobre_tooltip():
 				ocultar_tooltip()
 			
-			if item_agarrado == null and _mouse_esta_sobre(grilla_inventario):
+			if item_agarrado == null and _mouse_esta_sobre(grilla_inventario) and not _mouse_sobre_tooltip():
 				# Registramos dónde hizo clic y qué ítem tocó, pero NO lo arrastramos aún
 				_click_inicial_pos = event.position
 				_item_potencial = grilla_inventario.obtener_item_bajo_el_mouse()
@@ -49,10 +63,6 @@ func _input(event: InputEvent) -> void:
 			if _esta_arrastrando and item_agarrado != null:
 				# Intenta soltarlo al liberar el clic mantenido
 				grilla_inventario._soltar_item(item_agarrado)
-					
-			elif not _esta_arrastrando and _item_potencial != null:
-				# Si soltó el clic rápido sin mover el mouse, ABRIMOS EL MODAL
-				mostrar_tooltip(_item_potencial)
 			
 			# Limpiamos las variables tras soltar el clic
 			_item_potencial = null
@@ -66,7 +76,7 @@ func _input(event: InputEvent) -> void:
 					_esta_arrastrando = true
 					ocultar_tooltip()
 					# Arrancamos el ítem para empezar el Drag & Drop
-					grilla_inventario._agarrar_item_bajo_el_mouse()
+					grilla_inventario.agarrar_item(_item_potencial)
 				else:
 					print("Este ítem está bloqueado y no se puede arrastrar.")
 					_item_potencial = null
@@ -79,11 +89,15 @@ func _mouse_esta_sobre(nodo_control: Control) -> bool:
 		return false
 	return nodo_control.get_global_rect().has_point(get_global_mouse_position())
 
+func _mouse_sobre_tooltip() -> bool:
+	return panel_tooltip.visible and _mouse_esta_sobre(panel_tooltip)
+
 func mostrar_tooltip(item: Node) -> void:
 	if not item or not item.data:
 		return
 		
 	for child in contenedor_tooltip.get_children():
+		contenedor_tooltip.remove_child(child)
 		child.queue_free()
 
 	# Cabecera
@@ -101,14 +115,31 @@ func mostrar_tooltip(item: Node) -> void:
 	contenedor_tooltip.add_child(header_hbox)
 	
 	# Opciones dinámicas
-	if "opciones_descripcion" in item.data:
-		for option_text in item.data.opciones_descripcion:
-			var opt_button = Button.new()
-			opt_button.text = str(option_text)
-			contenedor_tooltip.add_child(opt_button)
+	for opcion in item.obtener_opciones():
+		var boton = Button.new()
+		boton.text = opcion
+		boton.pressed.connect(_on_opcion_elegida.bind(opcion, item))
+		contenedor_tooltip.add_child(boton)
 	
-	panel_tooltip.global_position = get_global_mouse_position()
 	panel_tooltip.show()
+	panel_tooltip.reset_size()
+	var limite = (get_viewport_rect().size - panel_tooltip.size).max(Vector2.ZERO)
+	panel_tooltip.global_position = get_global_mouse_position().clamp(Vector2.ZERO, limite)
 
 func ocultar_tooltip() -> void:
 	panel_tooltip.hide()
+
+func _on_opcion_elegida(opcion: String, item: Node) -> void:
+	ocultar_tooltip()
+	if not is_instance_valid(item):
+		return
+	match opcion:
+		"Agarrar uno":
+			grilla_inventario.agarrar_uno(item)
+		"Dividir a la mitad":
+			grilla_inventario.dividir_a_la_mitad(item)
+		"Mover":
+			if not item.data.esta_bloqueado:
+				grilla_inventario.agarrar_item(item)
+		_:
+			print("Opción sin implementar: ", opcion)
