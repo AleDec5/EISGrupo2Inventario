@@ -11,10 +11,16 @@ var _item_potencial: Node = null
 var _esta_arrastrando: bool = false
 const UMBRAL_ARRASTRE: float = 5.0 # Píxeles que debe moverse para considerar "arrastre"
 
+var _panel_info: PanelContainer
+var _etiqueta_nombre: Label
+var _etiqueta_descripcion: Label
+var _etiqueta_detalle: Label
+
 func _ready() -> void:
 	panel_tooltip.top_level = true
 	panel_tooltip.z_index = 100
 	panel_tooltip.hide()
+	_crear_panel_info()
 	
 	# Buscamos la grilla interna de forma segura
 	grilla_inventario = escena_inventario.find_child("Grilla", true, false)
@@ -27,6 +33,7 @@ func _input(event: InputEvent) -> void:
 
 	# --- 0. CLIC DERECHO: ABRIR EL MENÚ DEL ITEM ---
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		ocultar_info()
 		if item_agarrado == null and not _mouse_sobre_tooltip():
 			var item = null
 			if _mouse_esta_sobre(grilla_inventario):
@@ -49,7 +56,8 @@ func _input(event: InputEvent) -> void:
 				grilla_inventario._soltar_item(item_agarrado)
 				return
 
-			if not _mouse_sobre_tooltip():
+			ocultar_info()
+			if not _mouse_esta_sobre(panel_tooltip):
 				ocultar_tooltip()
 			
 			if item_agarrado == null and _mouse_esta_sobre(grilla_inventario) and not _mouse_sobre_tooltip():
@@ -63,6 +71,10 @@ func _input(event: InputEvent) -> void:
 			if _esta_arrastrando and item_agarrado != null:
 				# Intenta soltarlo al liberar el clic mantenido
 				grilla_inventario._soltar_item(item_agarrado)
+					
+			elif not _esta_arrastrando and _item_potencial != null:
+				# Si soltó el clic rápido sin mover el mouse, ABRIMOS EL MODAL
+				mostrar_info(_item_potencial)
 			
 			# Limpiamos las variables tras soltar el clic
 			_item_potencial = null
@@ -75,6 +87,7 @@ func _input(event: InputEvent) -> void:
 				if _item_potencial.data and not _item_potencial.data.esta_bloqueado:
 					_esta_arrastrando = true
 					ocultar_tooltip()
+					ocultar_info()
 					# Arrancamos el ítem para empezar el Drag & Drop
 					grilla_inventario.agarrar_item(_item_potencial)
 				else:
@@ -115,16 +128,16 @@ func mostrar_tooltip(item: Node) -> void:
 	contenedor_tooltip.add_child(header_hbox)
 	
 	# Opciones dinámicas
-	for opcion in item.obtener_opciones():
-		var boton = Button.new()
-		boton.text = opcion
-		boton.pressed.connect(_on_opcion_elegida.bind(opcion, item))
-		contenedor_tooltip.add_child(boton)
+	if "opciones_descripcion" in item.data:
+		for option_text in item.obtener_opciones():
+			var opt_button = Button.new()
+			opt_button.text = str(option_text)
+			opt_button.pressed.connect(_on_opcion_elegida.bind(option_text, item))
+			contenedor_tooltip.add_child(opt_button)
 	
+	panel_tooltip.global_position = get_global_mouse_position()
 	panel_tooltip.show()
 	panel_tooltip.reset_size()
-	var limite = (get_viewport_rect().size - panel_tooltip.size).max(Vector2.ZERO)
-	panel_tooltip.global_position = get_global_mouse_position().clamp(Vector2.ZERO, limite)
 
 func ocultar_tooltip() -> void:
 	panel_tooltip.hide()
@@ -143,3 +156,62 @@ func _on_opcion_elegida(opcion: String, item: Node) -> void:
 				grilla_inventario.agarrar_item(item)
 		_:
 			print("Opción sin implementar: ", opcion)
+
+
+# --- PANEL DE INFORMACIÓN (CLIC IZQUIERDO) ---
+
+func _crear_panel_info() -> void:
+	_panel_info = PanelContainer.new()
+	_panel_info.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_panel_info.custom_minimum_size.x = 180
+	_panel_info.z_index = 100
+
+	var margen := MarginContainer.new()
+	margen.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for lado in ["left", "right", "top", "bottom"]:
+		margen.add_theme_constant_override("margin_" + lado, 8)
+	_panel_info.add_child(margen)
+
+	var caja := VBoxContainer.new()
+	caja.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	margen.add_child(caja)
+
+	_etiqueta_nombre = Label.new()
+	_etiqueta_nombre.add_theme_font_size_override("font_size", 16)
+	caja.add_child(_etiqueta_nombre)
+
+	_etiqueta_descripcion = Label.new()
+	_etiqueta_descripcion.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_etiqueta_descripcion.custom_minimum_size.x = 164
+	caja.add_child(_etiqueta_descripcion)
+
+	_etiqueta_detalle = Label.new()
+	caja.add_child(_etiqueta_detalle)
+
+	_panel_info.hide()
+	$CanvasLayer.add_child(_panel_info)
+
+func mostrar_info(item: Node) -> void:
+	if not item or not item.data:
+		return
+
+	var casillas: Vector2i = item.dimensiones
+	var total: int = casillas.x * casillas.y
+	var detalle := PackedStringArray()
+	if item.data.stackeable:
+		detalle.append("Cantidad: %d / %d" % [item.cantidad, item.data.cantidad_maxima])
+	else:
+		detalle.append("Tier: %d" % item.tier)
+	detalle.append("Ocupa: %d×%d (%d %s)" % [casillas.x, casillas.y, total, "casilla" if total == 1 else "casillas"])
+
+	_etiqueta_nombre.text = item.data.nombre
+	_etiqueta_descripcion.text = item.data.descripcion if item.data.descripcion != "" else "Sin descripción."
+	_etiqueta_detalle.text = "\n".join(detalle)
+
+	_panel_info.show()
+	_panel_info.reset_size()
+	var limite = (get_viewport_rect().size - _panel_info.size).max(Vector2.ZERO)
+	_panel_info.global_position = (get_global_mouse_position() + Vector2(16, 16)).clamp(Vector2.ZERO, limite)
+
+func ocultar_info() -> void:
+	_panel_info.hide()

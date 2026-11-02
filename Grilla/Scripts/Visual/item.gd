@@ -25,6 +25,7 @@ var tier: int = 1:
 
 var _grados_objetivo: float = 0.0
 var _tween: Tween
+var _scroll: ScrollContainer = null
 
 @onready var etiqueta: Label = $Cantidad
 @onready var indicador_tier: GridContainer = $Tier
@@ -58,6 +59,7 @@ func _ready() -> void:
 	if data and data.texture:
 		texture = data.texture
 		scale = Vector2(data.dimensiones) * TAMAÑO_SLOT / texture.get_size()
+	_scroll = _buscar_scroll()
 	actualizar_indicadores()
 
 
@@ -106,16 +108,40 @@ func actualizar_indicadores() -> void:
 	if not is_node_ready() or data == null:
 		return
 
-	etiqueta.visible = data.stackeable
 	etiqueta.text = str(cantidad)
-	etiqueta.global_position = ancla + tamaño - etiqueta.get_combined_minimum_size() - Vector2(2, 0)
+	var tamaño_etiqueta := etiqueta.get_combined_minimum_size()
+	etiqueta.global_position = ancla + tamaño - tamaño_etiqueta - Vector2(2, 0)
+	etiqueta.visible = data.stackeable and _esta_dentro_del_scroll(Rect2(etiqueta.global_position, tamaño_etiqueta))
 
-	indicador_tier.visible = not data.stackeable
 	var cuadritos = indicador_tier.get_children()
 	for i in cuadritos.size():
 		var encendido = ORDEN_LLENADO.find(i) < tier
 		cuadritos[i].color = COLORES_TIER[tier - 1] if encendido else COLOR_APAGADO
-	indicador_tier.global_position = ancla + Vector2(tamaño.x - indicador_tier.get_combined_minimum_size().x - 2, 2)
+	var tamaño_tier := indicador_tier.get_combined_minimum_size()
+	indicador_tier.global_position = ancla + Vector2(tamaño.x - tamaño_tier.x - 2, 2)
+	indicador_tier.visible = not data.stackeable and _esta_dentro_del_scroll(Rect2(indicador_tier.global_position, tamaño_tier))
+
+
+func _buscar_scroll() -> ScrollContainer:
+	var nodo := get_parent()
+	while nodo != null:
+		if nodo is ScrollContainer:
+			return nodo as ScrollContainer
+		nodo = nodo.get_parent()
+	return null
+
+
+func _esta_dentro_del_scroll(rect: Rect2) -> bool:
+	if _scroll == null:
+		return true
+	var ventana := _scroll.get_global_rect()
+	var barra_vertical := _scroll.get_v_scroll_bar()
+	if barra_vertical.visible:
+		ventana.size.x -= barra_vertical.size.x
+	var barra_horizontal := _scroll.get_h_scroll_bar()
+	if barra_horizontal.visible:
+		ventana.size.y -= barra_horizontal.size.y
+	return ventana.encloses(rect)
 
 
 func es_mismo_item(otro: Node) -> bool:
