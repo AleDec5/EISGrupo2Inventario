@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://byvh515pm5fek"]
+
+[ext_resource type="Script" uid="uid://bce2s5f0q0hi0" path="res://Menu/Scripts/menu.gd" id="1_nys4u"]
+[ext_resource type="PackedScene" uid="uid://0uq8n5ncl5rg" path="res://Menu/Escenas/Header.tscn" id="2_nys4u"]
+[ext_resource type="PackedScene" uid="uid://dvfmaahcouem" path="res://Menu/Escenas/SeccionInventario.tscn" id="3_e82yi"]
+[ext_resource type="PackedScene" uid="uid://b82yuyoqdr7m1" path="res://Menu/Escenas/SeccionEquipamiento.tscn" id="4_ofkdj"]
+[ext_resource type="PackedScene" uid="uid://ctvym8gu2887c" path="res://Menu/Escenas/Footer.tscn" id="5_ofkdj"]
+[ext_resource type="PackedScene" uid="uid://o8ba8ii8vcjy" path="res://Menu/Escenas/Informacion.tscn" id="6_w8k61"]
+
+[node name="Menu" type="Control" unique_id=611561086 node_paths=PackedStringArray("contenedor_tooltip", "panel_tooltip", "escena_inventario")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_nys4u")
+contenedor_tooltip = NodePath("CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario/PanelContainer/TooltipContainer")
+panel_tooltip = NodePath("CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario/PanelContainer")
+escena_inventario = NodePath("CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario/Inventario/ScrollContainer/InventarioGrilla")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=819823046]
+
+[node name="ContenedorMenu" type="PanelContainer" parent="CanvasLayer" unique_id=825569544]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContenedorPrincipal" type="VBoxContainer" parent="CanvasLayer/ContenedorMenu" unique_id=427150401]
+layout_mode = 2
+
+[node name="HeaderMC" type="MarginContainer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal" unique_id=694911191]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Header" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal/HeaderMC" unique_id=306604934 instance=ExtResource("2_nys4u")]
+layout_mode = 2
+
+[node name="BodyMC" type="MarginContainer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal" unique_id=2060348706]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_right = 70
+
+[node name="Body" type="HBoxContainer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC" unique_id=1529817835]
+layout_mode = 2
+
+[node name="Inventario" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body" unique_id=1018133904 instance=ExtResource("3_e82yi")]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="PanelContainer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario" index="1" unique_id=56145449]
+visible = true
+
+[node name="EquipamientoMC" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body" unique_id=1831596708 instance=ExtResource("4_ofkdj")]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Footer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal" unique_id=281336662 instance=ExtResource("5_ofkdj")]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="PanelDescripcion" parent="CanvasLayer" unique_id=613739064 instance=ExtResource("6_w8k61")]
+visible = false
+
+[node name="HoverTimer" type="Timer" parent="." unique_id=1628367227]
+
+[editable path="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario"]

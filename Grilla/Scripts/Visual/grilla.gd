@@ -26,34 +26,31 @@ func init_data_casilla() -> void:
 	data_casilla.fill(null)
 
 
-func _gui_input(event: InputEvent) -> void:
-	if not (event is InputEventMouseButton and event.is_pressed()):
-		return
-
-	var item_agarrado = get_tree().get_first_node_in_group("item_agarrado")
-	if item_agarrado != null:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			_soltar_item(item_agarrado)
-	elif event.button_index == MOUSE_BUTTON_LEFT:
-		_agarrar_item_bajo_el_mouse(false)
-	elif event.button_index == MOUSE_BUTTON_RIGHT:
-		_agarrar_item_bajo_el_mouse(true)
-
-
-func _agarrar_item_bajo_el_mouse(solo_uno: bool) -> void:
+#separe la logica para ver si hay item abajo del mouse en una funcion aparte para usarlo en menu
+func obtener_item_bajo_el_mouse() -> Node:
 	var index = get_index_casilla_desde_coordenadas(Vector2i(get_global_mouse_position()))
-	if index == -1:
-		return
-	var item = data_casilla[index]
-	if item == null:
-		return
+	if index != -1 and data_casilla[index] != null:
+		return data_casilla[index]
+	return null
 
-	if solo_uno and item.cantidad > 1:
-		item.dividir_uno().agarrar()
-		return
 
+func agarrar_item(item: Node) -> void:
+	if get_tree().get_first_node_in_group("item_agarrado") != null:
+		return
 	sacar_item_de_data_casilla(item)
 	item.agarrar()
+
+
+func agarrar_uno(item: Node) -> void:
+	if get_tree().get_first_node_in_group("item_agarrado") != null or item.cantidad < 2:
+		return
+	item.dividir(1).agarrar()
+
+
+func dividir_a_la_mitad(item: Node) -> void:
+	if get_tree().get_first_node_in_group("item_agarrado") != null or item.cantidad < 2:
+		return
+	item.dividir(floori(item.cantidad / 2.0)).agarrar()
 
 
 func _soltar_item(item_agarrado: Node) -> void:

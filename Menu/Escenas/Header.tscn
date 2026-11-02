@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://0uq8n5ncl5rg"]
+
+[node name="Header" type="PanelContainer" unique_id=306604934]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1285854412]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ContenedorLabels" type="HBoxContainer" parent="MarginContainer" unique_id=212937425]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 25
+
+[node name="Inicio" type="Button" parent="MarginContainer/ContenedorLabels" unique_id=847841322]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Inicio"
+
+[node name="Inventario" type="Button" parent="MarginContainer/ContenedorLabels" unique_id=1882785459]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Inventario"
+
+[node name="SkillTree" type="Button" parent="MarginContainer/ContenedorLabels" unique_id=906937486]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "SkillTree"
+
+[node name="Mundo" type="Button" parent="MarginContainer/ContenedorLabels" unique_id=1362068614]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Mundo"
+
+[node name="Misiones" type="Button" parent="MarginContainer/ContenedorLabels" unique_id=723392264]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Misiones"

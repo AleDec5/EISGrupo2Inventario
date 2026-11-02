@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ctvym8gu2887c"]
+
+[node name="Footer" type="MarginContainer" unique_id=2015804982]
+offset_right = 216.0
+offset_bottom = 40.0
+
+[node name="FooterContainer" type="HBoxContainer" parent="." unique_id=2053209043]
+layout_mode = 2
+
+[node name="Atras" type="Button" parent="FooterContainer" unique_id=1351603583]
+layout_mode = 2
+text = "Atras (ESC)
+"
+
+[node name="Configuracion" type="Button" parent="FooterContainer" unique_id=1156400618]
+layout_mode = 2
+text = "Configuración"

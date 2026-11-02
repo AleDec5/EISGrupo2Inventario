@@ -1,3 +1,4 @@
+class_name ItemGrilla
 extends Sprite2D
 
 const TAMAÑO_SLOT: int = 32
@@ -63,7 +64,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if esta_agarrado:
 		global_position = get_global_mouse_position()
-		actualizar_indicadores()
+	actualizar_indicadores()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -78,12 +79,10 @@ func rotar() -> void:
 		_tween.kill()
 	_tween = create_tween()
 	_tween.tween_property(self, "rotation_degrees", _grados_objetivo, DURACION_ROTACION)
-	actualizar_indicadores()
 
 
 func set_posicion_inicial(pos: Vector2) -> void:
 	global_position = pos + tamaño / 2
-	actualizar_indicadores()
 
 
 func agarrar() -> void:
@@ -101,7 +100,6 @@ func colocar(pos: Vector2i) -> void:
 	indicador_tier.z_index = 1
 	global_position = Vector2(pos) + tamaño / 2
 	remove_from_group("item_agarrado")
-	actualizar_indicadores()
 
 
 func actualizar_indicadores() -> void:
@@ -149,11 +147,20 @@ func fusionar(otro: Node) -> void:
 	otro.queue_free()
 
 
-func dividir_uno() -> Node:
+func dividir(cantidad_a_separar: int) -> Node:
 	var nuevo = (load(scene_file_path) as PackedScene).instantiate()
 	nuevo.data = data
-	nuevo.cantidad = 1
+	nuevo.cantidad = cantidad_a_separar
 	nuevo.global_position = global_position
 	get_parent().add_child(nuevo)
-	cantidad -= 1
+	cantidad -= cantidad_a_separar
 	return nuevo
+
+
+func obtener_opciones() -> Array[String]:
+	var opciones: Array[String] = []
+	opciones.append_array(data.opciones_descripcion)
+	if data.stackeable and cantidad > 1 and not data.esta_bloqueado:
+		opciones.append("Agarrar uno")
+		opciones.append("Dividir a la mitad")
+	return opciones

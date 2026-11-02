@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://b82yuyoqdr7m1"]
+
+[node name="MarginContainer" type="MarginContainer" unique_id=1831596708]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Equipamiento" type="HBoxContainer" parent="." unique_id=174177239]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="OjetosEnSuVisual" type="VBoxContainer" parent="Equipamiento" unique_id=16472327]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="ColorRect" type="ColorRect" parent="Equipamiento/OjetosEnSuVisual" unique_id=814560803]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ColorRect2" type="ColorRect" parent="Equipamiento/OjetosEnSuVisual" unique_id=1474289950]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ColorRect3" type="ColorRect" parent="Equipamiento/OjetosEnSuVisual" unique_id=1268611056]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ColorRect4" type="ColorRect" parent="Equipamiento/OjetosEnSuVisual" unique_id=720705245]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Spacer" type="Control" parent="Equipamiento/OjetosEnSuVisual" unique_id=429543054]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="Equipamiento/OjetosEnSuVisual" unique_id=1323146146]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PersonajeYArma" type="VBoxContainer" parent="Equipamiento" unique_id=545263222]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="ColorRect" type="ColorRect" parent="Equipamiento/PersonajeYArma" unique_id=1524786562]
+custom_minimum_size = Vector2(200, 350)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Equipamiento/PersonajeYArma" unique_id=39995183]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="IndumentariaMC" type="MarginContainer" parent="Equipamiento" unique_id=292497473]
+layout_mode = 2
+
+[node name="Indumentaria" type="VBoxContainer" parent="Equipamiento/IndumentariaMC" unique_id=1930060612]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="ColorRect" type="ColorRect" parent="Equipamiento/IndumentariaMC/Indumentaria" unique_id=117117397]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Equipamiento/IndumentariaMC/Indumentaria" unique_id=1972552722]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="Equipamiento/IndumentariaMC/Indumentaria" unique_id=305674595]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="Equipamiento/IndumentariaMC/Indumentaria" unique_id=135056965]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Equipamiento2" type="GridContainer" parent="." unique_id=987064877]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 3
+
+[node name="OjetosEnSuVisual" type="VBoxContainer" parent="Equipamiento2" unique_id=1856172683]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 10
+
+[node name="ColorRect" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1979564919]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ColorRect2" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=476954746]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ColorRect3" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1185078389]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ColorRect4" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1736707854]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Spacer" type="Control" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1355139987]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect5" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=496220443]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PersonajeYArma" type="VBoxContainer" parent="Equipamiento2" unique_id=2114307509]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Personaje" type="ColorRect" parent="Equipamiento2/PersonajeYArma" unique_id=399215334]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IndumentariaMC" type="MarginContainer" parent="Equipamiento2" unique_id=890931713]
+layout_mode = 2
+
+[node name="Indumentaria" type="VBoxContainer" parent="Equipamiento2/IndumentariaMC" unique_id=430279370]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="ColorRect" type="ColorRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=1958178339]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=647344205]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=202148018]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=1579104578]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Equipamiento2" unique_id=663531869]
+layout_mode = 2
+
+[node name="Arma" type="ColorRect" parent="Equipamiento2" unique_id=730230304]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
