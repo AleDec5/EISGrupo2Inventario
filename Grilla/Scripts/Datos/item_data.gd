@@ -10,6 +10,7 @@ const TIER_MAXIMO: int = 4
 @export var texture: Texture2D
 @export_range(1, 4) var tier: int = 1
 @export var stackeable: bool = false
+@export var consumible: bool = false
 @export_enum("8:8", "16:16", "32:32", "64:64") var cantidad_maxima: int = 16:
 	set(valor):
 		cantidad_maxima = clampi(valor, 1, LIMITE_MAXIMO)

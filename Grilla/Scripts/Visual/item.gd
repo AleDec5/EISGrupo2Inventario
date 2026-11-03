@@ -186,6 +186,8 @@ func dividir(cantidad_a_separar: int) -> Node:
 func obtener_opciones() -> Array[String]:
 	var opciones: Array[String] = []
 	opciones.append_array(data.opciones_descripcion)
+	if data.consumible and not data.esta_bloqueado:
+		opciones.append("Consumir")
 	if data.stackeable and cantidad > 1 and not data.esta_bloqueado:
 		opciones.append("Agarrar uno")
 		opciones.append("Dividir a la mitad")

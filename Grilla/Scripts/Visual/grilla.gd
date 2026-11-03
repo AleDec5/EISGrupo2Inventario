@@ -1,6 +1,7 @@
 extends GridContainer
 
 signal fusion_bloqueada(motivo: String)
+signal item_consumido(data: ItemData)
 
 const TAMAÑO_SLOT: int = 32
 
@@ -51,6 +52,18 @@ func dividir_a_la_mitad(item: Node) -> void:
 	if get_tree().get_first_node_in_group("item_agarrado") != null or item.cantidad < 2:
 		return
 	item.dividir(floori(item.cantidad / 2.0)).agarrar()
+	
+	
+func consumir_item(item: Node) -> void:
+	if not item.data.consumible or item.data.esta_bloqueado:
+		return
+	var data_consumida: ItemData = item.data
+	if item.data.stackeable and item.cantidad > 1:
+		item.cantidad -= 1
+	else:
+		sacar_item_de_data_casilla(item)
+		item.queue_free()
+	item_consumido.emit(data_consumida)
 
 
 func _soltar_item(item_agarrado: Node) -> void:

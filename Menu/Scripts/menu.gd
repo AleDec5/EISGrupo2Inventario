@@ -55,7 +55,8 @@ func _input(event: InputEvent) -> void:
 			if item_agarrado != null:
 				grilla_inventario._soltar_item(item_agarrado)
 				return
-
+			if _mouse_sobre_info():
+				return
 			ocultar_info()
 			if not _mouse_esta_sobre(panel_tooltip):
 				ocultar_tooltip()
@@ -104,6 +105,11 @@ func _mouse_esta_sobre(nodo_control: Control) -> bool:
 
 func _mouse_sobre_tooltip() -> bool:
 	return panel_tooltip.visible and _mouse_esta_sobre(panel_tooltip)
+	
+	
+func _mouse_sobre_info() -> bool:
+	return _panel_info.visible and _mouse_esta_sobre(_panel_info)
+	
 
 func mostrar_tooltip(item: Node) -> void:
 	if not item or not item.data:
@@ -154,6 +160,8 @@ func _on_opcion_elegida(opcion: String, item: Node) -> void:
 		"Mover":
 			if not item.data.esta_bloqueado:
 				grilla_inventario.agarrar_item(item)
+		"Consumir":
+			grilla_inventario.consumir_item(item)
 		_:
 			print("Opción sin implementar: ", opcion)
 
@@ -176,9 +184,22 @@ func _crear_panel_info() -> void:
 	caja.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	margen.add_child(caja)
 
+	var cabecera := HBoxContainer.new()
+	cabecera.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	caja.add_child(cabecera)
+
 	_etiqueta_nombre = Label.new()
 	_etiqueta_nombre.add_theme_font_size_override("font_size", 16)
-	caja.add_child(_etiqueta_nombre)
+	_etiqueta_nombre.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	cabecera.add_child(_etiqueta_nombre)
+
+	var boton_cerrar := Button.new()
+	boton_cerrar.text = "X"
+	boton_cerrar.flat = true
+	boton_cerrar.focus_mode = Control.FOCUS_NONE
+	boton_cerrar.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	boton_cerrar.pressed.connect(ocultar_info)
+	cabecera.add_child(boton_cerrar)
 
 	_etiqueta_descripcion = Label.new()
 	_etiqueta_descripcion.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

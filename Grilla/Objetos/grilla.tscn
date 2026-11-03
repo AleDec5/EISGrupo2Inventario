@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://0sno1oi6ly57" path="res://Grilla/Assets/ItemPurple.png" id="5_8icrg"]
 [ext_resource type="Texture2D" uid="uid://cw5d8287sq6a8" path="res://Grilla/Assets/ItemPink.png" id="6_qxa1s"]
 [ext_resource type="Texture2D" uid="uid://b630hjarlfr7f" path="res://Grilla/Assets/ItemBrown.png" id="7_qxa1s"]
+[ext_resource type="Texture2D" uid="uid://cdenu1y2v1r7p" path="res://Grilla/Assets/ItemBlue.png" id="8_auoqk"]
 
 [sub_resource type="Resource" id="Resource_rf6od"]
 script = ExtResource("2_rf6od")
@@ -28,7 +29,6 @@ descripcion = "Item placeholder de color verde."
 dimensiones = Vector2i(4, 2)
 texture = ExtResource("4_s6ksn")
 tier = 3
-esta_bloqueado = true
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_auoqk"]
@@ -49,11 +49,33 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_qxa1s"]
 script = ExtResource("2_rf6od")
-nombre = "BrownItem"
-descripcion = "Item placeholder de color marrón. Futuro consumible. Se puede apilar."
+nombre = "Caramelos"
+descripcion = "Regeneración +...HP"
 texture = ExtResource("7_qxa1s")
 stackeable = true
+consumible = true
 cantidad_inicial = 10
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_w8k61"]
+script = ExtResource("2_rf6od")
+nombre = "Poción Murciélago"
+descripcion = "..."
+texture = ExtResource("4_s6ksn")
+stackeable = true
+consumible = true
+cantidad_maxima = 8
+cantidad_inicial = 4
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_0lisf"]
+script = ExtResource("2_rf6od")
+nombre = "Bolsa de Caramelos"
+descripcion = "Regeneración +...HP"
+dimensiones = Vector2i(2, 2)
+texture = ExtResource("8_auoqk")
+consumible = true
+cantidad_maxima = 8
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [node name="InventarioGrilla" type="Control" unique_id=639028448]
@@ -70,7 +92,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_efp76")
-items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4")])
+items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_w8k61"), SubResource("Resource_0lisf")])
 item_scene = ExtResource("2_fq556")
 
 [node name="Grilla" type="GridContainer" parent="Inventario" unique_id=662261994]
