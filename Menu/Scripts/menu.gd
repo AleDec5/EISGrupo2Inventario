@@ -4,10 +4,12 @@ extends Control
 @export var panel_tooltip: PanelContainer
 @export var escena_inventario: Control
 var grilla_inventario = null
+var gestor_equipamiento = null
 
 # --- Variables para el Umbral de Arrastre ---
 var _click_inicial_pos: Vector2 = Vector2.ZERO
 var _item_potencial: Node = null
+var _slot_potencial: SlotEquipamiento = null
 var _esta_arrastrando: bool = false
 const UMBRAL_ARRASTRE: float = 5.0 # Píxeles que debe moverse para considerar "arrastre"
 
@@ -26,6 +28,8 @@ func _ready() -> void:
 	grilla_inventario = escena_inventario.find_child("Grilla", true, false)
 	if grilla_inventario == null:
 		print("ERROR CRÍTICO: No se encontró 'Grilla' dentro de la escena")
+	
+	gestor_equipamiento = get_tree().get_first_node_in_group("gestor_equipamiento")
 
 
 func _input(event: InputEvent) -> void:
@@ -36,10 +40,13 @@ func _input(event: InputEvent) -> void:
 		ocultar_info()
 		if item_agarrado == null and not _mouse_sobre_tooltip():
 			var item = null
+			var slot = _slot_bajo_el_mouse()
 			if _mouse_esta_sobre(grilla_inventario):
 				item = grilla_inventario.obtener_item_bajo_el_mouse()
 			if item != null:
 				mostrar_tooltip(item)
+			elif slot != null and not slot.esta_vacio():
+				mostrar_tooltip(slot)
 			else:
 				ocultar_tooltip()
 		return
@@ -53,8 +60,9 @@ func _input(event: InputEvent) -> void:
 			# CASO RESCATE: Si ya tenemos un ítem en la mano (quedó flotando),
 			# un nuevo clic intentará soltarlo en la grilla o devolverlo
 			if item_agarrado != null:
-				grilla_inventario._soltar_item(item_agarrado)
+				_soltar_item_agarrado(item_agarrado)
 				return
+
 			if _mouse_sobre_info():
 				return
 			ocultar_info()
@@ -66,19 +74,28 @@ func _input(event: InputEvent) -> void:
 				_click_inicial_pos = event.position
 				_item_potencial = grilla_inventario.obtener_item_bajo_el_mouse()
 				_esta_arrastrando = false
+
+			var slot = _slot_bajo_el_mouse()
+			if item_agarrado == null and slot != null and slot.item != null and not _mouse_sobre_tooltip():
+				_click_inicial_pos = event.position
+				_slot_potencial = slot
+				_esta_arrastrando = false
 				
 		else:
 			# --- AL SOLTAR ---
 			if _esta_arrastrando and item_agarrado != null:
 				# Intenta soltarlo al liberar el clic mantenido
-				grilla_inventario._soltar_item(item_agarrado)
+				_soltar_item_agarrado(item_agarrado)
 					
 			elif not _esta_arrastrando and _item_potencial != null:
 				# Si soltó el clic rápido sin mover el mouse, ABRIMOS EL MODAL
 				mostrar_info(_item_potencial)
+			elif not _esta_arrastrando and _slot_potencial != null:
+				mostrar_info(_slot_potencial.item)
 			
 			# Limpiamos las variables tras soltar el clic
 			_item_potencial = null
+			_slot_potencial = null
 			_esta_arrastrando = false
 
 	# --- 2. MOVER EL MOUSE (DETECTAR ARRASTRE MANTENIDO) ---
@@ -94,6 +111,12 @@ func _input(event: InputEvent) -> void:
 				else:
 					print("Este ítem está bloqueado y no se puede arrastrar.")
 					_item_potencial = null
+		elif not _esta_arrastrando and _slot_potencial != null:
+			if event.position.distance_to(_click_inicial_pos) > UMBRAL_ARRASTRE:
+				_esta_arrastrando = true
+				ocultar_tooltip()
+				ocultar_info()
+				gestor_equipamiento.agarrar_de_slot(_slot_potencial)
 
 
 # --- FUNCIONES AUXILIARES ---
@@ -105,11 +128,33 @@ func _mouse_esta_sobre(nodo_control: Control) -> bool:
 
 func _mouse_sobre_tooltip() -> bool:
 	return panel_tooltip.visible and _mouse_esta_sobre(panel_tooltip)
-	
-	
+
 func _mouse_sobre_info() -> bool:
 	return _panel_info.visible and _mouse_esta_sobre(_panel_info)
-	
+
+func _slot_bajo_el_mouse() -> SlotEquipamiento:
+	if gestor_equipamiento == null:
+		return null
+	return gestor_equipamiento.obtener_slot_bajo_el_mouse()
+
+func _soltar_item_agarrado(item: Node) -> void:
+	var slot = _slot_bajo_el_mouse()
+	if slot != null:
+		gestor_equipamiento.soltar_en_slot(slot, item)
+	else:
+		grilla_inventario._soltar_item(item)
+
+func _opcion_habilitada(opcion: String, origen: Node) -> bool:
+	if gestor_equipamiento == null:
+		return not (opcion in ["Equipar", "Poner en atajo", "Desequipar", "Quitar atajo"])
+	match opcion:
+		"Equipar":
+			return gestor_equipamiento.puede_equipar(origen)
+		"Poner en atajo":
+			return gestor_equipamiento.puede_poner_en_atajo(origen)
+		"Desequipar":
+			return gestor_equipamiento.puede_desequipar(origen)
+	return true
 
 func mostrar_tooltip(item: Node) -> void:
 	if not item or not item.data:
@@ -138,12 +183,14 @@ func mostrar_tooltip(item: Node) -> void:
 		for option_text in item.obtener_opciones():
 			var opt_button = Button.new()
 			opt_button.text = str(option_text)
+			opt_button.disabled = not _opcion_habilitada(str(option_text), item)
 			opt_button.pressed.connect(_on_opcion_elegida.bind(option_text, item))
 			contenedor_tooltip.add_child(opt_button)
 	
-	panel_tooltip.global_position = get_global_mouse_position()
 	panel_tooltip.show()
 	panel_tooltip.reset_size()
+	var limite = (get_viewport_rect().size - panel_tooltip.size).max(Vector2.ZERO)
+	panel_tooltip.global_position = get_global_mouse_position().clamp(Vector2.ZERO, limite)
 
 func ocultar_tooltip() -> void:
 	panel_tooltip.hide()
@@ -162,6 +209,12 @@ func _on_opcion_elegida(opcion: String, item: Node) -> void:
 				grilla_inventario.agarrar_item(item)
 		"Consumir":
 			grilla_inventario.consumir_item(item)
+		"Equipar":
+			gestor_equipamiento.equipar(item)
+		"Poner en atajo":
+			gestor_equipamiento.poner_en_atajo(item)
+		"Desequipar", "Quitar atajo":
+			gestor_equipamiento.desequipar(item)
 		_:
 			print("Opción sin implementar: ", opcion)
 
@@ -219,6 +272,7 @@ func mostrar_info(item: Node) -> void:
 	var casillas: Vector2i = item.dimensiones
 	var total: int = casillas.x * casillas.y
 	var detalle := PackedStringArray()
+	detalle.append("Tipo: %s" % item.data.nombre_tipo())
 	if item.data.stackeable:
 		detalle.append("Cantidad: %d / %d" % [item.cantidad, item.data.cantidad_maxima])
 	else:

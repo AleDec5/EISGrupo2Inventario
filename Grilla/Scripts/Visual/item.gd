@@ -83,12 +83,22 @@ func rotar() -> void:
 	_tween.tween_property(self, "rotation_degrees", _grados_objetivo, DURACION_ROTACION)
 
 
+func reiniciar_rotacion() -> void:
+	if _tween:
+		_tween.kill()
+	pasos_rotacion = 0
+	_grados_objetivo = 0.0
+	rotation_degrees = 0.0
+
+
 func set_posicion_inicial(pos: Vector2) -> void:
 	global_position = pos + tamaño / 2
 
 
 func agarrar() -> void:
 	esta_agarrado = true
+	top_level = true
+	global_position = get_global_mouse_position()
 	z_index = 10
 	etiqueta.z_index = 11
 	indicador_tier.z_index = 11
@@ -97,11 +107,32 @@ func agarrar() -> void:
 
 func colocar(pos: Vector2i) -> void:
 	esta_agarrado = false
+	top_level = false
 	z_index = 0
 	etiqueta.z_index = 1
 	indicador_tier.z_index = 1
 	global_position = Vector2(pos) + tamaño / 2
 	remove_from_group("item_agarrado")
+
+
+func guardar_en_slot() -> void:
+	esta_agarrado = false
+	remove_from_group("item_agarrado")
+	top_level = false
+	reiniciar_rotacion()
+	z_index = 0
+	etiqueta.z_index = 1
+	indicador_tier.z_index = 1
+	etiqueta.hide()
+	indicador_tier.hide()
+	hide()
+	process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func sacar_de_slot() -> void:
+	process_mode = Node.PROCESS_MODE_INHERIT
+	show()
+	actualizar_indicadores()
 
 
 func actualizar_indicadores() -> void:
@@ -132,7 +163,7 @@ func _buscar_scroll() -> ScrollContainer:
 
 
 func _esta_dentro_del_scroll(rect: Rect2) -> bool:
-	if _scroll == null:
+	if esta_agarrado or _scroll == null:
 		return true
 	var ventana := _scroll.get_global_rect()
 	var barra_vertical := _scroll.get_v_scroll_bar()
@@ -145,7 +176,7 @@ func _esta_dentro_del_scroll(rect: Rect2) -> bool:
 
 
 func es_mismo_item(otro: Node) -> bool:
-	return data == otro.data or (data.nombre != "" and data.nombre == otro.data.nombre)
+	return data.es_mismo(otro.data)
 
 
 func puede_apilar(otro: Node) -> bool:
@@ -186,8 +217,13 @@ func dividir(cantidad_a_separar: int) -> Node:
 func obtener_opciones() -> Array[String]:
 	var opciones: Array[String] = []
 	opciones.append_array(data.opciones_descripcion)
-	if data.consumible and not data.esta_bloqueado:
+	if data.es_consumible() and not data.esta_bloqueado:
 		opciones.append("Consumir")
+	if data.se_puede_equipar() and not data.esta_bloqueado:
+		if not opciones.has("Equipar"):
+			opciones.append("Equipar")
+		if data.tipo == ItemData.Tipo.ARMA:
+			opciones.append("Poner en atajo")
 	if data.stackeable and cantidad > 1 and not data.esta_bloqueado:
 		opciones.append("Agarrar uno")
 		opciones.append("Dividir a la mitad")

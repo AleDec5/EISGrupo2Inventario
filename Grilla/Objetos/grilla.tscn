@@ -6,54 +6,63 @@
 [ext_resource type="PackedScene" uid="uid://ck5a8xg7to7c2" path="res://Grilla/Objetos/item.tscn" id="2_fq556"]
 [ext_resource type="Script" uid="uid://x0iaucbqh0di" path="res://Grilla/Scripts/Datos/item_data.gd" id="2_rf6od"]
 [ext_resource type="Texture2D" uid="uid://cedlxvu4ewphr" path="res://Grilla/Assets/ItemOrange.png" id="3_egqu4"]
+[ext_resource type="Texture2D" uid="uid://d1w700mlcytki" path="res://Grilla/Assets/ItemRed.png" id="3_fyf55"]
 [ext_resource type="Texture2D" uid="uid://li0nllsmjtjq" path="res://Grilla/Assets/ItemGreen.png" id="4_s6ksn"]
 [ext_resource type="Texture2D" uid="uid://0sno1oi6ly57" path="res://Grilla/Assets/ItemPurple.png" id="5_8icrg"]
-[ext_resource type="Texture2D" uid="uid://cw5d8287sq6a8" path="res://Grilla/Assets/ItemPink.png" id="6_qxa1s"]
 [ext_resource type="Texture2D" uid="uid://b630hjarlfr7f" path="res://Grilla/Assets/ItemBrown.png" id="7_qxa1s"]
 [ext_resource type="Texture2D" uid="uid://cdenu1y2v1r7p" path="res://Grilla/Assets/ItemBlue.png" id="8_auoqk"]
+[ext_resource type="Texture2D" uid="uid://bquce0i8bqys" path="res://Grilla/Assets/ItemBlack.png" id="8_qvaao"]
+[ext_resource type="Texture2D" uid="uid://y8brp0qvc7po" path="res://Grilla/Assets/ItemYellow.png" id="10_d5d12"]
+[ext_resource type="Texture2D" uid="uid://cna448v45jxwr" path="res://Grilla/Assets/ItemWhite.png" id="11_tgggm"]
 
 [sub_resource type="Resource" id="Resource_rf6od"]
 script = ExtResource("2_rf6od")
-nombre = "OrangeItem"
-descripcion = "Item placeholder de color naranja."
-dimensiones = Vector2i(2, 1)
-texture = ExtResource("3_egqu4")
+nombre = "Espada Roja"
+descripcion = "Espada Roja"
+tipo = 1
+dimensiones = Vector2i(1, 2)
+texture = ExtResource("3_fyf55")
 tier = 2
 opciones_descripcion = Array[String](["Usar", "Mover"])
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_egqu4"]
 script = ExtResource("2_rf6od")
-nombre = "GreenItem"
-descripcion = "Item placeholder de color verde."
-dimensiones = Vector2i(4, 2)
+nombre = "Pistola"
+descripcion = "Pistola 9mm"
+tipo = 1
 texture = ExtResource("4_s6ksn")
 tier = 3
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_auoqk"]
 script = ExtResource("2_rf6od")
-nombre = "PurpleItem"
-descripcion = "Item placeholder de color violeta."
-dimensiones = Vector2i(2, 5)
+nombre = "Pocion Fantasmal"
+descripcion = "..."
+tipo = 6
 texture = ExtResource("5_8icrg")
+stackeable = true
+cantidad_maxima = 8
+cantidad_inicial = 5
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_s6ksn"]
 script = ExtResource("2_rf6od")
-nombre = "PinkItem"
-descripcion = "Item placeholder de color rosa."
-dimensiones = Vector2i(2, 2)
-texture = ExtResource("6_qxa1s")
+nombre = "Poción Halloween"
+descripcion = "..."
+tipo = 6
+texture = ExtResource("3_egqu4")
+stackeable = true
+cantidad_inicial = 7
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_qxa1s"]
 script = ExtResource("2_rf6od")
 nombre = "Caramelos"
 descripcion = "Regeneración +...HP"
+tipo = 6
 texture = ExtResource("7_qxa1s")
 stackeable = true
-consumible = true
 cantidad_inicial = 10
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
@@ -61,9 +70,9 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 script = ExtResource("2_rf6od")
 nombre = "Poción Murciélago"
 descripcion = "..."
-texture = ExtResource("4_s6ksn")
+tipo = 6
+texture = ExtResource("8_qvaao")
 stackeable = true
-consumible = true
 cantidad_maxima = 8
 cantidad_inicial = 4
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
@@ -72,10 +81,110 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 script = ExtResource("2_rf6od")
 nombre = "Bolsa de Caramelos"
 descripcion = "Regeneración +...HP"
+tipo = 6
 dimensiones = Vector2i(2, 2)
 texture = ExtResource("8_auoqk")
-consumible = true
 cantidad_maxima = 8
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_p1rba"]
+script = ExtResource("2_rf6od")
+nombre = "Balas 9mm"
+descripcion = "16 balas 9mm"
+tipo = 9
+texture = ExtResource("10_d5d12")
+stackeable = true
+cantidad_inicial = 13
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_d5d12"]
+script = ExtResource("2_rf6od")
+nombre = "Rifle de Asalto"
+descripcion = "Rifle AK-47"
+tipo = 1
+dimensiones = Vector2i(2, 1)
+texture = ExtResource("11_tgggm")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_tgggm"]
+script = ExtResource("2_rf6od")
+nombre = "Doble Espadas"
+descripcion = "Espadas, dos"
+tipo = 1
+dimensiones = Vector2i(2, 1)
+texture = ExtResource("8_qvaao")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_o3kor"]
+script = ExtResource("2_rf6od")
+nombre = "Arco"
+descripcion = "Arco"
+tipo = 1
+texture = ExtResource("4_s6ksn")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_i8sdb"]
+script = ExtResource("2_rf6od")
+nombre = "Poción de Curación"
+descripcion = "Cura"
+tipo = 6
+texture = ExtResource("3_fyf55")
+stackeable = true
+cantidad_maxima = 8
+cantidad_inicial = 3
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_ne8bb"]
+script = ExtResource("2_rf6od")
+nombre = "Flechas"
+descripcion = "8 flechas"
+tipo = 9
+texture = ExtResource("3_egqu4")
+stackeable = true
+cantidad_maxima = 8
+cantidad_inicial = 7
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_8iw6o"]
+script = ExtResource("2_rf6od")
+nombre = "Torso"
+descripcion = "Prenda de torso"
+tipo = 4
+dimensiones = Vector2i(2, 2)
+texture = ExtResource("7_qxa1s")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_8bqdx"]
+script = ExtResource("2_rf6od")
+nombre = "Calzado"
+descripcion = "Calzado"
+tipo = 2
+texture = ExtResource("5_8icrg")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_eo6bj"]
+script = ExtResource("2_rf6od")
+nombre = "Sombrero"
+tipo = 5
+dimensiones = Vector2i(2, 1)
+texture = ExtResource("7_qxa1s")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_trhmw"]
+script = ExtResource("2_rf6od")
+nombre = "Pantalones"
+descripcion = "Lompas"
+tipo = 3
+dimensiones = Vector2i(1, 2)
+texture = ExtResource("8_qvaao")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_gpstx"]
+script = ExtResource("2_rf6od")
+nombre = "Anillo Mágico"
+descripcion = "Muy mágico"
+tipo = 7
+texture = ExtResource("10_d5d12")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [node name="InventarioGrilla" type="Control" unique_id=639028448]
@@ -92,7 +201,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_efp76")
-items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_w8k61"), SubResource("Resource_0lisf")])
+items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_w8k61"), SubResource("Resource_0lisf"), SubResource("Resource_p1rba"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_o3kor"), SubResource("Resource_i8sdb"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx")])
 item_scene = ExtResource("2_fq556")
 
 [node name="Grilla" type="GridContainer" parent="Inventario" unique_id=662261994]

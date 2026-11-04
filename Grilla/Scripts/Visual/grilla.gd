@@ -12,6 +12,7 @@ var data_casilla: Array[Node] = []
 
 
 func _ready() -> void:
+	add_to_group("grilla_inventario")
 	crear_casillas()
 	init_data_casilla()
 
@@ -38,6 +39,7 @@ func obtener_item_bajo_el_mouse() -> Node:
 func agarrar_item(item: Node) -> void:
 	if get_tree().get_first_node_in_group("item_agarrado") != null:
 		return
+	item.set_meta("casilla_origen", data_casilla.find(item))
 	sacar_item_de_data_casilla(item)
 	item.agarrar()
 
@@ -52,10 +54,10 @@ func dividir_a_la_mitad(item: Node) -> void:
 	if get_tree().get_first_node_in_group("item_agarrado") != null or item.cantidad < 2:
 		return
 	item.dividir(floori(item.cantidad / 2.0)).agarrar()
-	
-	
+
+
 func consumir_item(item: Node) -> void:
-	if not item.data.consumible or item.data.esta_bloqueado:
+	if not item.data.es_consumible() or item.data.esta_bloqueado:
 		return
 	var data_consumida: ItemData = item.data
 	if item.data.stackeable and item.cantidad > 1:
@@ -98,17 +100,53 @@ func _avisar_bloqueo(destino: Node, item: Node) -> void:
 
 
 func intentar_agregar_item_data(item: Node) -> bool:
-	var index_casilla: int = 0
-	while index_casilla < data_casilla.size():
-		if item_entra(index_casilla, item.dimensiones):
-			break
-		index_casilla += 1
-	if index_casilla >= data_casilla.size():
+	var index_casilla := _buscar_lugar(item.dimensiones)
+	if index_casilla == -1:
 		return false
-
 	llenar_data_casilla(item, index_casilla)
 	item.set_posicion_inicial(get_coordenadas_desde_index_casilla(index_casilla))
 	return true
+
+
+func devolver_item(item: Node) -> bool:
+	var index: int = item.get_meta("casilla_origen", -1)
+	if index == -1 or not item_entra(index, item.dimensiones):
+		index = _buscar_lugar(item.dimensiones)
+	if index == -1:
+		return false
+	llenar_data_casilla(item, index)
+	item.colocar(get_coordenadas_desde_index_casilla(index))
+	return true
+
+
+func hay_lugar_para(item: Node, ignorar: Node = null) -> bool:
+	return _buscar_lugar(item.dimensiones, ignorar) != -1
+
+
+func _buscar_lugar(tamano_item: Vector2i, ignorar: Node = null) -> int:
+	for index in data_casilla.size():
+		if item_entra(index, tamano_item, ignorar):
+			return index
+	return -1
+
+
+func obtener_items() -> Array[Node]:
+	var items: Array[Node] = []
+	for item in data_casilla:
+		if item != null and not items.has(item):
+			items.append(item)
+	var agarrado = get_tree().get_first_node_in_group("item_agarrado")
+	if agarrado != null and not items.has(agarrado):
+		items.append(agarrado)
+	return items
+
+
+func contar_item(data_buscada: ItemData) -> int:
+	var total: int = 0
+	for item in obtener_items():
+		if item.data.es_mismo(data_buscada):
+			total += item.cantidad if item.data.stackeable else 1
+	return total
 
 
 func llenar_data_casilla(item: Node, index: int) -> void:
@@ -123,7 +161,7 @@ func sacar_item_de_data_casilla(item: Node) -> void:
 			data_casilla[i] = null
 
 
-func item_entra(index: int, tamano_item: Vector2i) -> bool:
+func item_entra(index: int, tamano_item: Vector2i, ignorar: Node = null) -> bool:
 	if index % columns + tamano_item.x > columns:
 		return false
 	for y in tamano_item.y:
@@ -131,7 +169,8 @@ func item_entra(index: int, tamano_item: Vector2i) -> bool:
 			var index_actual = index + x + y * columns
 			if index_actual >= data_casilla.size():
 				return false
-			if data_casilla[index_actual] != null:
+			var ocupante = data_casilla[index_actual]
+			if ocupante != null and ocupante != ignorar:
 				return false
 	return true
 
