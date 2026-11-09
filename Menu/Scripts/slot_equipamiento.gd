@@ -1,5 +1,5 @@
 class_name SlotEquipamiento
-extends ColorRect
+extends TextureRect
 
 enum Rol { ATAJO, DEFENSA, SOMBRERO, TORSO, PANTALON, CALZADO, ARMA }
 

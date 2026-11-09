@@ -35,15 +35,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Indumentaria"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Inventario" unique_id=223207828]
-custom_minimum_size = Vector2(600, 400)
-custom_maximum_size = Vector2(-1, 400)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="InventarioGrilla" parent="Inventario/ScrollContainer" unique_id=639028448 instance=ExtResource("1_g4a5h")]
+[node name="InventarioGrilla" parent="Inventario" unique_id=639028448 instance=ExtResource("1_g4a5h")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 700)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=56145449]

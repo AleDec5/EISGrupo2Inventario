@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://b82yuyoqdr7m1"]
 
 [ext_resource type="Script" uid="uid://cuh6ld7x26tl" path="res://Menu/Scripts/gestor_equipamiento.gd" id="1_gestor"]
+[ext_resource type="Texture2D" uid="uid://clhitnmnqrptj" path="res://Assets/UI/SlotExtra.png" id="2_im0h5"]
 [ext_resource type="Script" uid="uid://bxdq36nd2cy0d" path="res://Menu/Scripts/slot_equipamiento.gd" id="2_slot"]
 [ext_resource type="Texture2D" uid="uid://nucw2m4p80cc" path="res://Assets/UI/Under.png" id="3_1vy64"]
 [ext_resource type="Texture2D" uid="uid://cpfimtd5f3is6" path="res://Assets/UI/Over.png" id="4_ixffu"]
+[ext_resource type="Texture2D" uid="uid://dyjus6sjixti3" path="res://Assets/UI/SlotEscudo.png" id="4_rvkho"]
 [ext_resource type="Script" uid="uid://bwh73apulahp8" path="res://Assets/UI/BarraSalud.gd" id="5_ixffu"]
 [ext_resource type="Texture2D" uid="uid://dp48gwccm75b0" path="res://Assets/UI/Progress.png" id="5_kvs7e"]
+[ext_resource type="Texture2D" uid="uid://b0eqcd64v7cfr" path="res://Assets/Personaje/Vacio.png" id="5_rvkho"]
+[ext_resource type="Texture2D" uid="uid://b0ics4quqxrio" path="res://Assets/UI/SlotSombrero.png" id="9_50mke"]
+[ext_resource type="Texture2D" uid="uid://rmgvej6caa7j" path="res://Assets/UI/SlotArmadura.png" id="10_x1idg"]
+[ext_resource type="Texture2D" uid="uid://claar8d3yc4s0" path="res://Assets/UI/SlotPantalones.png" id="11_bgpit"]
+[ext_resource type="Texture2D" uid="uid://ukuy5ilc8tr" path="res://Assets/UI/SlotBotas.png" id="12_fw6gt"]
+[ext_resource type="Texture2D" uid="uid://b20xbgi46glpj" path="res://Assets/UI/SlotArma.png" id="13_24fmh"]
 
 [node name="MarginContainer" type="MarginContainer" unique_id=1831596708]
 offset_right = 40.0
@@ -102,60 +110,79 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 10
 
-[node name="ColorRect" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1979564919]
+[node name="ColorRect" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=502584379]
+texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
+texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
 
-[node name="ColorRect2" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=476954746]
+[node name="ColorRect2" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1938960946]
+texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
+texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
 
-[node name="ColorRect3" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1185078389]
+[node name="ColorRect3" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1255866176]
+texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
+texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
 
-[node name="ColorRect4" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1736707854]
+[node name="ColorRect4" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1643156723]
+texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
+texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
 
 [node name="Spacer" type="Control" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1355139987]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ColorRect5" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=496220443]
+[node name="ColorRect5" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=752811792]
+texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
+texture = ExtResource("4_rvkho")
 script = ExtResource("2_slot")
 rol = 1
 
 [node name="PersonajeYSalud" type="VBoxContainer" parent="Equipamiento2" unique_id=2114307509]
 layout_mode = 2
-theme_override_constants/separation = -5
+theme_override_constants/separation = -7
 
-[node name="Personaje" type="ColorRect" parent="Equipamiento2/PersonajeYSalud" unique_id=399215334]
+[node name="ContenerdorPersonaje" type="PanelContainer" parent="Equipamiento2/PersonajeYSalud" unique_id=1080008356]
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Personaje" type="TextureRect" parent="Equipamiento2/PersonajeYSalud/ContenerdorPersonaje" unique_id=1636592390]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.9, 0.9)
+texture = ExtResource("5_rvkho")
+
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Equipamiento2/PersonajeYSalud" unique_id=1038347646]
+texture_filter = 4
+custom_minimum_size = Vector2(120, 15)
 layout_mode = 2
 size_flags_horizontal = 4
+nine_patch_stretch = true
 texture_under = ExtResource("3_1vy64")
 texture_over = ExtResource("4_ixffu")
 texture_progress = ExtResource("5_kvs7e")
-texture_progress_offset = Vector2(2, 0)
 script = ExtResource("5_ixffu")
 
 [node name="IndumentariaMC" type="MarginContainer" parent="Equipamiento2" unique_id=890931713]
@@ -165,35 +192,50 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="ColorRect" type="ColorRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=1958178339]
+[node name="ColorRect" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=857829586]
+texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
+texture = ExtResource("9_50mke")
 script = ExtResource("2_slot")
 rol = 2
 
-[node name="ColorRect2" type="ColorRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=647344205]
+[node name="ColorRect2" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=175947870]
+texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
+texture = ExtResource("10_x1idg")
 script = ExtResource("2_slot")
 rol = 3
 
-[node name="ColorRect3" type="ColorRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=202148018]
+[node name="ColorRect3" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=1270969163]
+texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
+texture = ExtResource("11_bgpit")
 script = ExtResource("2_slot")
 rol = 4
 
-[node name="ColorRect4" type="ColorRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=1579104578]
+[node name="ColorRect4" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=502781864]
+texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
+texture = ExtResource("12_fw6gt")
 script = ExtResource("2_slot")
 rol = 5
 
 [node name="Spacer" type="Control" parent="Equipamiento2" unique_id=663531869]
 layout_mode = 2
 
-[node name="Arma" type="ColorRect" parent="Equipamiento2" unique_id=730230304]
+[node name="Arma" type="TextureRect" parent="Equipamiento2" unique_id=1453908539]
+texture_filter = 1
 custom_minimum_size = Vector2(200, 100)
+custom_maximum_size = Vector2(200, 100)
 layout_mode = 2
+texture = ExtResource("13_24fmh")
 script = ExtResource("2_slot")
 rol = 6

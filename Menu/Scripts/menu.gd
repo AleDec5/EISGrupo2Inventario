@@ -25,7 +25,6 @@ func _ready() -> void:
 	panel_tooltip.hide()
 	_crear_panel_info()
 	
-	# Buscamos la grilla interna de forma segura
 	grilla_inventario = escena_inventario.find_child("Grilla", true, false)
 	if grilla_inventario == null:
 		print("ERROR CRÍTICO: No se encontró 'Grilla' dentro de la escena")
