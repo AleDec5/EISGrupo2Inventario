@@ -14,105 +14,130 @@
 [ext_resource type="Texture2D" uid="uid://bquce0i8bqys" path="res://Grilla/Assets/ItemBlack.png" id="8_qvaao"]
 [ext_resource type="Texture2D" uid="uid://y8brp0qvc7po" path="res://Grilla/Assets/ItemYellow.png" id="10_d5d12"]
 [ext_resource type="Texture2D" uid="uid://cna448v45jxwr" path="res://Grilla/Assets/ItemWhite.png" id="11_tgggm"]
+[ext_resource type="Texture2D" uid="uid://cw5d8287sq6a8" path="res://Grilla/Assets/ItemPink.png" id="12_tgggm"]
 
 [sub_resource type="Resource" id="Resource_rf6od"]
 script = ExtResource("2_rf6od")
-nombre = "Espada Roja"
-descripcion = "Espada Roja"
+nombre = "Espada Sangrienta"
+descripcion = "Roba 5% del daño realizado a un enemigo, en forma de curación instantanea."
 tipo = 1
 dimensiones = Vector2i(1, 2)
 texture = ExtResource("3_fyf55")
 tier = 2
 opciones_descripcion = Array[String](["Usar", "Mover"])
+dano = 20.0
+dps = 53.0
+alcance = 2.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_egqu4"]
 script = ExtResource("2_rf6od")
 nombre = "Pistola"
-descripcion = "Pistola 9mm"
+descripcion = "Pistola 9mm. Capacidad de cargador: 16 balas."
 tipo = 1
 texture = ExtResource("4_s6ksn")
 tier = 3
+dano = 10.0
+dps = 10.0
+disparos_por_segundo = 1.0
+capacidad_cargador = 16
+calibre = "Pistola"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_auoqk"]
 script = ExtResource("2_rf6od")
 nombre = "Pocion Fantasmal"
-descripcion = "..."
+descripcion = "Aplica invisibilidad por 3 segundos al consumirla."
 tipo = 6
 texture = ExtResource("5_8icrg")
 stackeable = true
-cantidad_maxima = 8
 cantidad_inicial = 5
+duracion_efecto = 3.0
+efecto_especial = "Invisibilidad"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_s6ksn"]
 script = ExtResource("2_rf6od")
 nombre = "Poción Halloween"
-descripcion = "..."
-tipo = 6
+descripcion = "Arrojable. Al impactar aplica un área de 4mts de diámetro que ralentiza a los enemigos un 50% de su velocidad."
+tipo = 1
 texture = ExtResource("3_egqu4")
 stackeable = true
 cantidad_inicial = 7
+alcance = 5.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_qxa1s"]
 script = ExtResource("2_rf6od")
 nombre = "Caramelos"
-descripcion = "Regeneración +...HP"
+descripcion = "Cura +15HP de salúd perdida"
 tipo = 6
 texture = ExtResource("7_qxa1s")
 stackeable = true
 cantidad_inicial = 10
+cura_instantanea = 15
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_w8k61"]
 script = ExtResource("2_rf6od")
 nombre = "Poción Murciélago"
-descripcion = "..."
+descripcion = "Permite saltar de vuelta en el aire durante 20 segundos."
 tipo = 6
 texture = ExtResource("8_qvaao")
 stackeable = true
 cantidad_maxima = 8
 cantidad_inicial = 4
+duracion_efecto = 20.0
+efecto_especial = "Doble Salto"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_0lisf"]
 script = ExtResource("2_rf6od")
 nombre = "Bolsa de Caramelos"
-descripcion = "Regeneración +...HP"
+descripcion = "Cura +80HP de salúd perdida"
 tipo = 6
 dimensiones = Vector2i(2, 2)
 texture = ExtResource("8_auoqk")
 cantidad_maxima = 8
+cura_instantanea = 80
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_p1rba"]
 script = ExtResource("2_rf6od")
 nombre = "Balas 9mm"
-descripcion = "16 balas 9mm"
+descripcion = "16 balas de pistola."
 tipo = 9
 texture = ExtResource("10_d5d12")
 stackeable = true
 cantidad_inicial = 13
+dano = 10.0
+calibre = "Pistola"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_d5d12"]
 script = ExtResource("2_rf6od")
 nombre = "Rifle de Asalto"
-descripcion = "Rifle AK-47"
+descripcion = "Rifle de asalto AK-47."
 tipo = 1
 dimensiones = Vector2i(2, 1)
 texture = ExtResource("11_tgggm")
+dano = 20.0
+dps = 60.0
+disparos_por_segundo = 3.0
+capacidad_cargador = 30
+calibre = "Rifle"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_tgggm"]
 script = ExtResource("2_rf6od")
-nombre = "Doble Espadas"
-descripcion = "Espadas, dos"
+nombre = "Dagas"
+descripcion = "2 dagas de plata, equipamiento estándar de los cazadores de monstruos."
 tipo = 1
 dimensiones = Vector2i(2, 1)
 texture = ExtResource("8_qvaao")
+dano = 5.0
+dps = 20.0
+alcance = 1.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_o3kor"]
@@ -125,13 +150,15 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_i8sdb"]
 script = ExtResource("2_rf6od")
-nombre = "Poción de Curación"
-descripcion = "Cura"
+nombre = "Elixir de Drácula"
+descripcion = "Cura +20HP durante 2 segundos."
 tipo = 6
 texture = ExtResource("3_fyf55")
 stackeable = true
 cantidad_maxima = 8
 cantidad_inicial = 3
+regen_por_segundo = 20
+duracion_efecto = 2.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_ne8bb"]
@@ -147,24 +174,30 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_8iw6o"]
 script = ExtResource("2_rf6od")
-nombre = "Torso"
-descripcion = "Prenda de torso"
+nombre = "Remera"
+descripcion = "Una simple remera."
 tipo = 4
 dimensiones = Vector2i(2, 2)
 texture = ExtResource("7_qxa1s")
+mod_resistencia = 5.0
+mod_defensa = 1.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_8bqdx"]
 script = ExtResource("2_rf6od")
-nombre = "Calzado"
-descripcion = "Calzado"
+nombre = "Botas de cuero"
+descripcion = "Confiables botas de cuero, aptas para todo tipo de terreno."
 tipo = 2
 texture = ExtResource("5_8icrg")
+mod_hp = 5.0
+mod_resistencia = 20.0
+mod_defensa = 10.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_eo6bj"]
 script = ExtResource("2_rf6od")
-nombre = "Sombrero"
+nombre = "Mi sombrero"
+descripcion = "\"¡Pero se me ve bien!\""
 tipo = 5
 dimensiones = Vector2i(2, 1)
 texture = ExtResource("7_qxa1s")
@@ -173,18 +206,79 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 [sub_resource type="Resource" id="Resource_trhmw"]
 script = ExtResource("2_rf6od")
 nombre = "Pantalones"
-descripcion = "Lompas"
+descripcion = "Unos simples pantalones."
 tipo = 3
 dimensiones = Vector2i(1, 2)
 texture = ExtResource("8_qvaao")
+mod_hp = 1.0
+mod_resistencia = 5.0
+mod_defensa = 1.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_gpstx"]
 script = ExtResource("2_rf6od")
-nombre = "Anillo Mágico"
-descripcion = "Muy mágico"
+nombre = "Anillo dorado"
+descripcion = "Anillo dorado perteneciente a una criatura muy antigua. Cientos de años después, todavía se siente caliente al tacto. +100HP máxima."
 tipo = 7
 texture = ExtResource("10_d5d12")
+mod_hp = 100.0
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_o8qx6"]
+script = ExtResource("2_rf6od")
+nombre = "Pulsera dentada"
+descripcion = "Aplica +15 de daño a cada golpe con un arma cuerpo a cuerpo."
+tipo = 7
+texture = ExtResource("4_s6ksn")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_1iarf"]
+script = ExtResource("2_rf6od")
+nombre = "Collar de corazón"
+descripcion = "Resguarda una porción de la esencia vital de su usuario. Al recibir un daño fatal, se destruye y cura +50HP instantaneamente."
+tipo = 7
+texture = ExtResource("5_8icrg")
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_pn52p"]
+script = ExtResource("2_rf6od")
+nombre = "Libro maldito"
+descripcion = "Escrito en el lenguaje perdido de un reino que jamas existió. Resiliencia Infernal: cada vez que recibís daño, recuperás un 12% del daño recibido en forma de regeneración, durante 3 segundos."
+tipo = 8
+dimensiones = Vector2i(2, 2)
+texture = ExtResource("7_qxa1s")
+mod_velocidad = -5.0
+mod_resistencia = -20.0
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_4v8t0"]
+script = ExtResource("2_rf6od")
+nombre = "Munición explosiva"
+descripcion = "Explota al impactar. La explosión hace un daño extra equivalente al 10% del daño base de la bala."
+tipo = 9
+texture = ExtResource("12_tgggm")
+stackeable = true
+cantidad_inicial = 9
+calibre = "Rifle"
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_4vqr3"]
+script = ExtResource("2_rf6od")
+nombre = "Munición venenosa"
+descripcion = "Envenena al enemigo durante 3 segundos, ralentizándolo su velocidad en un 50%, y dañándolo por segundo por el 5% de su vida máxima. El efecto no se acumula, y cada bala reinicia la duración."
+tipo = 9
+texture = ExtResource("4_s6ksn")
+stackeable = true
+cantidad_inicial = 7
+calibre = "Rifle"
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_m86do"]
+script = ExtResource("2_rf6od")
+nombre = "Munición incendiaria"
+descripcion = "Envuelve en llamas al objetivo durante 4 segundos. La quemadura causa en el enemigo una reducción del 25% de su daño, reduce en 30% su defensa, y lo daña por el 2% de su vida actual por segundo. El DPS es acumulable (5 stacks máximo). Cada bala aumenta en un 10% la duración del efecto."
+tipo = 9
+texture = ExtResource("3_fyf55")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [node name="InventarioGrilla" type="Control" unique_id=639028448]
@@ -201,7 +295,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_efp76")
-items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_w8k61"), SubResource("Resource_0lisf"), SubResource("Resource_p1rba"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_o3kor"), SubResource("Resource_i8sdb"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx")])
+items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_w8k61"), SubResource("Resource_0lisf"), SubResource("Resource_p1rba"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_o3kor"), SubResource("Resource_i8sdb"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx"), SubResource("Resource_o8qx6"), SubResource("Resource_1iarf"), SubResource("Resource_pn52p"), SubResource("Resource_4v8t0"), SubResource("Resource_4vqr3"), SubResource("Resource_m86do")])
 item_scene = ExtResource("2_fq556")
 
 [node name="Grilla" type="GridContainer" parent="Inventario" unique_id=662261994]

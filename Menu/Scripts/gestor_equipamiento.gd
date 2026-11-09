@@ -1,12 +1,43 @@
 class_name GestorEquipamiento
 extends MarginContainer
 
+var estadisticas := EstadisticasPersonaje.new()
+var simulando_tiempo: bool = false
+
+var _panel_stats: PanelContainer
+var _etiqueta_stats: Label
+var _texto_anterior: String = ""
+
 
 func _ready() -> void:
 	add_to_group("gestor_equipamiento")
+	_crear_panel_stats()
+	_conectar_grilla.call_deferred()
 
 
-func _process(_delta: float) -> void:
+func _conectar_grilla() -> void:
+	var grilla = _grilla()
+	if grilla != null:
+		grilla.item_consumido.connect(estadisticas.aplicar_consumible)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not (event is InputEventKey and event.pressed and not event.echo):
+		return
+	match event.keycode:
+		KEY_F3:
+			_panel_stats.visible = not _panel_stats.visible
+		KEY_F4:
+			simulando_tiempo = not simulando_tiempo
+		KEY_F5:
+			estadisticas.curar(-20)
+
+
+func _process(delta: float) -> void:
+	if simulando_tiempo:
+		estadisticas.avanzar_tiempo(delta)
+	_actualizar_bonus_equipo()
+	_actualizar_panel_stats()
 	var grilla = _grilla()
 	if grilla == null:
 		return
@@ -21,6 +52,46 @@ func _process(_delta: float) -> void:
 				slot.vaciar()
 			else:
 				slot.mostrar_cantidad(total)
+
+
+func _crear_panel_stats() -> void:
+	_panel_stats = PanelContainer.new()
+	_panel_stats.top_level = true
+	_panel_stats.z_index = 90
+	_panel_stats.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_etiqueta_stats = Label.new()
+	_etiqueta_stats.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_etiqueta_stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_etiqueta_stats.custom_minimum_size.x = 260
+	_etiqueta_stats.add_theme_font_size_override("font_size", 12)
+	_panel_stats.add_child(_etiqueta_stats)
+	add_child(_panel_stats)
+
+
+func _actualizar_panel_stats() -> void:
+	var texto := estadisticas.a_texto()
+	texto += "\n\nTiempo: %s\n(F3 panel, F4 tiempo, F5 -20 HP)" % ("simulando" if simulando_tiempo else "en pausa")
+	if texto != _texto_anterior:
+		_texto_anterior = texto
+		_etiqueta_stats.text = texto
+		_panel_stats.reset_size()
+	_panel_stats.global_position = Vector2(80, get_viewport_rect().size.y - _panel_stats.size.y - 60)
+
+
+func _actualizar_bonus_equipo() -> void:
+	var bonus: Dictionary = {}
+	for slot in _slots():
+		if slot.item == null:
+			continue
+		if slot.es_atajo() and slot.data.tipo == ItemData.Tipo.ARMA:
+			continue
+		var modificadores: Dictionary = slot.data.obtener_modificadores()
+		for stat in modificadores:
+			var acumulado: Dictionary = bonus.get(stat, {"fijo": 0.0, "pct": 0.0})
+			acumulado["fijo"] += modificadores[stat]["fijo"]
+			acumulado["pct"] += modificadores[stat]["pct"]
+			bonus[stat] = acumulado
+	estadisticas.establecer_bonus_equipo(bonus)
 
 
 func _grilla() -> Node:

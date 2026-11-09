@@ -12,6 +12,7 @@ var _item_potencial: Node = null
 var _slot_potencial: SlotEquipamiento = null
 var _esta_arrastrando: bool = false
 const UMBRAL_ARRASTRE: float = 5.0 # Píxeles que debe moverse para considerar "arrastre"
+const OPACIDAD_PANEL_INFO: float = 0.9
 
 var _panel_info: PanelContainer
 var _etiqueta_nombre: Label
@@ -224,7 +225,7 @@ func _on_opcion_elegida(opcion: String, item: Node) -> void:
 func _crear_panel_info() -> void:
 	_panel_info = PanelContainer.new()
 	_panel_info.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_panel_info.custom_minimum_size.x = 180
+	_panel_info.custom_minimum_size.x = 260
 	_panel_info.z_index = 100
 
 	var margen := MarginContainer.new()
@@ -256,7 +257,7 @@ func _crear_panel_info() -> void:
 
 	_etiqueta_descripcion = Label.new()
 	_etiqueta_descripcion.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_etiqueta_descripcion.custom_minimum_size.x = 164
+	_etiqueta_descripcion.custom_minimum_size.x = 244
 	caja.add_child(_etiqueta_descripcion)
 
 	_etiqueta_detalle = Label.new()
@@ -264,6 +265,7 @@ func _crear_panel_info() -> void:
 
 	_panel_info.hide()
 	$CanvasLayer.add_child(_panel_info)
+	_subir_opacidad_panel_info()
 
 func mostrar_info(item: Node) -> void:
 	if not item or not item.data:
@@ -278,6 +280,11 @@ func mostrar_info(item: Node) -> void:
 	else:
 		detalle.append("Tier: %d" % item.tier)
 	detalle.append("Ocupa: %d×%d (%d %s)" % [casillas.x, casillas.y, total, "casilla" if total == 1 else "casillas"])
+	var efectos := _lineas_efectos(item.data)
+	if not efectos.is_empty():
+		detalle.append("")
+		detalle.append("Al consumir:" if item.data.es_consumible() else "Al equipar:")
+		detalle.append_array(efectos)
 
 	_etiqueta_nombre.text = item.data.nombre
 	_etiqueta_descripcion.text = item.data.descripcion if item.data.descripcion != "" else "Sin descripción."
@@ -290,3 +297,43 @@ func mostrar_info(item: Node) -> void:
 
 func ocultar_info() -> void:
 	_panel_info.hide()
+	
+func _lineas_efectos(data: ItemData) -> PackedStringArray:
+	var lineas := PackedStringArray()
+	var modificadores := data.obtener_modificadores()
+	for stat in modificadores:
+		var m: Dictionary = modificadores[stat]
+		var nombre: String = EstadisticasPersonaje.NOMBRES[stat]
+		var unidad: String = EstadisticasPersonaje.UNIDADES.get(stat, "")
+		if m["fijo"] != 0.0:
+			lineas.append("%s %s%s" % [nombre, _num_signado(m["fijo"]), unidad])
+		if m["pct"] != 0.0:
+			lineas.append("%s %s%%" % [nombre, _num_signado(m["pct"])])
+
+	if data.es_consumible():
+		var hay_efecto := not modificadores.is_empty() or data.regen_por_segundo != 0 or data.efecto_especial != ""
+		if data.cura_instantanea > 0:
+			lineas.append("Cura %d HP al instante" % data.cura_instantanea)
+		if data.regen_por_segundo != 0:
+			lineas.append("Regenera %+d HP por segundo" % data.regen_por_segundo)
+		if data.efecto_especial != "":
+			lineas.append(data.efecto_especial)
+		if hay_efecto and data.duracion_efecto > 0.0:
+			lineas.append("Dura %s s" % _num_signado(data.duracion_efecto).trim_prefix("+"))
+	return lineas
+
+
+func _num_signado(valor: float) -> String:
+	return ("+" if valor > 0.0 else "") + ("%.1f" % valor).trim_suffix(".0")
+
+
+func _subir_opacidad_panel_info() -> void:
+	var base := _panel_info.get_theme_stylebox("panel")
+	var estilo: StyleBoxFlat
+	if base is StyleBoxFlat:
+		estilo = base.duplicate()
+	else:
+		estilo = StyleBoxFlat.new()
+		estilo.bg_color = Color(0.1, 0.1, 0.1)
+	estilo.bg_color.a = OPACIDAD_PANEL_INFO
+	_panel_info.add_theme_stylebox_override("panel", estilo)
