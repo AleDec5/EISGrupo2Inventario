@@ -110,7 +110,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 10
 
-[node name="ColorRect" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=502584379]
+[node name="SlotItem1" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=502584379]
 texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
@@ -119,7 +119,7 @@ size_flags_horizontal = 4
 texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
 
-[node name="ColorRect2" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1938960946]
+[node name="SlotItem2" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1938960946]
 texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
@@ -128,7 +128,7 @@ size_flags_horizontal = 4
 texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
 
-[node name="ColorRect3" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1255866176]
+[node name="SlotItem3" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1255866176]
 texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
@@ -137,7 +137,7 @@ size_flags_horizontal = 4
 texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
 
-[node name="ColorRect4" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1643156723]
+[node name="SlotItem4" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1643156723]
 texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
@@ -150,7 +150,7 @@ script = ExtResource("2_slot")
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ColorRect5" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=752811792]
+[node name="SlotEscudo" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=752811792]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
@@ -170,11 +170,42 @@ size_flags_vertical = 3
 
 [node name="Personaje" type="TextureRect" parent="Equipamiento2/PersonajeYSalud/ContenerdorPersonaje" unique_id=1636592390]
 layout_mode = 2
-offset_transform_enabled = true
 offset_transform_scale = Vector2(0.9, 0.9)
 texture = ExtResource("5_rvkho")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Equipamiento2/PersonajeYSalud" unique_id=1038347646]
+[node name="CapaPantalon" type="TextureRect" parent="Equipamiento2/PersonajeYSalud/ContenerdorPersonaje" unique_id=1188290114]
+layout_mode = 2
+offset_transform_scale = Vector2(0.9, 0.9)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CapaTorso" type="TextureRect" parent="Equipamiento2/PersonajeYSalud/ContenerdorPersonaje" unique_id=2095902800]
+layout_mode = 2
+offset_transform_scale = Vector2(0.9, 0.9)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CapaBotas" type="TextureRect" parent="Equipamiento2/PersonajeYSalud/ContenerdorPersonaje" unique_id=352531196]
+layout_mode = 2
+offset_transform_scale = Vector2(0.9, 0.9)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CapaSombrero" type="TextureRect" parent="Equipamiento2/PersonajeYSalud/ContenerdorPersonaje" unique_id=364234815]
+layout_mode = 2
+offset_transform_scale = Vector2(0.9, 0.9)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CapaArma" type="TextureRect" parent="Equipamiento2/PersonajeYSalud/ContenerdorPersonaje" unique_id=2117078844]
+layout_mode = 2
+offset_transform_scale = Vector2(0.9, 0.9)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BarraSalud" type="TextureProgressBar" parent="Equipamiento2/PersonajeYSalud" unique_id=1038347646]
 texture_filter = 4
 custom_minimum_size = Vector2(120, 15)
 layout_mode = 2
@@ -192,7 +223,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="ColorRect" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=857829586]
+[node name="SlotSombrero" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=857829586]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
@@ -201,7 +232,7 @@ texture = ExtResource("9_50mke")
 script = ExtResource("2_slot")
 rol = 2
 
-[node name="ColorRect2" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=175947870]
+[node name="SlotArmadura" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=175947870]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
@@ -210,7 +241,7 @@ texture = ExtResource("10_x1idg")
 script = ExtResource("2_slot")
 rol = 3
 
-[node name="ColorRect3" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=1270969163]
+[node name="SlotPantalones" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=1270969163]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
@@ -219,7 +250,7 @@ texture = ExtResource("11_bgpit")
 script = ExtResource("2_slot")
 rol = 4
 
-[node name="ColorRect4" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=502781864]
+[node name="SlotBotas" type="TextureRect" parent="Equipamiento2/IndumentariaMC/Indumentaria" unique_id=502781864]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
@@ -231,7 +262,7 @@ rol = 5
 [node name="Spacer" type="Control" parent="Equipamiento2" unique_id=663531869]
 layout_mode = 2
 
-[node name="Arma" type="TextureRect" parent="Equipamiento2" unique_id=1453908539]
+[node name="SlotArma" type="TextureRect" parent="Equipamiento2" unique_id=1453908539]
 texture_filter = 1
 custom_minimum_size = Vector2(200, 100)
 custom_maximum_size = Vector2(200, 100)

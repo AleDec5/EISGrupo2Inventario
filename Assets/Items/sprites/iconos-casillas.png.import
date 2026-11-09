@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnu1nhlq37e2k"
-path="res://.godot/imported/spritesheet-otros-items.png-6db2e90e3d4ec171cc96928874b33864.ctex"
+uid="uid://cryqdvqjdxejf"
+path="res://.godot/imported/iconos-casillas.png-870277e2f348ae8e97d987e1e5ebc3aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Items/spritesheet-otros-items.png"
-dest_files=["res://.godot/imported/spritesheet-otros-items.png-6db2e90e3d4ec171cc96928874b33864.ctex"]
+source_file="res://Assets/Items/sprites/iconos-casillas.png"
+dest_files=["res://.godot/imported/iconos-casillas.png-870277e2f348ae8e97d987e1e5ebc3aa.ctex"]
 
 [params]
 

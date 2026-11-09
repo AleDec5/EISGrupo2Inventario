@@ -23,6 +23,7 @@ const NOMBRES_TIPO: Dictionary = {
 @export var tipo: Tipo = Tipo.NINGUNO
 @export var dimensiones: Vector2i = Vector2i(1, 1)
 @export var texture: Texture2D
+@export var textura_personaje: Texture2D #agrego esta textura para obtener cual aplicar al personaje
 @export_range(1, 4) var tier: int = 1
 @export var stackeable: bool = false
 @export_enum("8:8", "16:16", "32:32", "64:64") var cantidad_maxima: int = 16:

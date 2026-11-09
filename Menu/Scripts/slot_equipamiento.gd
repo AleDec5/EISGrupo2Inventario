@@ -3,6 +3,8 @@ extends TextureRect
 
 enum Rol { ATAJO, DEFENSA, SOMBRERO, TORSO, PANTALON, CALZADO, ARMA }
 
+signal equipo_cambiado(rol: Rol, data: ItemData)
+
 const TIPOS_ACEPTADOS: Dictionary = {
 	Rol.ATAJO: [ItemData.Tipo.ARMA, ItemData.Tipo.CONSUMIBLE, ItemData.Tipo.EQUIPABLE],
 	Rol.DEFENSA: [ItemData.Tipo.DEFENSA],
@@ -56,7 +58,7 @@ func acepta(d: ItemData) -> bool:
 func poner_item(nuevo: Node) -> void:
 	item = nuevo
 	_mostrar(nuevo.data)
-
+	equipo_cambiado.emit(rol, data)
 
 func poner_atajo(d: ItemData) -> void:
 	item = null
@@ -68,7 +70,7 @@ func vaciar() -> void:
 	data = null
 	_icono.texture = null
 	_cantidad.hide()
-
+	equipo_cambiado.emit(rol, null)
 
 func mostrar_cantidad(total: int) -> void:
 	_cantidad.visible = data != null and data.stackeable

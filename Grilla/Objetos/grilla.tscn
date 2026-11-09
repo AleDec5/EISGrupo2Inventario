@@ -5,16 +5,30 @@
 [ext_resource type="PackedScene" uid="uid://c8y2ce3kqchib" path="res://Grilla/Objetos/casilla.tscn" id="2_0a3j7"]
 [ext_resource type="PackedScene" uid="uid://ck5a8xg7to7c2" path="res://Grilla/Objetos/item.tscn" id="2_fq556"]
 [ext_resource type="Script" uid="uid://x0iaucbqh0di" path="res://Grilla/Scripts/Datos/item_data.gd" id="2_rf6od"]
+[ext_resource type="Texture2D" uid="uid://d010amth44xp5" path="res://Assets/Personaje/Armas/EspadaRoja.png" id="3_8bqdx"]
 [ext_resource type="Texture2D" uid="uid://cedlxvu4ewphr" path="res://Grilla/Assets/ItemOrange.png" id="3_egqu4"]
 [ext_resource type="Texture2D" uid="uid://d1w700mlcytki" path="res://Grilla/Assets/ItemRed.png" id="3_fyf55"]
 [ext_resource type="Texture2D" uid="uid://li0nllsmjtjq" path="res://Grilla/Assets/ItemGreen.png" id="4_s6ksn"]
 [ext_resource type="Texture2D" uid="uid://0sno1oi6ly57" path="res://Grilla/Assets/ItemPurple.png" id="5_8icrg"]
+[ext_resource type="Texture2D" uid="uid://cjk3x7rpnitmk" path="res://Assets/Personaje/Armas/Pistola.png" id="5_eo6bj"]
 [ext_resource type="Texture2D" uid="uid://b630hjarlfr7f" path="res://Grilla/Assets/ItemBrown.png" id="7_qxa1s"]
-[ext_resource type="Texture2D" uid="uid://cdenu1y2v1r7p" path="res://Grilla/Assets/ItemBlue.png" id="8_auoqk"]
+[ext_resource type="Texture2D" uid="uid://d07q70sysf3k3" path="res://Assets/Items/pocion_fantasmal.tres" id="7_trhmw"]
+[ext_resource type="Texture2D" uid="uid://dhfw63k1sdqn7" path="res://Assets/Items/pocion_haloween.tres" id="8_gpstx"]
 [ext_resource type="Texture2D" uid="uid://bquce0i8bqys" path="res://Grilla/Assets/ItemBlack.png" id="8_qvaao"]
+[ext_resource type="Texture2D" uid="uid://nv2brvt2up13" path="res://Assets/Items/caramelos.tres" id="9_4v8t0"]
 [ext_resource type="Texture2D" uid="uid://y8brp0qvc7po" path="res://Grilla/Assets/ItemYellow.png" id="10_d5d12"]
+[ext_resource type="Texture2D" uid="uid://d0lps773gc8l" path="res://Assets/Items/pocion_murcielago.tres" id="10_eo6bj"]
 [ext_resource type="Texture2D" uid="uid://cna448v45jxwr" path="res://Grilla/Assets/ItemWhite.png" id="11_tgggm"]
+[ext_resource type="Texture2D" uid="uid://chgyskrq8gds0" path="res://Assets/Items/bolsa_caramelos.tres" id="11_trhmw"]
 [ext_resource type="Texture2D" uid="uid://cw5d8287sq6a8" path="res://Grilla/Assets/ItemPink.png" id="12_tgggm"]
+[ext_resource type="Texture2D" uid="uid://b07tbgo220sea" path="res://Assets/Personaje/Armas/AK47.png" id="13_h0mok"]
+[ext_resource type="Texture2D" uid="uid://prxxoipy3bne" path="res://Assets/Personaje/Armas/EspadaDoble.png" id="15_b0rd3"]
+[ext_resource type="Texture2D" uid="uid://dx5mjhvcmcp15" path="res://Assets/Personaje/Armas/Arco.png" id="16_b0rd3"]
+[ext_resource type="Texture2D" uid="uid://b2h2dodtl1oo1" path="res://Assets/Items/pocion_dracula.tres" id="17_bixgc"]
+[ext_resource type="Texture2D" uid="uid://bkjycu3ovdvly" path="res://Assets/Personaje/Ropa/Sombrero1.png" id="18_gpstx"]
+[ext_resource type="Texture2D" uid="uid://bvrdse3cj8moi" path="res://Assets/Personaje/Ropa/Pantalon2.png" id="19_4v8t0"]
+[ext_resource type="Texture2D" uid="uid://5ttdnskpsvc8" path="res://Assets/Personaje/Ropa/Remera1.png" id="19_rwnsa"]
+[ext_resource type="Texture2D" uid="uid://bq28ca2vwoufv" path="res://Assets/Personaje/Ropa/Botas1.png" id="21_kpfqr"]
 
 [sub_resource type="Resource" id="Resource_rf6od"]
 script = ExtResource("2_rf6od")
@@ -23,6 +37,7 @@ descripcion = "Roba 5% del daño realizado a un enemigo, en forma de curación i
 tipo = 1
 dimensiones = Vector2i(1, 2)
 texture = ExtResource("3_fyf55")
+textura_personaje = ExtResource("3_8bqdx")
 tier = 2
 opciones_descripcion = Array[String](["Usar", "Mover"])
 dano = 20.0
@@ -35,7 +50,9 @@ script = ExtResource("2_rf6od")
 nombre = "Pistola"
 descripcion = "Pistola 9mm. Capacidad de cargador: 16 balas."
 tipo = 1
+dimensiones = Vector2i(4, 2)
 texture = ExtResource("4_s6ksn")
+textura_personaje = ExtResource("5_eo6bj")
 tier = 3
 dano = 10.0
 dps = 10.0
@@ -49,7 +66,7 @@ script = ExtResource("2_rf6od")
 nombre = "Pocion Fantasmal"
 descripcion = "Aplica invisibilidad por 3 segundos al consumirla."
 tipo = 6
-texture = ExtResource("5_8icrg")
+texture = ExtResource("7_trhmw")
 stackeable = true
 cantidad_inicial = 5
 duracion_efecto = 3.0
@@ -61,7 +78,8 @@ script = ExtResource("2_rf6od")
 nombre = "Poción Halloween"
 descripcion = "Arrojable. Al impactar aplica un área de 4mts de diámetro que ralentiza a los enemigos un 50% de su velocidad."
 tipo = 1
-texture = ExtResource("3_egqu4")
+dimensiones = Vector2i(2, 2)
+texture = ExtResource("8_gpstx")
 stackeable = true
 cantidad_inicial = 7
 alcance = 5.0
@@ -72,7 +90,7 @@ script = ExtResource("2_rf6od")
 nombre = "Caramelos"
 descripcion = "Cura +15HP de salúd perdida"
 tipo = 6
-texture = ExtResource("7_qxa1s")
+texture = ExtResource("9_4v8t0")
 stackeable = true
 cantidad_inicial = 10
 cura_instantanea = 15
@@ -83,7 +101,7 @@ script = ExtResource("2_rf6od")
 nombre = "Poción Murciélago"
 descripcion = "Permite saltar de vuelta en el aire durante 20 segundos."
 tipo = 6
-texture = ExtResource("8_qvaao")
+texture = ExtResource("10_eo6bj")
 stackeable = true
 cantidad_maxima = 8
 cantidad_inicial = 4
@@ -97,7 +115,7 @@ nombre = "Bolsa de Caramelos"
 descripcion = "Cura +80HP de salúd perdida"
 tipo = 6
 dimensiones = Vector2i(2, 2)
-texture = ExtResource("8_auoqk")
+texture = ExtResource("11_trhmw")
 cantidad_maxima = 8
 cura_instantanea = 80
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
@@ -121,6 +139,7 @@ descripcion = "Rifle de asalto AK-47."
 tipo = 1
 dimensiones = Vector2i(2, 1)
 texture = ExtResource("11_tgggm")
+textura_personaje = ExtResource("13_h0mok")
 dano = 20.0
 dps = 60.0
 disparos_por_segundo = 3.0
@@ -135,6 +154,7 @@ descripcion = "2 dagas de plata, equipamiento estándar de los cazadores de mons
 tipo = 1
 dimensiones = Vector2i(2, 1)
 texture = ExtResource("8_qvaao")
+textura_personaje = ExtResource("15_b0rd3")
 dano = 5.0
 dps = 20.0
 alcance = 1.0
@@ -146,6 +166,7 @@ nombre = "Arco"
 descripcion = "Arco"
 tipo = 1
 texture = ExtResource("4_s6ksn")
+textura_personaje = ExtResource("16_b0rd3")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_i8sdb"]
@@ -153,7 +174,7 @@ script = ExtResource("2_rf6od")
 nombre = "Elixir de Drácula"
 descripcion = "Cura +20HP durante 2 segundos."
 tipo = 6
-texture = ExtResource("3_fyf55")
+texture = ExtResource("17_bixgc")
 stackeable = true
 cantidad_maxima = 8
 cantidad_inicial = 3
@@ -179,6 +200,7 @@ descripcion = "Una simple remera."
 tipo = 4
 dimensiones = Vector2i(2, 2)
 texture = ExtResource("7_qxa1s")
+textura_personaje = ExtResource("19_rwnsa")
 mod_resistencia = 5.0
 mod_defensa = 1.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
@@ -189,6 +211,7 @@ nombre = "Botas de cuero"
 descripcion = "Confiables botas de cuero, aptas para todo tipo de terreno."
 tipo = 2
 texture = ExtResource("5_8icrg")
+textura_personaje = ExtResource("21_kpfqr")
 mod_hp = 5.0
 mod_resistencia = 20.0
 mod_defensa = 10.0
@@ -200,7 +223,8 @@ nombre = "Mi sombrero"
 descripcion = "\"¡Pero se me ve bien!\""
 tipo = 5
 dimensiones = Vector2i(2, 1)
-texture = ExtResource("7_qxa1s")
+texture = ExtResource("3_egqu4")
+textura_personaje = ExtResource("18_gpstx")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_trhmw"]
@@ -209,7 +233,8 @@ nombre = "Pantalones"
 descripcion = "Unos simples pantalones."
 tipo = 3
 dimensiones = Vector2i(1, 2)
-texture = ExtResource("8_qvaao")
+texture = ExtResource("7_qxa1s")
+textura_personaje = ExtResource("19_4v8t0")
 mod_hp = 1.0
 mod_resistencia = 5.0
 mod_defensa = 1.0
