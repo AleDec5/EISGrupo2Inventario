@@ -8,57 +8,47 @@
 [ext_resource type="Texture2D" uid="uid://d010amth44xp5" path="res://Assets/Personaje/Armas/EspadaRoja.png" id="3_8bqdx"]
 [ext_resource type="Texture2D" uid="uid://cedlxvu4ewphr" path="res://Grilla/Assets/ItemOrange.png" id="3_egqu4"]
 [ext_resource type="Texture2D" uid="uid://d1w700mlcytki" path="res://Grilla/Assets/ItemRed.png" id="3_fyf55"]
+[ext_resource type="Texture2D" uid="uid://b4gstblkg2hdk" path="res://Assets/Items/Equipables/Armas/EspadaDeSangre.tres" id="4_rwnsa"]
 [ext_resource type="Texture2D" uid="uid://li0nllsmjtjq" path="res://Grilla/Assets/ItemGreen.png" id="4_s6ksn"]
 [ext_resource type="Texture2D" uid="uid://0sno1oi6ly57" path="res://Grilla/Assets/ItemPurple.png" id="5_8icrg"]
 [ext_resource type="Texture2D" uid="uid://cjk3x7rpnitmk" path="res://Assets/Personaje/Armas/Pistola.png" id="5_eo6bj"]
+[ext_resource type="Texture2D" uid="uid://11w28nmeg78j" path="res://Assets/Items/Equipables/Armas/pistola.tres" id="6_kpfqr"]
 [ext_resource type="Texture2D" uid="uid://b630hjarlfr7f" path="res://Grilla/Assets/ItemBrown.png" id="7_qxa1s"]
-[ext_resource type="Texture2D" uid="uid://d07q70sysf3k3" path="res://Assets/Items/pocion_fantasmal.tres" id="7_trhmw"]
-[ext_resource type="Texture2D" uid="uid://dhfw63k1sdqn7" path="res://Assets/Items/pocion_haloween.tres" id="8_gpstx"]
-[ext_resource type="Texture2D" uid="uid://bquce0i8bqys" path="res://Grilla/Assets/ItemBlack.png" id="8_qvaao"]
-[ext_resource type="Texture2D" uid="uid://nv2brvt2up13" path="res://Assets/Items/caramelos.tres" id="9_4v8t0"]
+[ext_resource type="Texture2D" uid="uid://d07q70sysf3k3" path="res://Assets/Items/Consumibles/pocion_fantasmal.tres" id="7_trhmw"]
+[ext_resource type="Texture2D" uid="uid://dhfw63k1sdqn7" path="res://Assets/Items/Consumibles/pocion_haloween.tres" id="8_gpstx"]
+[ext_resource type="Texture2D" uid="uid://nv2brvt2up13" path="res://Assets/Items/Consumibles/caramelos.tres" id="9_4v8t0"]
 [ext_resource type="Texture2D" uid="uid://y8brp0qvc7po" path="res://Grilla/Assets/ItemYellow.png" id="10_d5d12"]
-[ext_resource type="Texture2D" uid="uid://d0lps773gc8l" path="res://Assets/Items/pocion_murcielago.tres" id="10_eo6bj"]
-[ext_resource type="Texture2D" uid="uid://cna448v45jxwr" path="res://Grilla/Assets/ItemWhite.png" id="11_tgggm"]
-[ext_resource type="Texture2D" uid="uid://chgyskrq8gds0" path="res://Assets/Items/bolsa_caramelos.tres" id="11_trhmw"]
+[ext_resource type="Texture2D" uid="uid://d0lps773gc8l" path="res://Assets/Items/Consumibles/pocion_murcielago.tres" id="10_eo6bj"]
+[ext_resource type="Texture2D" uid="uid://chgyskrq8gds0" path="res://Assets/Items/Consumibles/bolsa_caramelos.tres" id="11_trhmw"]
 [ext_resource type="Texture2D" uid="uid://cw5d8287sq6a8" path="res://Grilla/Assets/ItemPink.png" id="12_tgggm"]
 [ext_resource type="Texture2D" uid="uid://b07tbgo220sea" path="res://Assets/Personaje/Armas/AK47.png" id="13_h0mok"]
+[ext_resource type="Texture2D" uid="uid://b4dq442cmiakd" path="res://Assets/Items/Equipables/Armas/AK47.tres" id="14_kpfqr"]
 [ext_resource type="Texture2D" uid="uid://prxxoipy3bne" path="res://Assets/Personaje/Armas/EspadaDoble.png" id="15_b0rd3"]
+[ext_resource type="Texture2D" uid="uid://bkusr7viwa4c2" path="res://Assets/Items/Equipables/Armas/dagas.tres" id="16_037br"]
 [ext_resource type="Texture2D" uid="uid://dx5mjhvcmcp15" path="res://Assets/Personaje/Armas/Arco.png" id="16_b0rd3"]
-[ext_resource type="Texture2D" uid="uid://b2h2dodtl1oo1" path="res://Assets/Items/pocion_dracula.tres" id="17_bixgc"]
+[ext_resource type="Texture2D" uid="uid://b2h2dodtl1oo1" path="res://Assets/Items/Consumibles/pocion_dracula.tres" id="17_bixgc"]
 [ext_resource type="Texture2D" uid="uid://bkjycu3ovdvly" path="res://Assets/Personaje/Ropa/Sombrero1.png" id="18_gpstx"]
+[ext_resource type="Texture2D" uid="uid://2lqfc22en7g0" path="res://Assets/Items/Equipables/Armas/arco.tres" id="18_wydpi"]
 [ext_resource type="Texture2D" uid="uid://bvrdse3cj8moi" path="res://Assets/Personaje/Ropa/Pantalon2.png" id="19_4v8t0"]
 [ext_resource type="Texture2D" uid="uid://5ttdnskpsvc8" path="res://Assets/Personaje/Ropa/Remera1.png" id="19_rwnsa"]
 [ext_resource type="Texture2D" uid="uid://bq28ca2vwoufv" path="res://Assets/Personaje/Ropa/Botas1.png" id="21_kpfqr"]
+[ext_resource type="Texture2D" uid="uid://druoxdhv8ja65" path="res://Assets/Items/Equipables/Ropa/Remera.tres" id="22_m0snj"]
+[ext_resource type="Texture2D" uid="uid://ydxnr4skulf1" path="res://Assets/Items/Equipables/Ropa/Botas.tres" id="24_gvyhe"]
+[ext_resource type="Texture2D" uid="uid://b3apttqw3sto4" path="res://Assets/Items/Equipables/Ropa/Gorro.tres" id="26_a2q78"]
 
 [sub_resource type="Resource" id="Resource_rf6od"]
 script = ExtResource("2_rf6od")
 nombre = "Espada Sangrienta"
 descripcion = "Roba 5% del daño realizado a un enemigo, en forma de curación instantanea."
 tipo = 1
-dimensiones = Vector2i(1, 2)
-texture = ExtResource("3_fyf55")
+dimensiones = Vector2i(2, 4)
+texture = ExtResource("4_rwnsa")
 textura_personaje = ExtResource("3_8bqdx")
 tier = 2
 opciones_descripcion = Array[String](["Usar", "Mover"])
 dano = 20.0
 dps = 53.0
 alcance = 2.0
-metadata/_custom_type_script = "uid://x0iaucbqh0di"
-
-[sub_resource type="Resource" id="Resource_egqu4"]
-script = ExtResource("2_rf6od")
-nombre = "Pistola"
-descripcion = "Pistola 9mm. Capacidad de cargador: 16 balas."
-tipo = 1
-dimensiones = Vector2i(4, 2)
-texture = ExtResource("4_s6ksn")
-textura_personaje = ExtResource("5_eo6bj")
-tier = 3
-dano = 10.0
-dps = 10.0
-disparos_por_segundo = 1.0
-capacidad_cargador = 16
-calibre = "Pistola"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_auoqk"]
@@ -94,6 +84,22 @@ texture = ExtResource("9_4v8t0")
 stackeable = true
 cantidad_inicial = 10
 cura_instantanea = 15
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_egqu4"]
+script = ExtResource("2_rf6od")
+nombre = "Pistola"
+descripcion = "Pistola 9mm. Capacidad de cargador: 16 balas."
+tipo = 1
+dimensiones = Vector2i(2, 2)
+texture = ExtResource("6_kpfqr")
+textura_personaje = ExtResource("5_eo6bj")
+tier = 3
+dano = 10.0
+dps = 10.0
+disparos_por_segundo = 1.0
+capacidad_cargador = 16
+calibre = "Pistola"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_w8k61"]
@@ -137,8 +143,8 @@ script = ExtResource("2_rf6od")
 nombre = "Rifle de Asalto"
 descripcion = "Rifle de asalto AK-47."
 tipo = 1
-dimensiones = Vector2i(2, 1)
-texture = ExtResource("11_tgggm")
+dimensiones = Vector2i(4, 2)
+texture = ExtResource("14_kpfqr")
 textura_personaje = ExtResource("13_h0mok")
 dano = 20.0
 dps = 60.0
@@ -153,7 +159,7 @@ nombre = "Dagas"
 descripcion = "2 dagas de plata, equipamiento estándar de los cazadores de monstruos."
 tipo = 1
 dimensiones = Vector2i(2, 1)
-texture = ExtResource("8_qvaao")
+texture = ExtResource("16_037br")
 textura_personaje = ExtResource("15_b0rd3")
 dano = 5.0
 dps = 20.0
@@ -165,7 +171,8 @@ script = ExtResource("2_rf6od")
 nombre = "Arco"
 descripcion = "Arco"
 tipo = 1
-texture = ExtResource("4_s6ksn")
+dimensiones = Vector2i(2, 3)
+texture = ExtResource("18_wydpi")
 textura_personaje = ExtResource("16_b0rd3")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
@@ -199,7 +206,7 @@ nombre = "Remera"
 descripcion = "Una simple remera."
 tipo = 4
 dimensiones = Vector2i(2, 2)
-texture = ExtResource("7_qxa1s")
+texture = ExtResource("22_m0snj")
 textura_personaje = ExtResource("19_rwnsa")
 mod_resistencia = 5.0
 mod_defensa = 1.0
@@ -210,7 +217,8 @@ script = ExtResource("2_rf6od")
 nombre = "Botas de cuero"
 descripcion = "Confiables botas de cuero, aptas para todo tipo de terreno."
 tipo = 2
-texture = ExtResource("5_8icrg")
+dimensiones = Vector2i(2, 2)
+texture = ExtResource("24_gvyhe")
 textura_personaje = ExtResource("21_kpfqr")
 mod_hp = 5.0
 mod_resistencia = 20.0
@@ -223,7 +231,7 @@ nombre = "Mi sombrero"
 descripcion = "\"¡Pero se me ve bien!\""
 tipo = 5
 dimensiones = Vector2i(2, 1)
-texture = ExtResource("3_egqu4")
+texture = ExtResource("26_a2q78")
 textura_personaje = ExtResource("18_gpstx")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
@@ -320,7 +328,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_efp76")
-items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_w8k61"), SubResource("Resource_0lisf"), SubResource("Resource_p1rba"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_o3kor"), SubResource("Resource_i8sdb"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx"), SubResource("Resource_o8qx6"), SubResource("Resource_1iarf"), SubResource("Resource_pn52p"), SubResource("Resource_4v8t0"), SubResource("Resource_4vqr3"), SubResource("Resource_m86do")])
+items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_w8k61"), SubResource("Resource_0lisf"), SubResource("Resource_p1rba"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_o3kor"), SubResource("Resource_i8sdb"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx"), SubResource("Resource_o8qx6"), SubResource("Resource_1iarf"), SubResource("Resource_pn52p"), SubResource("Resource_4v8t0"), SubResource("Resource_4vqr3"), SubResource("Resource_m86do")])
 item_scene = ExtResource("2_fq556")
 
 [node name="Grilla" type="GridContainer" parent="Inventario" unique_id=662261994]
