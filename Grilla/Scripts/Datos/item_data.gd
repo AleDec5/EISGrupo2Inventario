@@ -1,7 +1,7 @@
 class_name ItemData
 extends Resource
 
-enum Tipo { NINGUNO, ARMA, CALZADO, PANTALON, TORSO, SOMBRERO, CONSUMIBLE, EQUIPABLE, DEFENSA, MUNICION }
+enum Tipo { NINGUNO, ARMA, CALZADO, PANTALON, TORSO, SOMBRERO, CONSUMIBLE, EQUIPABLE, MUNICION = 9 }
 
 const LIMITE_MAXIMO: int = 64
 const TIER_MAXIMO: int = 4
@@ -14,7 +14,6 @@ const NOMBRES_TIPO: Dictionary = {
 	Tipo.SOMBRERO: "Sombrero",
 	Tipo.CONSUMIBLE: "Consumible",
 	Tipo.EQUIPABLE: "Equipable",
-	Tipo.DEFENSA: "Item de defensa",
 	Tipo.MUNICION: "Munición",
 }
 
@@ -49,6 +48,7 @@ const NOMBRES_TIPO: Dictionary = {
 @export var pct_rango_deteccion: float = 0.0
 
 @export_group("Armas y munición")
+@export var arma_secundaria: bool = false
 @export var dano: float = 0.0
 @export var dps: float = 0.0
 @export var disparos_por_segundo: float = 0.0
@@ -79,7 +79,7 @@ func se_puede_equipar() -> bool:
 
 
 func nombre_tipo() -> String:
-	return NOMBRES_TIPO[tipo]
+	return NOMBRES_TIPO.get(tipo, "General")
 
 
 func es_mismo(otro: ItemData) -> bool:

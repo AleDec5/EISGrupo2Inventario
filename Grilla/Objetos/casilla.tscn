@@ -13,7 +13,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Fondo" type="ColorRect" parent="." unique_id=1663895680]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
@@ -24,7 +24,7 @@ color = Color(0.16924527, 0.1692453, 0.16924527, 1)
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 32.0
-offset_bottom = 32.0
+offset_right = 64.0
+offset_bottom = 64.0
 mouse_filter = 2
 color = Color(0.5689727, 0.56897277, 0.5689727, 1)

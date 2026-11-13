@@ -1,19 +1,20 @@
 class_name SlotEquipamiento
 extends ColorRect
 
-enum Rol { ATAJO, DEFENSA, SOMBRERO, TORSO, PANTALON, CALZADO, ARMA }
+enum Rol { CONSUMIBLE, EQUIPABLE, SOMBRERO, TORSO, PANTALON, CALZADO, ARMA_PRINCIPAL, ARMA_SECUNDARIA }
 
 const TIPOS_ACEPTADOS: Dictionary = {
-	Rol.ATAJO: [ItemData.Tipo.ARMA, ItemData.Tipo.CONSUMIBLE, ItemData.Tipo.EQUIPABLE],
-	Rol.DEFENSA: [ItemData.Tipo.DEFENSA],
+	Rol.CONSUMIBLE: [ItemData.Tipo.CONSUMIBLE],
+	Rol.EQUIPABLE: [ItemData.Tipo.EQUIPABLE],
 	Rol.SOMBRERO: [ItemData.Tipo.SOMBRERO],
 	Rol.TORSO: [ItemData.Tipo.TORSO],
 	Rol.PANTALON: [ItemData.Tipo.PANTALON],
 	Rol.CALZADO: [ItemData.Tipo.CALZADO],
-	Rol.ARMA: [ItemData.Tipo.ARMA],
+	Rol.ARMA_PRINCIPAL: [ItemData.Tipo.ARMA],
+	Rol.ARMA_SECUNDARIA: [ItemData.Tipo.ARMA],
 }
 
-@export var rol: Rol = Rol.ATAJO
+@export var rol: Rol = Rol.CONSUMIBLE
 
 var item: Node = null
 var data: ItemData = null
@@ -42,7 +43,7 @@ func _ready() -> void:
 
 
 func es_atajo() -> bool:
-	return rol == Rol.ATAJO
+	return rol == Rol.CONSUMIBLE
 
 
 func esta_vacio() -> bool:
@@ -50,7 +51,13 @@ func esta_vacio() -> bool:
 
 
 func acepta(d: ItemData) -> bool:
-	return d != null and d.tipo in TIPOS_ACEPTADOS[rol]
+	if d == null or not (d.tipo in TIPOS_ACEPTADOS[rol]):
+		return false
+	if rol == Rol.ARMA_PRINCIPAL:
+		return not d.arma_secundaria
+	if rol == Rol.ARMA_SECUNDARIA:
+		return d.arma_secundaria
+	return true
 
 
 func poner_item(nuevo: Node) -> void:

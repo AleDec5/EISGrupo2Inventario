@@ -104,6 +104,7 @@ custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("2_slot")
+rol = 1
 
 [node name="ColorRect2" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=476954746]
 custom_minimum_size = Vector2(48, 48)
@@ -111,6 +112,7 @@ custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("2_slot")
+rol = 1
 
 [node name="ColorRect3" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1185078389]
 custom_minimum_size = Vector2(48, 48)
@@ -118,6 +120,7 @@ custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("2_slot")
+rol = 1
 
 [node name="ColorRect4" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1736707854]
 custom_minimum_size = Vector2(48, 48)
@@ -125,17 +128,25 @@ custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("2_slot")
+rol = 1
 
 [node name="Spacer" type="Control" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1355139987]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ColorRect5" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=496220443]
-custom_minimum_size = Vector2(64, 64)
+[node name="Consumible" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual"]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("2_slot")
-rol = 1
+
+[node name="Consumible2" type="ColorRect" parent="Equipamiento2/OjetosEnSuVisual"]
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("2_slot")
 
 [node name="PersonajeYArma" type="VBoxContainer" parent="Equipamiento2" unique_id=2114307509]
 layout_mode = 2
@@ -179,8 +190,18 @@ rol = 5
 [node name="Spacer" type="Control" parent="Equipamiento2" unique_id=663531869]
 layout_mode = 2
 
-[node name="Arma" type="ColorRect" parent="Equipamiento2" unique_id=730230304]
-custom_minimum_size = Vector2(200, 100)
+[node name="Armas" type="HBoxContainer" parent="Equipamiento2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Arma" type="ColorRect" parent="Equipamiento2/Armas" unique_id=730230304]
+custom_minimum_size = Vector2(160, 80)
 layout_mode = 2
 script = ExtResource("2_slot")
 rol = 6
+
+[node name="ArmaSecundaria" type="ColorRect" parent="Equipamiento2/Armas"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+script = ExtResource("2_slot")
+rol = 7

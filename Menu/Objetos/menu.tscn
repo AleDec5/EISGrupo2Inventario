@@ -15,7 +15,7 @@ offset_bottom = 40.0
 script = ExtResource("1_nys4u")
 contenedor_tooltip = NodePath("CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario/PanelContainer/TooltipContainer")
 panel_tooltip = NodePath("CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario/PanelContainer")
-escena_inventario = NodePath("CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario/Inventario/ScrollContainer/InventarioGrilla")
+escena_inventario = NodePath("CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario/Inventario/InventarioGrilla")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=819823046]
 
@@ -40,7 +40,7 @@ layout_mode = 2
 [node name="BodyMC" type="MarginContainer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal" unique_id=2060348706]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 70
+theme_override_constants/margin_left = 25
 theme_override_constants/margin_right = 70
 
 [node name="Body" type="HBoxContainer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC" unique_id=1529817835]
@@ -58,6 +58,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 
 [node name="Footer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal" unique_id=281336662 instance=ExtResource("5_ofkdj")]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 15

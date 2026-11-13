@@ -1,7 +1,7 @@
 class_name ItemGrilla
 extends Sprite2D
 
-const TAMAÑO_SLOT: int = 32
+const TAMAÑO_SLOT: int = 64
 const DURACION_ROTACION: float = 0.1
 const TAMAÑO_FUENTE: int = 10
 const GROSOR_CONTORNO: int = 3
@@ -25,7 +25,6 @@ var tier: int = 1:
 
 var _grados_objetivo: float = 0.0
 var _tween: Tween
-var _scroll: ScrollContainer = null
 
 @onready var etiqueta: Label = $Cantidad
 @onready var indicador_tier: GridContainer = $Tier
@@ -59,7 +58,6 @@ func _ready() -> void:
 	if data and data.texture:
 		texture = data.texture
 		scale = Vector2(data.dimensiones) * TAMAÑO_SLOT / texture.get_size()
-	_scroll = _buscar_scroll()
 	actualizar_indicadores()
 
 
@@ -142,7 +140,7 @@ func actualizar_indicadores() -> void:
 	etiqueta.text = str(cantidad)
 	var tamaño_etiqueta := etiqueta.get_combined_minimum_size()
 	etiqueta.global_position = ancla + tamaño - tamaño_etiqueta - Vector2(2, 0)
-	etiqueta.visible = data.stackeable and _esta_dentro_del_scroll(Rect2(etiqueta.global_position, tamaño_etiqueta))
+	etiqueta.visible = data.stackeable
 
 	var cuadritos = indicador_tier.get_children()
 	for i in cuadritos.size():
@@ -150,29 +148,7 @@ func actualizar_indicadores() -> void:
 		cuadritos[i].color = COLORES_TIER[tier - 1] if encendido else COLOR_APAGADO
 	var tamaño_tier := indicador_tier.get_combined_minimum_size()
 	indicador_tier.global_position = ancla + Vector2(tamaño.x - tamaño_tier.x - 2, 2)
-	indicador_tier.visible = not data.stackeable and _esta_dentro_del_scroll(Rect2(indicador_tier.global_position, tamaño_tier))
-
-
-func _buscar_scroll() -> ScrollContainer:
-	var nodo := get_parent()
-	while nodo != null:
-		if nodo is ScrollContainer:
-			return nodo as ScrollContainer
-		nodo = nodo.get_parent()
-	return null
-
-
-func _esta_dentro_del_scroll(rect: Rect2) -> bool:
-	if esta_agarrado or _scroll == null:
-		return true
-	var ventana := _scroll.get_global_rect()
-	var barra_vertical := _scroll.get_v_scroll_bar()
-	if barra_vertical.visible:
-		ventana.size.x -= barra_vertical.size.x
-	var barra_horizontal := _scroll.get_h_scroll_bar()
-	if barra_horizontal.visible:
-		ventana.size.y -= barra_horizontal.size.y
-	return ventana.encloses(rect)
+	indicador_tier.visible = not data.stackeable
 
 
 func es_mismo_item(otro: Node) -> bool:
@@ -222,8 +198,6 @@ func obtener_opciones() -> Array[String]:
 	if data.se_puede_equipar() and not data.esta_bloqueado:
 		if not opciones.has("Equipar"):
 			opciones.append("Equipar")
-		if data.tipo == ItemData.Tipo.ARMA:
-			opciones.append("Poner en atajo")
 	if data.stackeable and cantidad > 1 and not data.esta_bloqueado:
 		opciones.append("Agarrar uno")
 		opciones.append("Dividir a la mitad")

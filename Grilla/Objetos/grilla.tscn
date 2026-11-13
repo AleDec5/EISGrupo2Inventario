@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://cna448v45jxwr" path="res://Grilla/Assets/ItemWhite.png" id="11_tgggm"]
 [ext_resource type="Texture2D" uid="uid://cw5d8287sq6a8" path="res://Grilla/Assets/ItemPink.png" id="12_tgggm"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4a5h"]
+
 [sub_resource type="Resource" id="Resource_rf6od"]
 script = ExtResource("2_rf6od")
 nombre = "Espada Sangrienta"
@@ -244,7 +246,7 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 script = ExtResource("2_rf6od")
 nombre = "Libro maldito"
 descripcion = "Escrito en el lenguaje perdido de un reino que jamas existió. Resiliencia Infernal: cada vez que recibís daño, recuperás un 12% del daño recibido en forma de regeneración, durante 3 segundos."
-tipo = 8
+tipo = 7
 dimensiones = Vector2i(2, 2)
 texture = ExtResource("7_qxa1s")
 mod_velocidad = -5.0
@@ -294,6 +296,7 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_g4a5h")
 script = ExtResource("1_efp76")
 items = Array[ExtResource("2_rf6od")]([SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_w8k61"), SubResource("Resource_0lisf"), SubResource("Resource_p1rba"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_o3kor"), SubResource("Resource_i8sdb"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx"), SubResource("Resource_o8qx6"), SubResource("Resource_1iarf"), SubResource("Resource_pn52p"), SubResource("Resource_4v8t0"), SubResource("Resource_4vqr3"), SubResource("Resource_m86do")])
 item_scene = ExtResource("2_fq556")

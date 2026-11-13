@@ -3,7 +3,7 @@ extends GridContainer
 signal fusion_bloqueada(motivo: String)
 signal item_consumido(data: ItemData)
 
-const TAMAÑO_SLOT: int = 32
+const TAMAÑO_SLOT: int = ItemGrilla.TAMAÑO_SLOT
 
 @export var casilla_scene: PackedScene
 @export var dimensiones: Vector2i
@@ -15,12 +15,16 @@ func _ready() -> void:
 	add_to_group("grilla_inventario")
 	crear_casillas()
 	init_data_casilla()
+	if owner is Control:
+		owner.custom_minimum_size = Vector2(dimensiones) * TAMAÑO_SLOT
 
 
 func crear_casillas() -> void:
 	self.columns = dimensiones.x
 	for i in dimensiones.x * dimensiones.y:
-		add_child(casilla_scene.instantiate())
+		var casilla = casilla_scene.instantiate()
+		casilla.custom_minimum_size = Vector2.ONE * TAMAÑO_SLOT
+		add_child(casilla)
 
 
 func init_data_casilla() -> void:

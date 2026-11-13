@@ -1,17 +1,21 @@
 class_name GestorEquipamiento
 extends MarginContainer
 
+const MARGEN_BOTON_DEBUG := Vector2(8, 8)
+
 var estadisticas := EstadisticasPersonaje.new()
 var simulando_tiempo: bool = false
 
 var _panel_stats: PanelContainer
 var _etiqueta_stats: Label
+var _boton_debug: Button
 var _texto_anterior: String = ""
 
 
 func _ready() -> void:
 	add_to_group("gestor_equipamiento")
 	_crear_panel_stats()
+	_crear_boton_debug()
 	_conectar_grilla.call_deferred()
 
 
@@ -25,8 +29,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	match event.keycode:
-		KEY_F3:
-			_panel_stats.visible = not _panel_stats.visible
 		KEY_F4:
 			simulando_tiempo = not simulando_tiempo
 		KEY_F5:
@@ -38,6 +40,7 @@ func _process(delta: float) -> void:
 		estadisticas.avanzar_tiempo(delta)
 	_actualizar_bonus_equipo()
 	_actualizar_panel_stats()
+	_posicionar_debug()
 	var grilla = _grilla()
 	if grilla == null:
 		return
@@ -59,6 +62,7 @@ func _crear_panel_stats() -> void:
 	_panel_stats.top_level = true
 	_panel_stats.z_index = 90
 	_panel_stats.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_panel_stats.hide()
 	_etiqueta_stats = Label.new()
 	_etiqueta_stats.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_etiqueta_stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -68,22 +72,39 @@ func _crear_panel_stats() -> void:
 	add_child(_panel_stats)
 
 
+func _crear_boton_debug() -> void:
+	_boton_debug = Button.new()
+	_boton_debug.top_level = true
+	_boton_debug.z_index = 90
+	_boton_debug.text = "Debug menu"
+	_boton_debug.toggle_mode = true
+	_boton_debug.focus_mode = Control.FOCUS_NONE
+	_boton_debug.toggled.connect(func(activado: bool): _panel_stats.visible = activado)
+	add_child(_boton_debug)
+
+
+func _posicionar_debug() -> void:
+	var pantalla := get_viewport_rect().size
+	var tamaño_boton := _boton_debug.get_combined_minimum_size()
+	_boton_debug.global_position = Vector2(MARGEN_BOTON_DEBUG.x, pantalla.y - tamaño_boton.y - MARGEN_BOTON_DEBUG.y)
+	_panel_stats.global_position = Vector2(MARGEN_BOTON_DEBUG.x, _boton_debug.global_position.y - _panel_stats.size.y - 8)
+
+
 func _actualizar_panel_stats() -> void:
+	if not _panel_stats.visible:
+		return
 	var texto := estadisticas.a_texto()
-	texto += "\n\nTiempo: %s\n(F3 panel, F4 tiempo, F5 -20 HP)" % ("simulando" if simulando_tiempo else "en pausa")
+	texto += "\n\nTiempo: %s\n(F4 tiempo, F5 -20 HP)" % ("simulando" if simulando_tiempo else "en pausa")
 	if texto != _texto_anterior:
 		_texto_anterior = texto
 		_etiqueta_stats.text = texto
 		_panel_stats.reset_size()
-	_panel_stats.global_position = Vector2(80, get_viewport_rect().size.y - _panel_stats.size.y - 60)
 
 
 func _actualizar_bonus_equipo() -> void:
 	var bonus: Dictionary = {}
 	for slot in _slots():
-		if slot.item == null:
-			continue
-		if slot.es_atajo() and slot.data.tipo == ItemData.Tipo.ARMA:
+		if slot.item == null or slot.rol == SlotEquipamiento.Rol.ARMA_SECUNDARIA:
 			continue
 		var modificadores: Dictionary = slot.data.obtener_modificadores()
 		for stat in modificadores:
@@ -113,10 +134,23 @@ func obtener_slot_bajo_el_mouse() -> SlotEquipamiento:
 	return null
 
 
-func slot_principal_para(d: ItemData) -> SlotEquipamiento:
+func _candidatos(d: ItemData) -> Array[SlotEquipamiento]:
+	var candidatos: Array[SlotEquipamiento] = []
 	for slot in _slots():
-		if not slot.es_atajo() and slot.acepta(d):
+		if slot.acepta(d):
+			candidatos.append(slot)
+	return candidatos
+
+
+func slot_para_equipar(d: ItemData) -> SlotEquipamiento:
+	if d.es_consumible():
+		return atajo_libre_para(d)
+	var candidatos := _candidatos(d)
+	for slot in candidatos:
+		if slot.esta_vacio():
 			return slot
+	if candidatos.size() == 1:
+		return candidatos[0]
 	return null
 
 
@@ -128,7 +162,7 @@ func _atajo_con(d: ItemData) -> SlotEquipamiento:
 
 
 func atajo_libre_para(d: ItemData) -> SlotEquipamiento:
-	if d.es_consumible() and _atajo_con(d) != null:
+	if _atajo_con(d) != null:
 		return null
 	for slot in _slots():
 		if slot.es_atajo() and slot.acepta(d) and slot.esta_vacio():
@@ -140,15 +174,13 @@ func puede_equipar(item: Node) -> bool:
 	var d: ItemData = item.data
 	if not d.se_puede_equipar() or d.esta_bloqueado:
 		return false
-	var slot := slot_principal_para(d)
-	if slot != null:
-		var ocupante = slot.item
-		return ocupante == null or _grilla().hay_lugar_para(ocupante, item)
-	return atajo_libre_para(d) != null
-
-
-func puede_poner_en_atajo(item: Node) -> bool:
-	return atajo_libre_para(item.data) != null
+	var slot := slot_para_equipar(d)
+	if slot == null:
+		return false
+	if slot.es_atajo():
+		return true
+	var ocupante = slot.item
+	return ocupante == null or _grilla().hay_lugar_para(ocupante, item)
 
 
 func puede_desequipar(slot: SlotEquipamiento) -> bool:
@@ -158,10 +190,10 @@ func puede_desequipar(slot: SlotEquipamiento) -> bool:
 
 
 func equipar(item: Node) -> bool:
-	var slot := slot_principal_para(item.data)
-	if slot != null:
-		return _equipar_en_slot(slot, item)
-	return poner_en_atajo(item)
+	var slot := slot_para_equipar(item.data)
+	if slot == null:
+		return false
+	return soltar_en_slot(slot, item)
 
 
 func soltar_en_slot(slot: SlotEquipamiento, item: Node) -> bool:
@@ -177,26 +209,11 @@ func poner_en_atajo(item: Node, slot: SlotEquipamiento = null) -> bool:
 		slot = atajo_libre_para(item.data)
 	if slot == null or not slot.es_atajo() or not slot.acepta(item.data):
 		return false
-
-	if not item.data.es_consumible():
-		return _equipar_en_slot(slot, item)
-
 	var otro := _atajo_con(item.data)
 	if otro != null and otro != slot:
 		return false
-
-	var grilla = _grilla()
-	var ocupante = slot.item
-	var venia_en_mano: bool = item.esta_agarrado
-	if venia_en_mano and not grilla.devolver_item(item):
+	if item.esta_agarrado and not _grilla().devolver_item(item):
 		return false
-	if ocupante != null:
-		if not grilla.hay_lugar_para(ocupante):
-			if venia_en_mano:
-				grilla.agarrar_item(item)
-			return false
-		ocupante.sacar_de_slot()
-		grilla.intentar_agregar_item_data(ocupante)
 	slot.poner_atajo(item.data)
 	return true
 
