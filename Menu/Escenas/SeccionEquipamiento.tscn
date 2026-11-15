@@ -1,4 +1,4 @@
- [gd_scene format=3 uid="uid://b82yuyoqdr7m1"]
+[gd_scene format=3 uid="uid://b82yuyoqdr7m1"]
 
 [ext_resource type="Script" uid="uid://cuh6ld7x26tl" path="res://Menu/Scripts/gestor_equipamiento.gd" id="1_gestor"]
 [ext_resource type="Texture2D" uid="uid://clhitnmnqrptj" path="res://Assets/UI/SlotExtra.png" id="2_im0h5"]
@@ -117,7 +117,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
-rol = 1
 
 [node name="SlotItem2" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1938960946]
 texture_filter = 1
@@ -127,7 +126,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
-rol = 1
 
 [node name="SlotItem3" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1255866176]
 texture_filter = 1
@@ -137,7 +135,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
-rol = 1
 
 [node name="SlotItem4" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1643156723]
 texture_filter = 1
@@ -147,13 +144,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
-rol = 1
 
 [node name="Spacer" type="Control" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1355139987]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SlotConsumible1" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual"]
+[node name="SlotConsumible1" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1918949010]
 texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
@@ -161,8 +157,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
+rol = 1
 
-[node name="SlotConsumible2" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual"]
+[node name="SlotConsumible2" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1319567610]
 texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
@@ -170,6 +167,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_im0h5")
 script = ExtResource("2_slot")
+rol = 1
 
 [node name="PersonajeYSalud" type="VBoxContainer" parent="Equipamiento2" unique_id=2114307509]
 layout_mode = 2
@@ -273,7 +271,7 @@ rol = 5
 [node name="Spacer" type="Control" parent="Equipamiento2" unique_id=663531869]
 layout_mode = 2
 
-[node name="Armas" type="HBoxContainer" parent="Equipamiento2"]
+[node name="Armas" type="HBoxContainer" parent="Equipamiento2" unique_id=766326916]
 layout_mode = 2
 theme_override_constants/separation = 10
 
@@ -287,7 +285,7 @@ expand_mode = 1
 script = ExtResource("2_slot")
 rol = 6
 
-[node name="SlotArmaSecundaria" type="TextureRect" parent="Equipamiento2/Armas"]
+[node name="SlotArmaSecundaria" type="TextureRect" parent="Equipamiento2/Armas" unique_id=1464944783]
 texture_filter = 1
 custom_minimum_size = Vector2(80, 80)
 custom_maximum_size = Vector2(80, 80)

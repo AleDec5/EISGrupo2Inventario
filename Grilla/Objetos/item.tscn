@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://eulwu42b014x" path="res://Grilla/Scripts/Visual/item.gd" id="1_lft5x"]
 
 [node name="Item" type="Sprite2D" unique_id=595347924]
+texture_filter = 1
 script = ExtResource("1_lft5x")
 
 [node name="Cantidad" type="Label" parent="." unique_id=1681405037]

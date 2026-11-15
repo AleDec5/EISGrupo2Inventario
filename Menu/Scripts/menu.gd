@@ -270,6 +270,9 @@ func mostrar_info(item: Node) -> void:
 	if not item or not item.data:
 		return
 
+	if grilla_inventario != null: # NUEVO
+		grilla_inventario.item_seleccionado = item # NUEVO
+
 	var casillas: Vector2i = item.dimensiones
 	var total: int = casillas.x * casillas.y
 	var detalle := PackedStringArray()
@@ -296,6 +299,8 @@ func mostrar_info(item: Node) -> void:
 
 func ocultar_info() -> void:
 	_panel_info.hide()
+	if grilla_inventario != null: # NUEVO
+		grilla_inventario.item_seleccionado = null # NUEVO
 	
 func _lineas_efectos(data: ItemData) -> PackedStringArray:
 	var lineas := PackedStringArray()

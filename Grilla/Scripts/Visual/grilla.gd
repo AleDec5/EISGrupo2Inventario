@@ -3,33 +3,114 @@ extends GridContainer
 signal fusion_bloqueada(motivo: String)
 signal item_consumido(data: ItemData)
 
-const TAMAÑO_SLOT: int = ItemGrilla.TAMAÑO_SLOT
+enum EstadoCasilla { BASE, SELECCIONADO, HOVER, LLENO }
 
-@export var casilla_scene: PackedScene
+const TAMAÑO_SLOT: int = ItemGrilla.TAMAÑO_SLOT
+const ATLAS_1X1: Texture2D = preload("res://Assets/Casillas/spritesheet-casilla1x1.png")
+const ATLAS_2X1: Texture2D = preload("res://Assets/Casillas/spritesheet-casilla1x2.png")
+const ATLAS_1X2: Texture2D = preload("res://Assets/Casillas/spritesheet-casillas2x1.png")
+const ATLAS_2X2: Texture2D = preload("res://Assets/Casillas/spritesheet-casilla2x2.png")
+
 @export var dimensiones: Vector2i
 
 var data_casilla: Array[Node] = []
+var item_seleccionado: Node = null
+
+var _capa_arrastre: Node2D
 
 
 func _ready() -> void:
 	add_to_group("grilla_inventario")
-	crear_casillas()
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	columns = dimensiones.x
+	custom_minimum_size = Vector2(dimensiones) * TAMAÑO_SLOT
 	init_data_casilla()
 	if owner is Control:
-		owner.custom_minimum_size = Vector2(dimensiones) * TAMAÑO_SLOT
+		owner.custom_minimum_size = custom_minimum_size
 
-
-func crear_casillas() -> void:
-	self.columns = dimensiones.x
-	for i in dimensiones.x * dimensiones.y:
-		var casilla = casilla_scene.instantiate()
-		casilla.custom_minimum_size = Vector2.ONE * TAMAÑO_SLOT
-		add_child(casilla)
+	_capa_arrastre = Node2D.new()
+	_capa_arrastre.top_level = true
+	_capa_arrastre.z_as_relative = false
+	_capa_arrastre.z_index = 9
+	_capa_arrastre.draw.connect(_dibujar_capa_arrastre)
+	add_child(_capa_arrastre)
 
 
 func init_data_casilla() -> void:
 	data_casilla.resize(dimensiones.x * dimensiones.y)
 	data_casilla.fill(null)
+
+
+func _process(_delta: float) -> void:
+	queue_redraw()
+	_capa_arrastre.queue_redraw()
+
+
+func _draw() -> void:
+	if item_seleccionado != null and not is_instance_valid(item_seleccionado):
+		item_seleccionado = null
+
+	var agarrado = get_tree().get_first_node_in_group("item_agarrado")
+	var bajo_el_mouse: Node = null
+	if agarrado == null:
+		bajo_el_mouse = obtener_item_bajo_el_mouse()
+
+	var dibujados: Dictionary = {}
+	for index in data_casilla.size():
+		var item = data_casilla[index]
+		if item == null:
+			_dibujar_marco(self, _posicion_casilla(index), Vector2i.ONE, EstadoCasilla.BASE)
+		elif not dibujados.has(item):
+			dibujados[item] = true
+			_dibujar_marco(self, _posicion_casilla(index), item.dimensiones, _estado_de(item, bajo_el_mouse))
+
+
+func _dibujar_capa_arrastre() -> void:
+	var agarrado = get_tree().get_first_node_in_group("item_agarrado")
+	if agarrado == null:
+		return
+	_dibujar_marco(_capa_arrastre, agarrado.ancla, agarrado.dimensiones, EstadoCasilla.SELECCIONADO)
+
+
+func _estado_de(item: Node, bajo_el_mouse: Node) -> int:
+	if item == item_seleccionado:
+		return EstadoCasilla.SELECCIONADO
+	if item == bajo_el_mouse:
+		return EstadoCasilla.HOVER
+	if item.data.stackeable and item.cantidad >= item.data.cantidad_maxima:
+		return EstadoCasilla.LLENO
+	return EstadoCasilla.BASE
+
+
+func _posicion_casilla(index: int) -> Vector2:
+	return Vector2((index % columns) * TAMAÑO_SLOT, (index / columns) * TAMAÑO_SLOT)
+
+
+func _dibujar_marco(lienzo: CanvasItem, pos: Vector2, dims: Vector2i, estado: int) -> void:
+	var atlas: Texture2D = null
+	if dims == Vector2i(1, 1):
+		atlas = ATLAS_1X1
+	elif dims == Vector2i(2, 1):
+		atlas = ATLAS_2X1
+	elif dims == Vector2i(1, 2):
+		atlas = ATLAS_1X2
+	elif dims == Vector2i(2, 2):
+		atlas = ATLAS_2X2
+
+	if atlas != null:
+		_dibujar_region(lienzo, atlas, Rect2(pos, Vector2(dims) * TAMAÑO_SLOT), estado)
+		return
+
+	for y in dims.y:
+		for x in dims.x:
+			var destino := Rect2(pos + Vector2(x, y) * TAMAÑO_SLOT, Vector2.ONE * TAMAÑO_SLOT)
+			_dibujar_region(lienzo, ATLAS_1X1, destino, estado)
+
+
+func _dibujar_region(lienzo: CanvasItem, atlas: Texture2D, destino: Rect2, estado: int) -> void:
+	var tamaño_cuadro := atlas.get_size() / 2.0
+	var origen := Vector2(estado % 2, estado / 2) * tamaño_cuadro
+	lienzo.draw_texture_rect_region(atlas, destino, Rect2(origen, tamaño_cuadro))
 
 
 #separe la logica para ver si hay item abajo del mouse en una funcion aparte para usarlo en menu
