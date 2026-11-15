@@ -48,10 +48,7 @@ layout_mode = 2
 
 [node name="Inventario" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body" unique_id=1018133904 instance=ExtResource("3_e82yi")]
 layout_mode = 2
-size_flags_horizontal = 2
-
-[node name="PanelContainer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario" index="1" unique_id=56145449]
-visible = true
+size_flags_horizontal = 3
 
 [node name="EquipamientoMC" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body" unique_id=1831596708 instance=ExtResource("4_ofkdj")]
 layout_mode = 2
@@ -68,5 +65,3 @@ theme_override_constants/margin_bottom = 15
 visible = false
 
 [node name="HoverTimer" type="Timer" parent="." unique_id=1628367227]
-
-[editable path="CanvasLayer/ContenedorMenu/ContenedorPrincipal/BodyMC/Body/Inventario"]

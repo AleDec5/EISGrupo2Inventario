@@ -1,7 +1,9 @@
 class_name SlotEquipamiento
-extends ColorRect
+extends TextureRect
 
 enum Rol { CONSUMIBLE, EQUIPABLE, SOMBRERO, TORSO, PANTALON, CALZADO, ARMA_PRINCIPAL, ARMA_SECUNDARIA }
+
+signal equipo_cambiado(rol: Rol, data: ItemData)
 
 const TIPOS_ACEPTADOS: Dictionary = {
 	Rol.CONSUMIBLE: [ItemData.Tipo.CONSUMIBLE],
@@ -63,7 +65,7 @@ func acepta(d: ItemData) -> bool:
 func poner_item(nuevo: Node) -> void:
 	item = nuevo
 	_mostrar(nuevo.data)
-
+	equipo_cambiado.emit(rol, data)
 
 func poner_atajo(d: ItemData) -> void:
 	item = null
@@ -75,7 +77,7 @@ func vaciar() -> void:
 	data = null
 	_icono.texture = null
 	_cantidad.hide()
-
+	equipo_cambiado.emit(rol, null)
 
 func mostrar_cantidad(total: int) -> void:
 	_cantidad.visible = data != null and data.stackeable

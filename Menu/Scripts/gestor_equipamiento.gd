@@ -3,6 +3,14 @@ extends MarginContainer
 
 const MARGEN_BOTON_DEBUG := Vector2(8, 8)
 
+@onready var capa_pantalon: TextureRect = $Equipamiento2/PersonajeYSalud/ContenerdorPersonaje/CapaPantalon
+@onready var capa_torso: TextureRect = $Equipamiento2/PersonajeYSalud/ContenerdorPersonaje/CapaTorso
+@onready var capa_botas: TextureRect = $Equipamiento2/PersonajeYSalud/ContenerdorPersonaje/CapaBotas
+@onready var capa_sombrero: TextureRect = $Equipamiento2/PersonajeYSalud/ContenerdorPersonaje/CapaSombrero
+@onready var capa_arma: TextureRect = $Equipamiento2/PersonajeYSalud/ContenerdorPersonaje/CapaArma
+
+var capas_por_rol: Dictionary = {}
+
 var estadisticas := EstadisticasPersonaje.new()
 var simulando_tiempo: bool = false
 
@@ -17,7 +25,32 @@ func _ready() -> void:
 	_crear_panel_stats()
 	_crear_boton_debug()
 	_conectar_grilla.call_deferred()
+	
+	capas_por_rol = {
+		SlotEquipamiento.Rol.SOMBRERO: capa_sombrero,
+		SlotEquipamiento.Rol.TORSO: capa_torso,
+		SlotEquipamiento.Rol.PANTALON: capa_pantalon,
+		SlotEquipamiento.Rol.CALZADO: capa_botas,
+		SlotEquipamiento.Rol.ARMA_PRINCIPAL: capa_arma
+	}
+	
+	_conectar_slots_visuales.call_deferred()
 
+func _conectar_slots_visuales() -> void:
+	for slot in _slots():
+		if not slot.is_connected("equipo_cambiado", _on_slot_equipo_cambiado):
+			slot.equipo_cambiado.connect(_on_slot_equipo_cambiado)
+
+func _on_slot_equipo_cambiado(rol: SlotEquipamiento.Rol, item_data: ItemData) -> void:
+	if not capas_por_rol.has(rol):
+		return
+		
+	var capa_target: TextureRect = capas_por_rol[rol]
+	
+	if item_data != null and item_data.textura_personaje != null:
+		capa_target.texture = item_data.textura_personaje
+	else:
+		capa_target.texture = null
 
 func _conectar_grilla() -> void:
 	var grilla = _grilla()
