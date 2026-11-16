@@ -24,15 +24,16 @@ const TEXTURAS_TIER: Array[Texture2D] = [
 	preload("res://Assets/Items/Iconos/tiers/naranja.tres"),
 ]
 
-const MARGEN_ESQUINA_SUP_IZQ := Vector2(6, 6)
+const MARGEN_ESQUINA_CATEGORIA := Vector2(2, 2) 
+const MARGEN_ESQUINA_TIER := Vector2(7, 7)      
 const MARGEN_ESQUINA_INF_DER := Vector2(7, 7)
 
-const MARGEN_INTERNO: float = 8.0
+const MARGEN_INTERNO: float = 4.0
 const ESCALA_MINIMA: float = 2.0
 
-const TAMANIO_ICONO_CATEGORIA: int = 24
-const TAMANIO_ICONO_TIER: int = 8
-const TAMANIO_ICONO_NIVEL: int = 12
+const TAMANIO_ICONO_CATEGORIA: int = 26
+const TAMANIO_ICONO_TIER: int = 6
+const TAMANIO_ICONO_NIVEL: int = 9
 
 const TAMAÑO_SLOT: int = 64
 const DURACION_ROTACION: float = 0.1
@@ -91,9 +92,8 @@ func _ready() -> void:
 	etiqueta.add_theme_constant_override("outline_size", GROSOR_CONTORNO)
 	etiqueta.add_theme_color_override("font_outline_color", Color.BLACK)
 
-	for icono in [icono_categoria, icono_nivel]:
-		icono_nivel.custom_minimum_size = Vector2(TAMANIO_ICONO_NIVEL, TAMANIO_ICONO_NIVEL)
-		icono_nivel.size = Vector2(TAMANIO_ICONO_NIVEL, TAMANIO_ICONO_NIVEL)
+	icono_nivel.custom_minimum_size = Vector2(TAMANIO_ICONO_NIVEL, TAMANIO_ICONO_NIVEL)
+	icono_nivel.size = Vector2(TAMANIO_ICONO_NIVEL, TAMANIO_ICONO_NIVEL)
 
 	if data and data.texture:
 		_ajustar_textura_y_escala()
@@ -217,12 +217,14 @@ func actualizar_indicadores() -> void:
 		tamano_sup_izq = TAMANIO_ICONO_TIER
 	else:
 		tex_sup_izq = ICONOS_CATEGORIA.get(data.categoria_icono, null)
+	
+	var margen_sup_izq := MARGEN_ESQUINA_TIER if es_municion else MARGEN_ESQUINA_CATEGORIA
 
 	icono_categoria.texture = tex_sup_izq
 	icono_categoria.visible = tex_sup_izq != null
 	icono_categoria.custom_minimum_size = Vector2(tamano_sup_izq, tamano_sup_izq)
 	icono_categoria.size = Vector2(tamano_sup_izq, tamano_sup_izq)
-	icono_categoria.global_position = _pos_arriba_izquierda()
+	icono_categoria.global_position = ancla + margen_sup_izq
 
 	icono_nivel.texture = TEXTURAS_NIVEL[nivel - 1]
 	icono_nivel.visible = es_arma
@@ -287,8 +289,8 @@ func obtener_opciones() -> Array[String]:
 	return opciones
 
 
-func _pos_arriba_izquierda() -> Vector2:
-	return ancla + MARGEN_ESQUINA_SUP_IZQ
+func _pos_arriba_izquierda(margen: Vector2 = MARGEN_ESQUINA_CATEGORIA) -> Vector2:
+	return ancla + margen
 
 
 func _pos_abajo_derecha(tamaño_nodo: Vector2) -> Vector2:
