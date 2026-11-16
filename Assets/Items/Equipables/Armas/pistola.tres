@@ -1,7 +1,7 @@
-[gd_resource type="AtlasTexture" format=3 uid="uid://11w28nmeg78j"]
+[gd_resource type="AtlasTexture" format=3 uid="uid://byjojt3kbird0"]
 
-[ext_resource type="Texture2D" uid="uid://dt4spk2wiyeo6" path="res://Assets/Items/sprites/spritesheet-armas.png" id="1_gbsso"]
+[ext_resource type="Texture2D" uid="uid://bma7d2gae3a8o" path="res://Assets/Items/sprites/spritesheet-armas-v2.png" id="1_tn8vh"]
 
 [resource]
-atlas = ExtResource("1_gbsso")
-region = Rect2(64, 32, 32, 32)
+atlas = ExtResource("1_tn8vh")
+region = Rect2(128, 72, 64, 48)

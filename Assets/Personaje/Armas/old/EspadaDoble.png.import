@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ukuy5ilc8tr"
-path="res://.godot/imported/SlotBotas.png-41e9edcde6ec26d7ef446475d048089b.ctex"
+uid="uid://prxxoipy3bne"
+path="res://.godot/imported/EspadaDoble.png-76076129abce8cbd44c78f6d0e836091.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/SlotBotas.png"
-dest_files=["res://.godot/imported/SlotBotas.png-41e9edcde6ec26d7ef446475d048089b.ctex"]
+source_file="res://Assets/Personaje/Armas/old/EspadaDoble.png"
+dest_files=["res://.godot/imported/EspadaDoble.png-76076129abce8cbd44c78f6d0e836091.ctex"]
 
 [params]
 

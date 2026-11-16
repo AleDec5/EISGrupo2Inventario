@@ -1,18 +1,19 @@
 [gd_scene format=3 uid="uid://b82yuyoqdr7m1"]
 
 [ext_resource type="Script" uid="uid://cuh6ld7x26tl" path="res://Menu/Scripts/gestor_equipamiento.gd" id="1_gestor"]
-[ext_resource type="Texture2D" uid="uid://clhitnmnqrptj" path="res://Assets/UI/SlotExtra.png" id="2_im0h5"]
+[ext_resource type="Texture2D" uid="uid://clhitnmnqrptj" path="res://Assets/UI/placeholders/SlotExtra.png" id="2_im0h5"]
 [ext_resource type="Script" uid="uid://bxdq36nd2cy0d" path="res://Menu/Scripts/slot_equipamiento.gd" id="2_slot"]
 [ext_resource type="Texture2D" uid="uid://nucw2m4p80cc" path="res://Assets/UI/Under.png" id="3_1vy64"]
 [ext_resource type="Texture2D" uid="uid://cpfimtd5f3is6" path="res://Assets/UI/Over.png" id="4_ixffu"]
 [ext_resource type="Script" uid="uid://bwh73apulahp8" path="res://Assets/UI/BarraSalud.gd" id="5_ixffu"]
 [ext_resource type="Texture2D" uid="uid://dp48gwccm75b0" path="res://Assets/UI/Progress.png" id="5_kvs7e"]
 [ext_resource type="Texture2D" uid="uid://b0eqcd64v7cfr" path="res://Assets/Personaje/Vacio.png" id="5_rvkho"]
-[ext_resource type="Texture2D" uid="uid://b0ics4quqxrio" path="res://Assets/UI/SlotSombrero.png" id="9_50mke"]
-[ext_resource type="Texture2D" uid="uid://rmgvej6caa7j" path="res://Assets/UI/SlotArmadura.png" id="10_x1idg"]
-[ext_resource type="Texture2D" uid="uid://claar8d3yc4s0" path="res://Assets/UI/SlotPantalones.png" id="11_bgpit"]
-[ext_resource type="Texture2D" uid="uid://ukuy5ilc8tr" path="res://Assets/UI/SlotBotas.png" id="12_fw6gt"]
-[ext_resource type="Texture2D" uid="uid://b20xbgi46glpj" path="res://Assets/UI/SlotArma.png" id="13_24fmh"]
+[ext_resource type="Texture2D" uid="uid://dt13432vukqsl" path="res://Assets/UI/CasillasSombrero.png" id="9_rvkho"]
+[ext_resource type="Texture2D" uid="uid://1adh3j7bt1uu" path="res://Assets/UI/CasillaRemera.png" id="10_50mke"]
+[ext_resource type="Texture2D" uid="uid://ryehb1655mmx" path="res://Assets/UI/CasillaPantalon.png" id="11_x1idg"]
+[ext_resource type="Texture2D" uid="uid://ct8vrmife6bjs" path="res://Assets/UI/CasillaBotas.png" id="12_bgpit"]
+[ext_resource type="Texture2D" uid="uid://dsuw0uq42fyob" path="res://Assets/UI/CasillaPistola.png" id="13_fw6gt"]
+[ext_resource type="Texture2D" uid="uid://cc7vob1grrf6d" path="res://Assets/UI/CasillaEscudo.png" id="14_24fmh"]
 
 [node name="MarginContainer" type="MarginContainer" unique_id=1831596708]
 offset_right = 40.0
@@ -237,7 +238,7 @@ texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("9_50mke")
+texture = ExtResource("9_rvkho")
 script = ExtResource("2_slot")
 rol = 2
 
@@ -246,7 +247,7 @@ texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("10_x1idg")
+texture = ExtResource("10_50mke")
 script = ExtResource("2_slot")
 rol = 3
 
@@ -255,7 +256,7 @@ texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("11_bgpit")
+texture = ExtResource("11_x1idg")
 script = ExtResource("2_slot")
 rol = 4
 
@@ -264,7 +265,7 @@ texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("12_fw6gt")
+texture = ExtResource("12_bgpit")
 script = ExtResource("2_slot")
 rol = 5
 
@@ -280,7 +281,7 @@ texture_filter = 1
 custom_minimum_size = Vector2(160, 80)
 custom_maximum_size = Vector2(160, 80)
 layout_mode = 2
-texture = ExtResource("13_24fmh")
+texture = ExtResource("13_fw6gt")
 expand_mode = 1
 script = ExtResource("2_slot")
 rol = 6
@@ -290,7 +291,7 @@ texture_filter = 1
 custom_minimum_size = Vector2(80, 80)
 custom_maximum_size = Vector2(80, 80)
 layout_mode = 2
-texture = ExtResource("2_im0h5")
+texture = ExtResource("14_24fmh")
 expand_mode = 1
 script = ExtResource("2_slot")
 rol = 7

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxo3bwj7dkp7v"
-path="res://.godot/imported/Armas spritesheet.png-3d573536fbc5367eddf849ccb9c26652.ctex"
+uid="uid://b20xbgi46glpj"
+path="res://.godot/imported/SlotArma.png-4558225d5b0e547187436c640bdb1dad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Personaje/Armas/Armas spritesheet.png"
-dest_files=["res://.godot/imported/Armas spritesheet.png-3d573536fbc5367eddf849ccb9c26652.ctex"]
+source_file="res://Assets/UI/placeholders/SlotArma.png"
+dest_files=["res://.godot/imported/SlotArma.png-4558225d5b0e547187436c640bdb1dad.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://claar8d3yc4s0"
-path="res://.godot/imported/SlotPantalones.png-38cd5ca377a0d81f1cf190ff1867f8e3.ctex"
+uid="uid://boyvcwka6rw81"
+path="res://.godot/imported/ItemPantalon3.png-ace16e74752906fb96bbec2e7e5333f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/SlotPantalones.png"
-dest_files=["res://.godot/imported/SlotPantalones.png-38cd5ca377a0d81f1cf190ff1867f8e3.ctex"]
+source_file="res://Assets/Items/Equipables/Ropa/ItemPantalon3.png"
+dest_files=["res://.godot/imported/ItemPantalon3.png-ace16e74752906fb96bbec2e7e5333f8.ctex"]
 
 [params]
 

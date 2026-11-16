@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clhitnmnqrptj"
-path="res://.godot/imported/SlotExtra.png-f49af5fec9011cf3b72d75ba388da2b6.ctex"
+uid="uid://claar8d3yc4s0"
+path="res://.godot/imported/SlotPantalones.png-cc53f4027e71a9bbe87ca448b4fe05b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/SlotExtra.png"
-dest_files=["res://.godot/imported/SlotExtra.png-f49af5fec9011cf3b72d75ba388da2b6.ctex"]
+source_file="res://Assets/UI/placeholders/SlotPantalones.png"
+dest_files=["res://.godot/imported/SlotPantalones.png-cc53f4027e71a9bbe87ca448b4fe05b5.ctex"]
 
 [params]
 

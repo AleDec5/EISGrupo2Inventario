@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyjus6sjixti3"
-path="res://.godot/imported/SlotEscudo.png-cdc934779319c46df5cb297f8f1d67c7.ctex"
+uid="uid://doyoe7v3tygp0"
+path="res://.godot/imported/ItemRemera1.png-46244d28d7bbd9a0c9b2f122a768b16d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/SlotEscudo.png"
-dest_files=["res://.godot/imported/SlotEscudo.png-cdc934779319c46df5cb297f8f1d67c7.ctex"]
+source_file="res://Assets/Items/Equipables/Ropa/ItemRemera1.png"
+dest_files=["res://.godot/imported/ItemRemera1.png-46244d28d7bbd9a0c9b2f122a768b16d.ctex"]
 
 [params]
 

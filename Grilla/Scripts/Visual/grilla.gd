@@ -3,10 +3,10 @@ extends GridContainer
 signal fusion_bloqueada(motivo: String)
 signal item_consumido(data: ItemData)
 
-enum EstadoCasilla { BASE, SELECCIONADO, HOVER, LLENO }
+enum EstadoCasilla { BASE, SELECCIONADO, HOVER, LLENO, VACIA }
 
 const TAMAÑO_SLOT: int = ItemGrilla.TAMAÑO_SLOT
-const ATLAS_1X1: Texture2D = preload("res://Assets/Casillas/spritesheet-casilla1x1.png")
+const ATLAS_1X1: Texture2D = preload("res://Assets/Casillas/spritesheet-casilla1x1(2).png")
 const ATLAS_2X1: Texture2D = preload("res://Assets/Casillas/spritesheet-casilla1x2.png")
 const ATLAS_1X2: Texture2D = preload("res://Assets/Casillas/spritesheet-casillas2x1.png")
 const ATLAS_2X2: Texture2D = preload("res://Assets/Casillas/spritesheet-casilla2x2.png")
@@ -59,7 +59,7 @@ func _draw() -> void:
 	for index in data_casilla.size():
 		var item = data_casilla[index]
 		if item == null:
-			_dibujar_marco(self, _posicion_casilla(index), Vector2i.ONE, EstadoCasilla.BASE)
+			_dibujar_marco(self, _posicion_casilla(index), Vector2i.ONE, EstadoCasilla.VACIA)
 		elif not dibujados.has(item):
 			dibujados[item] = true
 			_dibujar_marco(self, _posicion_casilla(index), item.dimensiones, _estado_de(item, bajo_el_mouse))
@@ -108,10 +108,17 @@ func _dibujar_marco(lienzo: CanvasItem, pos: Vector2, dims: Vector2i, estado: in
 
 
 func _dibujar_region(lienzo: CanvasItem, atlas: Texture2D, destino: Rect2, estado: int) -> void:
-	var tamaño_cuadro := atlas.get_size() / 2.0
-	var origen := Vector2(estado % 2, estado / 2) * tamaño_cuadro
-	lienzo.draw_texture_rect_region(atlas, destino, Rect2(origen, tamaño_cuadro))
+	var tamaño_cuadro: Vector2
+	var origen: Vector2
 
+	if atlas == ATLAS_1X1:
+		tamaño_cuadro = Vector2(atlas.get_width() / 5.0, atlas.get_height())
+		origen = Vector2(estado * tamaño_cuadro.x, 0.0)
+	else:
+		tamaño_cuadro = atlas.get_size() / 2.0
+		origen = Vector2(estado % 2, estado / 2) * tamaño_cuadro
+
+	lienzo.draw_texture_rect_region(atlas, destino, Rect2(origen, tamaño_cuadro))
 
 #separe la logica para ver si hay item abajo del mouse en una funcion aparte para usarlo en menu
 func obtener_item_bajo_el_mouse() -> Node:
