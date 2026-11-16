@@ -12,6 +12,7 @@ const ICONOS_CATEGORIA: Dictionary = {
 
 #este es para dejarle un margen a los items y que se vean mejor los iconos
 const MARGEN_INTERNO: float = 8.0
+const ESCALA_MINIMA: float = 2.0
 const TAMANIO_ICONOS: int = 24
 const TAMAÑO_SLOT: int = 64
 const DURACION_ROTACION: float = 0.1
@@ -88,12 +89,15 @@ func _ajustar_textura_y_escala() -> void:
 	else:
 		texture = data.texture
 
-	var area_disponible := Vector2(data.dimensiones) * TAMAÑO_SLOT - Vector2.ONE * (MARGEN_INTERNO * 2.0)
+	var tamano_celdas := Vector2(data.dimensiones) * TAMAÑO_SLOT
+	var area_disponible := tamano_celdas - Vector2.ONE * (MARGEN_INTERNO * 2.0)
 	var factores := area_disponible / texture.get_size()
 	var escala_uniforme := minf(factores.x, factores.y)
 
 	if escala_uniforme >= 1.0:
-		escala_uniforme = floorf(escala_uniforme)
+		escala_uniforme = maxf(ESCALA_MINIMA, floorf(escala_uniforme))
+		if (texture.get_size() * escala_uniforme).x > tamano_celdas.x or (texture.get_size() * escala_uniforme).y > tamano_celdas.y:
+			escala_uniforme = 1.0
 
 	scale = Vector2.ONE * escala_uniforme
 
@@ -162,6 +166,7 @@ func guardar_en_slot() -> void:
 	icono_categoria.z_index = 1
 	etiqueta.hide()
 	indicador_tier.hide()
+	icono_categoria.hide()
 	hide()
 	process_mode = Node.PROCESS_MODE_DISABLED
 
