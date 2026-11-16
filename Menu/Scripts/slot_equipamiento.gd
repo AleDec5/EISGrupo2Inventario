@@ -53,12 +53,14 @@ func esta_vacio() -> bool:
 
 
 func acepta(d: ItemData) -> bool:
-	if d == null or not (d.tipo in TIPOS_ACEPTADOS[rol]):
+	if d == null:
+		return false
+	if rol == Rol.ARMA_SECUNDARIA:
+		return d.arma_secundaria
+	if not (d.tipo in TIPOS_ACEPTADOS[rol]):
 		return false
 	if rol == Rol.ARMA_PRINCIPAL:
 		return not d.arma_secundaria
-	if rol == Rol.ARMA_SECUNDARIA:
-		return d.arma_secundaria
 	return true
 
 

@@ -2,25 +2,42 @@ class_name ItemGrilla
 extends Sprite2D
 
 const ICONOS_CATEGORIA: Dictionary = {
-	ItemData.CategoriaIcono.ARMA_DISTANCIA: preload("res://Assets/Items/Iconos/arma_rango.tres"),
-	ItemData.CategoriaIcono.ARMA_MELEE: preload("res://Assets/Items/Iconos/arma_mele.tres"),
-	ItemData.CategoriaIcono.CONSUMIBLE_HABILIDAD: preload("res://Assets/Items/Iconos/consumible_habilidad.tres"),
-	ItemData.CategoriaIcono.CONSUMIBLE_SANACION: preload("res://Assets/Items/Iconos/consumible_sanacion.tres"),
-	ItemData.CategoriaIcono.CONSUMIBLE_CREACION: preload("res://Assets/Items/Iconos/consumible_creacion.tres"),
-	ItemData.CategoriaIcono.ARMADURA: preload("res://Assets/Items/Iconos/indumentaria.tres")
+	ItemData.CategoriaIcono.ARMA_DISTANCIA: preload("res://Assets/Items/Iconos/consumibles/arma_rango.tres"),
+	ItemData.CategoriaIcono.ARMA_MELEE: preload("res://Assets/Items/Iconos/consumibles/arma_mele.tres"),
+	ItemData.CategoriaIcono.CONSUMIBLE_HABILIDAD: preload("res://Assets/Items/Iconos/consumibles/consumible_habilidad.tres"),
+	ItemData.CategoriaIcono.CONSUMIBLE_SANACION: preload("res://Assets/Items/Iconos/consumibles/consumible_sanacion.tres"),
+	ItemData.CategoriaIcono.CONSUMIBLE_CREACION: preload("res://Assets/Items/Iconos/consumibles/consumible_creacion.tres"),
+	ItemData.CategoriaIcono.ARMADURA: preload("res://Assets/Items/Iconos/consumibles/indumentaria.tres"),
 }
 
-#este es para dejarle un margen a los items y que se vean mejor los iconos
+const TEXTURAS_NIVEL: Array[Texture2D] = [
+	preload("res://Assets/Items/Iconos/niveles/nivel_1.tres"),
+	preload("res://Assets/Items/Iconos/niveles/nivel_2.tres"),
+	preload("res://Assets/Items/Iconos/niveles/nivel_3.tres"),
+	preload("res://Assets/Items/Iconos/niveles/nivel_4.tres"),
+]
+
+const TEXTURAS_TIER: Array[Texture2D] = [
+	preload("res://Assets/Items/Iconos/tiers/verde.tres"),
+	preload("res://Assets/Items/Iconos/tiers/cian.tres"),
+	preload("res://Assets/Items/Iconos/tiers/violeta.tres"),
+	preload("res://Assets/Items/Iconos/tiers/naranja.tres"),
+]
+
+const MARGEN_ESQUINA_SUP_IZQ := Vector2(6, 6)
+const MARGEN_ESQUINA_INF_DER := Vector2(7, 7)
+
 const MARGEN_INTERNO: float = 8.0
 const ESCALA_MINIMA: float = 2.0
-const TAMANIO_ICONOS: int = 24
+
+const TAMANIO_ICONO_CATEGORIA: int = 24
+const TAMANIO_ICONO_TIER: int = 8
+const TAMANIO_ICONO_NIVEL: int = 12
+
 const TAMAÑO_SLOT: int = 64
 const DURACION_ROTACION: float = 0.1
 const TAMAÑO_FUENTE: int = 10
 const GROSOR_CONTORNO: int = 3
-const COLORES_TIER: Array[Color] = [Color.LIME_GREEN, Color.DODGER_BLUE, Color.MEDIUM_PURPLE, Color.ORANGE]
-const COLOR_APAGADO := Color(0.1, 0.1, 0.1, 0.6)
-const ORDEN_LLENADO: Array[int] = [2, 3, 0, 1]
 
 var data: ItemData = null
 var esta_agarrado: bool = false
@@ -29,6 +46,11 @@ var pasos_rotacion: int = 0
 var cantidad: int = 1:
 	set(valor):
 		cantidad = valor
+		actualizar_indicadores()
+
+var nivel: int = 1:
+	set(valor):
+		nivel = clampi(valor, 1, ItemData.NIVEL_MAXIMO)
 		actualizar_indicadores()
 
 var tier: int = 1:
@@ -40,8 +62,8 @@ var _grados_objetivo: float = 0.0
 var _tween: Tween
 
 @onready var etiqueta: Label = $Cantidad
-@onready var indicador_tier: GridContainer = $Tier
 @onready var icono_categoria: TextureRect = $IconoCategoria
+@onready var icono_nivel: TextureRect = $IconoNivel
 
 var dimensiones: Vector2i:
 	get():
@@ -57,28 +79,27 @@ var ancla: Vector2:
 	get():
 		return global_position - tamaño / 2
 
+
 func _ready() -> void:
-	for nodo in [etiqueta, indicador_tier, icono_categoria]:
+	for nodo in [etiqueta, icono_categoria, icono_nivel]:
 		nodo.top_level = true
 		nodo.z_as_relative = false
 		nodo.z_index = 1
+		nodo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	etiqueta.add_theme_font_size_override("font_size", TAMAÑO_FUENTE)
 	etiqueta.add_theme_constant_override("outline_size", GROSOR_CONTORNO)
 	etiqueta.add_theme_color_override("font_outline_color", Color.BLACK)
-	indicador_tier.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	for cuadrito in indicador_tier.get_children():
-		cuadrito.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	#if data and data.texture:
-	#	texture = data.texture
-	#	var area_disponible := Vector2(data.dimensiones) * TAMAÑO_SLOT - Vector2.ONE * (MARGEN_INTERNO * 2.0)
-	#	scale = area_disponible / texture.get_size()
-	
+
+	for icono in [icono_categoria, icono_nivel]:
+		icono_nivel.custom_minimum_size = Vector2(TAMANIO_ICONO_NIVEL, TAMANIO_ICONO_NIVEL)
+		icono_nivel.size = Vector2(TAMANIO_ICONO_NIVEL, TAMANIO_ICONO_NIVEL)
+
 	if data and data.texture:
-			_ajustar_textura_y_escala()
-		
-	icono_categoria.custom_maximum_size = Vector2i(TAMANIO_ICONOS,TAMANIO_ICONOS)
-	icono_categoria.update_maximum_size()
+		_ajustar_textura_y_escala()
+
 	actualizar_indicadores()
+
 
 func _ajustar_textura_y_escala() -> void:
 	var img := data.texture.get_image()
@@ -101,6 +122,7 @@ func _ajustar_textura_y_escala() -> void:
 
 	scale = Vector2.ONE * escala_uniforme
 
+
 func _process(_delta: float) -> void:
 	if esta_agarrado:
 		global_position = get_global_mouse_position()
@@ -112,13 +134,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotar()
 
 
-func rotar() -> void:
+func rotar(instantaneo: bool = false) -> void:
 	pasos_rotacion = (pasos_rotacion + 1) % 4
 	_grados_objetivo += 90.0
 	if _tween:
 		_tween.kill()
-	_tween = create_tween()
-	_tween.tween_property(self, "rotation_degrees", _grados_objetivo, DURACION_ROTACION)
+	if instantaneo:
+		rotation_degrees = _grados_objetivo
+	else:
+		_tween = create_tween()
+		_tween.tween_property(self, "rotation_degrees", _grados_objetivo, DURACION_ROTACION)
 
 
 func reiniciar_rotacion() -> void:
@@ -139,8 +164,8 @@ func agarrar() -> void:
 	global_position = get_global_mouse_position()
 	z_index = 10
 	etiqueta.z_index = 11
-	indicador_tier.z_index = 11
 	icono_categoria.z_index = 11
+	icono_nivel.z_index = 11
 	add_to_group("item_agarrado")
 
 
@@ -149,8 +174,8 @@ func colocar(pos: Vector2i) -> void:
 	top_level = false
 	z_index = 0
 	etiqueta.z_index = 1
-	indicador_tier.z_index = 1
 	icono_categoria.z_index = 1
+	icono_nivel.z_index = 1
 	global_position = Vector2(pos) + tamaño / 2
 	remove_from_group("item_agarrado")
 
@@ -162,11 +187,11 @@ func guardar_en_slot() -> void:
 	reiniciar_rotacion()
 	z_index = 0
 	etiqueta.z_index = 1
-	indicador_tier.z_index = 1
 	icono_categoria.z_index = 1
+	icono_nivel.z_index = 1
 	etiqueta.hide()
-	indicador_tier.hide()
 	icono_categoria.hide()
+	icono_nivel.hide()
 	hide()
 	process_mode = Node.PROCESS_MODE_DISABLED
 
@@ -180,35 +205,39 @@ func sacar_de_slot() -> void:
 func actualizar_indicadores() -> void:
 	if not is_node_ready() or data == null:
 		return
-	
-	#iconos arriba a la izquierda
-	var tex_cat: Texture2D = ICONOS_CATEGORIA.get(data.categoria_icono, null)
-	icono_categoria.texture = tex_cat
-	icono_categoria.visible = tex_cat != null
-	icono_categoria.global_position = ancla + Vector2(2, 2)
 
+	var es_municion := data.tipo == ItemData.Tipo.MUNICION
+	var es_arma := data.tipo == ItemData.Tipo.ARMA
+
+	var tex_sup_izq: Texture2D = null
+	var tamano_sup_izq: int = TAMANIO_ICONO_CATEGORIA
+
+	if es_municion:
+		tex_sup_izq = TEXTURAS_TIER[tier - 1]
+		tamano_sup_izq = TAMANIO_ICONO_TIER
+	else:
+		tex_sup_izq = ICONOS_CATEGORIA.get(data.categoria_icono, null)
+
+	icono_categoria.texture = tex_sup_izq
+	icono_categoria.visible = tex_sup_izq != null
+	icono_categoria.custom_minimum_size = Vector2(tamano_sup_izq, tamano_sup_izq)
+	icono_categoria.size = Vector2(tamano_sup_izq, tamano_sup_izq)
+	icono_categoria.global_position = _pos_arriba_izquierda()
+
+	icono_nivel.texture = TEXTURAS_NIVEL[nivel - 1]
+	icono_nivel.visible = es_arma
+	icono_nivel.global_position = _pos_abajo_derecha(icono_nivel.size)
 
 	etiqueta.text = str(cantidad)
-	var tamaño_etiqueta := etiqueta.get_combined_minimum_size()
-	etiqueta.global_position = ancla + tamaño - tamaño_etiqueta - Vector2(2, 0)
-	etiqueta.visible = data.stackeable
-	
-	#abajo a la derecha
-	var cuadritos = indicador_tier.get_children()
-	for i in cuadritos.size():
-		var encendido = ORDEN_LLENADO.find(i) < tier
-		cuadritos[i].color = COLORES_TIER[tier - 1] if encendido else COLOR_APAGADO
-	var tamaño_tier := indicador_tier.get_combined_minimum_size()
-	indicador_tier.global_position = ancla + tamaño - tamaño_tier - Vector2(10, 10)
-	indicador_tier.visible = not data.stackeable
-
+	etiqueta.visible = data.stackeable and not es_arma
+	etiqueta.global_position = _pos_abajo_derecha(etiqueta.get_combined_minimum_size())
 
 func es_mismo_item(otro: Node) -> bool:
 	return data.es_mismo(otro.data)
 
 
 func puede_apilar(otro: Node) -> bool:
-	return otro != self and data.stackeable and es_mismo_item(otro) and cantidad < data.cantidad_maxima
+	return otro != self and data.stackeable and es_mismo_item(otro) and otro.tier == tier and cantidad < data.cantidad_maxima
 
 
 func apilar(otro: Node) -> void:
@@ -222,11 +251,11 @@ func apilar(otro: Node) -> void:
 
 
 func puede_fusionar(otro: Node) -> bool:
-	return otro != self and not data.stackeable and es_mismo_item(otro) and otro.tier == tier and tier < ItemData.TIER_MAXIMO
+	return otro != self and data.tipo == ItemData.Tipo.ARMA and es_mismo_item(otro) and otro.nivel == nivel and nivel < ItemData.NIVEL_MAXIMO
 
 
 func fusionar(otro: Node) -> void:
-	tier += 1
+	nivel += 1
 	otro.esta_agarrado = false
 	otro.remove_from_group("item_agarrado")
 	otro.queue_free()
@@ -235,6 +264,8 @@ func fusionar(otro: Node) -> void:
 func dividir(cantidad_a_separar: int) -> Node:
 	var nuevo = (load(scene_file_path) as PackedScene).instantiate()
 	nuevo.data = data
+	nuevo.tier = tier
+	nuevo.nivel = nivel
 	nuevo.cantidad = cantidad_a_separar
 	nuevo.global_position = global_position
 	get_parent().add_child(nuevo)
@@ -254,3 +285,11 @@ func obtener_opciones() -> Array[String]:
 		opciones.append("Agarrar uno")
 		opciones.append("Dividir a la mitad")
 	return opciones
+
+
+func _pos_arriba_izquierda() -> Vector2:
+	return ancla + MARGEN_ESQUINA_SUP_IZQ
+
+
+func _pos_abajo_derecha(tamaño_nodo: Vector2) -> Vector2:
+	return ancla + tamaño - tamaño_nodo - MARGEN_ESQUINA_INF_DER

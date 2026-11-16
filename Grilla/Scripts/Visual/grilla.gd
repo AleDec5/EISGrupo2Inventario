@@ -183,12 +183,12 @@ func _soltar_item(item_agarrado: Node) -> void:
 
 
 func _avisar_bloqueo(destino: Node, item: Node) -> void:
-	if not destino.es_mismo_item(item) or destino.data.stackeable:
+	if not destino.es_mismo_item(item) or destino.data.tipo != ItemData.Tipo.ARMA:
 		return
-	if destino.tier != item.tier:
-		fusion_bloqueada.emit("tier_distinto")
-	elif destino.tier >= ItemData.TIER_MAXIMO:
-		fusion_bloqueada.emit("tier_maximo")
+	if destino.nivel != item.nivel:
+		fusion_bloqueada.emit("nivel_distinto")
+	elif destino.nivel >= ItemData.NIVEL_MAXIMO:
+		fusion_bloqueada.emit("nivel_maximo")
 
 
 func intentar_agregar_item_data(item: Node) -> bool:

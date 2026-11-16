@@ -3,8 +3,10 @@ extends Resource
 
 enum Tipo { NINGUNO, ARMA, CALZADO, PANTALON, TORSO, SOMBRERO, CONSUMIBLE, EQUIPABLE, MUNICION = 9 }
 enum CategoriaIcono { NINGUNA, ARMA_DISTANCIA, ARMA_MELEE, CONSUMIBLE_HABILIDAD, CONSUMIBLE_SANACION,CONSUMIBLE_CREACION,ARMADURA }
+enum TierColor { VERDE = 1, CIAN = 2, VIOLETA = 3, NARANJA = 4 }
 
 const LIMITE_MAXIMO: int = 64
+const NIVEL_MAXIMO: int = 4
 const TIER_MAXIMO: int = 4
 const NOMBRES_TIPO: Dictionary = {
 	Tipo.NINGUNO: "General",
@@ -26,7 +28,10 @@ const NOMBRES_TIPO: Dictionary = {
 @export var dimensiones: Vector2i = Vector2i(1, 1)
 @export var texture: Texture2D
 @export var textura_personaje: Texture2D #agrego esta textura para obtener cual aplicar al personaje
+##Tier es para los consumibles
 @export_range(1, 4) var tier: int = 1
+##Nivel es para las armas
+@export_range(1, 4) var nivel: int = 1
 @export var stackeable: bool = false
 @export_enum("8:8", "16:16", "32:32", "64:64") var cantidad_maxima: int = 16:
 	set(valor):

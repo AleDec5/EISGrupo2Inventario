@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://c7pj8j3n8yylr"]
+
+[ext_resource type="Texture2D" uid="uid://cryqdvqjdxejf" path="res://Assets/Items/sprites/iconos-casillas.png" id="1_r3eyu"]
+
+[resource]
+atlas = ExtResource("1_r3eyu")
+region = Rect2(5, 16, 3, 3)
