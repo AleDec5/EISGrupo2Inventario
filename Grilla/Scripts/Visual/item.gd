@@ -11,7 +11,7 @@ const ICONOS_CATEGORIA: Dictionary = {
 }
 
 #este es para dejarle un margen a los items y que se vean mejor los iconos
-const MARGEN_INTERNO: float = 10.0
+const MARGEN_INTERNO: float = 8.0
 const TAMANIO_ICONOS: int = 24
 const TAMAÑO_SLOT: int = 64
 const DURACION_ROTACION: float = 0.1
@@ -67,14 +67,35 @@ func _ready() -> void:
 	indicador_tier.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	for cuadrito in indicador_tier.get_children():
 		cuadrito.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	#if data and data.texture:
+	#	texture = data.texture
+	#	var area_disponible := Vector2(data.dimensiones) * TAMAÑO_SLOT - Vector2.ONE * (MARGEN_INTERNO * 2.0)
+	#	scale = area_disponible / texture.get_size()
+	
 	if data and data.texture:
-		texture = data.texture
-		var area_disponible := Vector2(data.dimensiones) * TAMAÑO_SLOT - Vector2.ONE * (MARGEN_INTERNO * 2.0)
-		scale = area_disponible / texture.get_size()
+			_ajustar_textura_y_escala()
+		
 	icono_categoria.custom_maximum_size = Vector2i(TAMANIO_ICONOS,TAMANIO_ICONOS)
 	icono_categoria.update_maximum_size()
 	actualizar_indicadores()
 
+func _ajustar_textura_y_escala() -> void:
+	var img := data.texture.get_image()
+	var rect_usado := img.get_used_rect()
+
+	if rect_usado.has_area():
+		texture = ImageTexture.create_from_image(img.get_region(rect_usado))
+	else:
+		texture = data.texture
+
+	var area_disponible := Vector2(data.dimensiones) * TAMAÑO_SLOT - Vector2.ONE * (MARGEN_INTERNO * 2.0)
+	var factores := area_disponible / texture.get_size()
+	var escala_uniforme := minf(factores.x, factores.y)
+
+	if escala_uniforme >= 1.0:
+		escala_uniforme = floorf(escala_uniforme)
+
+	scale = Vector2.ONE * escala_uniforme
 
 func _process(_delta: float) -> void:
 	if esta_agarrado:
@@ -154,26 +175,26 @@ func sacar_de_slot() -> void:
 func actualizar_indicadores() -> void:
 	if not is_node_ready() or data == null:
 		return
-
-	#abajo a la derecha
-	etiqueta.text = str(cantidad)
-	var tamaño_etiqueta := etiqueta.get_combined_minimum_size()
-	etiqueta.global_position = ancla + tamaño - tamaño_etiqueta - Vector2(2, 0)
-	etiqueta.visible = data.stackeable
-
-	#arriba a la derecha
+	
+	#iconos arriba a la izquierda
 	var tex_cat: Texture2D = ICONOS_CATEGORIA.get(data.categoria_icono, null)
 	icono_categoria.texture = tex_cat
 	icono_categoria.visible = tex_cat != null
 	icono_categoria.global_position = ancla + Vector2(2, 2)
+
+
+	etiqueta.text = str(cantidad)
+	var tamaño_etiqueta := etiqueta.get_combined_minimum_size()
+	etiqueta.global_position = ancla + tamaño - tamaño_etiqueta - Vector2(2, 0)
+	etiqueta.visible = data.stackeable
 	
-	#abajo a la izquierda
+	#abajo a la derecha
 	var cuadritos = indicador_tier.get_children()
 	for i in cuadritos.size():
 		var encendido = ORDEN_LLENADO.find(i) < tier
 		cuadritos[i].color = COLORES_TIER[tier - 1] if encendido else COLOR_APAGADO
 	var tamaño_tier := indicador_tier.get_combined_minimum_size()
-	indicador_tier.global_position = ancla + Vector2(tamaño.x - tamaño_tier.x - 2, 2)
+	indicador_tier.global_position = ancla + tamaño - tamaño_tier - Vector2(10, 10)
 	indicador_tier.visible = not data.stackeable
 
 
