@@ -5,17 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://ck5a8xg7to7c2" path="res://Grilla/Objetos/item.tscn" id="2_fq556"]
 [ext_resource type="Script" uid="uid://x0iaucbqh0di" path="res://Grilla/Scripts/Datos/item_data.gd" id="2_rf6od"]
 [ext_resource type="Texture2D" uid="uid://dvqbacqivb4ig" path="res://Assets/Personaje/Armas/EspadaRoja.png" id="3_8bqdx"]
+[ext_resource type="Texture2D" uid="uid://b7yw1j1ehbq2l" path="res://Assets/Items/Equipables/Armas/caja de municion_2x.png" id="3_a2q78"]
 [ext_resource type="Texture2D" uid="uid://d1w700mlcytki" path="res://Grilla/Assets/ItemRed.png" id="3_fyf55"]
 [ext_resource type="Texture2D" uid="uid://b4gstblkg2hdk" path="res://Assets/Items/Equipables/Armas/EspadaDeSangre.tres" id="4_rwnsa"]
 [ext_resource type="Texture2D" uid="uid://li0nllsmjtjq" path="res://Grilla/Assets/ItemGreen.png" id="4_s6ksn"]
 [ext_resource type="Texture2D" uid="uid://cvxtw2rrhskr" path="res://Assets/Personaje/Armas/Pistola.png" id="5_eo6bj"]
-[ext_resource type="Texture2D" uid="uid://11w28nmeg78j" path="res://Assets/Items/Equipables/Armas/balas.tres" id="6_kpfqr"]
 [ext_resource type="Texture2D" uid="uid://d07q70sysf3k3" path="res://Assets/Items/Consumibles/pocion_fantasmal.tres" id="7_trhmw"]
 [ext_resource type="Texture2D" uid="uid://dhfw63k1sdqn7" path="res://Assets/Items/Consumibles/pocion_haloween.tres" id="8_gpstx"]
 [ext_resource type="Texture2D" uid="uid://nv2brvt2up13" path="res://Assets/Items/Consumibles/caramelos.tres" id="9_4v8t0"]
 [ext_resource type="Texture2D" uid="uid://d0lps773gc8l" path="res://Assets/Items/Consumibles/pocion_murcielago.tres" id="10_eo6bj"]
 [ext_resource type="Texture2D" uid="uid://chgyskrq8gds0" path="res://Assets/Items/Consumibles/bolsa_caramelos.tres" id="11_trhmw"]
-[ext_resource type="Texture2D" uid="uid://cw5d8287sq6a8" path="res://Grilla/Assets/ItemPink.png" id="12_tgggm"]
 [ext_resource type="Texture2D" uid="uid://bq547q34vfic2" path="res://Assets/Personaje/Armas/AK47.png" id="13_h0mok"]
 [ext_resource type="Texture2D" uid="uid://b4dq442cmiakd" path="res://Assets/Items/Equipables/Armas/AK47.tres" id="14_kpfqr"]
 [ext_resource type="Texture2D" uid="uid://bwkll1ekbnljt" path="res://Assets/Personaje/Armas/EspadaDoble.png" id="15_b0rd3"]
@@ -37,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://cbo2yw0xnp13v" path="res://Assets/Items/Equipables/Accesorios/collar-dientes.png" id="30_a2q78"]
 [ext_resource type="Texture2D" uid="uid://b3vq1suu1ko7y" path="res://Assets/Items/Equipables/Accesorios/collar-corazon.png" id="31_80mon"]
 [ext_resource type="Texture2D" uid="uid://bov0v44t4ck52" path="res://Assets/Items/Equipables/Accesorios/libroMaldito.tres" id="31_m0snj"]
+[ext_resource type="Texture2D" uid="uid://ckxx6no81oi7q" path="res://Assets/Items/Equipables/Armas/caja de municion explosiva_2x.png" id="33_80mon"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4a5h"]
 
@@ -45,7 +45,7 @@ script = ExtResource("2_rf6od")
 nombre = "Balas 9mm"
 descripcion = "16 balas de pistola."
 tipo = 9
-texture = ExtResource("6_kpfqr")
+texture = ExtResource("3_a2q78")
 stackeable = true
 cantidad_inicial = 18
 dano = 10.0
@@ -114,7 +114,6 @@ descripcion = "Cura +20HP durante 2 segundos."
 tipo = 6
 categoria_icono = 4
 texture = ExtResource("17_bixgc")
-textura_personaje = ExtResource("17_bixgc")
 stackeable = true
 cantidad_maxima = 8
 cantidad_inicial = 3
@@ -316,7 +315,7 @@ script = ExtResource("2_rf6od")
 nombre = "Munición explosiva"
 descripcion = "Explota al impactar. La explosión hace un daño extra equivalente al 10% del daño base de la bala."
 tipo = 9
-texture = ExtResource("12_tgggm")
+texture = ExtResource("33_80mon")
 stackeable = true
 cantidad_inicial = 9
 calibre = "Rifle"

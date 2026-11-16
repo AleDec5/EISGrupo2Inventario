@@ -24,6 +24,7 @@ const NOMBRES_TIPO: Dictionary = {
 @export var nombre: String
 @export_multiline var descripcion: String
 @export var tipo: Tipo = Tipo.NINGUNO
+#recien vi que estaba "categoria_icono" lo hice por subcateogia.
 @export var categoria_icono: CategoriaIcono = CategoriaIcono.NINGUNA
 @export var dimensiones: Vector2i = Vector2i(1, 1)
 @export var texture: Texture2D

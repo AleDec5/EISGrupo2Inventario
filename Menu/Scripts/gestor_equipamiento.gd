@@ -127,7 +127,7 @@ func _actualizar_panel_stats() -> void:
 	if not _panel_stats.visible:
 		return
 	var texto := estadisticas.a_texto()
-	texto += "\n\nTiempo: %s\n(F4 tiempo, F5 -20 HP)" % ("simulando" if simulando_tiempo else "en pausa")
+	texto += "\n\nTiempo: %s\n(F4 tiempo, F5 -20 HP, F6 +Arma, F7 +Poción)" % ("simulando" if simulando_tiempo else "en pausa")
 	if texto != _texto_anterior:
 		_texto_anterior = texto
 		_etiqueta_stats.text = texto
