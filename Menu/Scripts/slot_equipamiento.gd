@@ -75,6 +75,7 @@ func poner_atajo(d: ItemData) -> void:
 func vaciar() -> void:
 	item = null
 	data = null
+	self_modulate = Color.WHITE
 	_icono.texture = null
 	_cantidad.hide()
 	equipo_cambiado.emit(rol, null)
@@ -93,5 +94,16 @@ func obtener_opciones() -> Array[String]:
 
 func _mostrar(d: ItemData) -> void:
 	data = d
-	_icono.texture = d.texture
+	_icono.texture = _obtener_textura_ajustada(d)
+	self_modulate = Color(0.3, 0.3, 0.3, 0.25)
 	_cantidad.hide()
+
+func _obtener_textura_ajustada(d: ItemData) -> Texture2D:
+	if d.texture == null:
+		return null
+	var es_slot_arma := rol == Rol.ARMA_PRINCIPAL
+	if es_slot_arma and d.dimensiones.y > d.dimensiones.x:
+		var img: Image = d.texture.get_image()
+		img.rotate_90(COUNTERCLOCKWISE)
+		return ImageTexture.create_from_image(img)
+	return d.texture
