@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://b82yuyoqdr7m1"]
 
 [ext_resource type="Script" uid="uid://cuh6ld7x26tl" path="res://Menu/Scripts/gestor_equipamiento.gd" id="1_gestor"]
-[ext_resource type="Texture2D" uid="uid://clhitnmnqrptj" path="res://Assets/UI/placeholders/SlotExtra.png" id="2_im0h5"]
+[ext_resource type="Texture2D" uid="uid://c6y6ibubc0bx5" path="res://Assets/UI/iconos inventario/botella.png" id="2_50mke"]
 [ext_resource type="Script" uid="uid://bxdq36nd2cy0d" path="res://Menu/Scripts/slot_equipamiento.gd" id="2_slot"]
 [ext_resource type="Texture2D" uid="uid://nucw2m4p80cc" path="res://Assets/UI/iconos inventario/Under.png" id="3_1vy64"]
 [ext_resource type="Texture2D" uid="uid://cpfimtd5f3is6" path="res://Assets/UI/iconos inventario/Over.png" id="4_ixffu"]
+[ext_resource type="Texture2D" uid="uid://cjq6ey0xwn0nd" path="res://Assets/UI/iconos inventario/CasillaAnillo.png" id="4_x1idg"]
 [ext_resource type="Script" uid="uid://bwh73apulahp8" path="res://Assets/UI/BarraSalud.gd" id="5_ixffu"]
 [ext_resource type="Texture2D" uid="uid://dp48gwccm75b0" path="res://Assets/UI/iconos inventario/Progress.png" id="5_kvs7e"]
 [ext_resource type="Texture2D" uid="uid://b0eqcd64v7cfr" path="res://Assets/Personaje/Vacio.png" id="5_rvkho"]
@@ -13,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ryehb1655mmx" path="res://Assets/UI/iconos inventario/CasillaPantalon.png" id="11_x1idg"]
 [ext_resource type="Texture2D" uid="uid://ct8vrmife6bjs" path="res://Assets/UI/iconos inventario/CasillaBotas.png" id="12_bgpit"]
 [ext_resource type="Texture2D" uid="uid://dsuw0uq42fyob" path="res://Assets/UI/iconos inventario/CasillaPistola.png" id="13_fw6gt"]
-[ext_resource type="Texture2D" uid="uid://cc7vob1grrf6d" path="res://Assets/UI/iconos inventario/CasillaEscudo.png" id="14_24fmh"]
+[ext_resource type="Texture2D" uid="uid://b3su7srdalhiy" path="res://Assets/UI/iconos inventario/Cuchillo.png" id="15_bgpit"]
 
 [node name="MarginContainer" type="MarginContainer" unique_id=1831596708]
 offset_right = 40.0
@@ -116,7 +117,7 @@ custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("2_im0h5")
+texture = ExtResource("2_50mke")
 script = ExtResource("2_slot")
 
 [node name="SlotItem2" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1938960946]
@@ -125,7 +126,7 @@ custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("2_im0h5")
+texture = ExtResource("2_50mke")
 script = ExtResource("2_slot")
 
 [node name="SlotItem3" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1255866176]
@@ -134,7 +135,7 @@ custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("2_im0h5")
+texture = ExtResource("2_50mke")
 script = ExtResource("2_slot")
 
 [node name="SlotItem4" type="TextureRect" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1643156723]
@@ -143,7 +144,7 @@ custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("2_im0h5")
+texture = ExtResource("2_50mke")
 script = ExtResource("2_slot")
 
 [node name="Spacer" type="Control" parent="Equipamiento2/OjetosEnSuVisual" unique_id=1355139987]
@@ -156,7 +157,7 @@ custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("2_im0h5")
+texture = ExtResource("4_x1idg")
 script = ExtResource("2_slot")
 rol = 1
 
@@ -166,7 +167,7 @@ custom_minimum_size = Vector2(48, 48)
 custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("2_im0h5")
+texture = ExtResource("4_x1idg")
 script = ExtResource("2_slot")
 rol = 1
 
@@ -291,7 +292,7 @@ texture_filter = 1
 custom_minimum_size = Vector2(80, 80)
 custom_maximum_size = Vector2(80, 80)
 layout_mode = 2
-texture = ExtResource("14_24fmh")
+texture = ExtResource("15_bgpit")
 expand_mode = 1
 script = ExtResource("2_slot")
 rol = 7
