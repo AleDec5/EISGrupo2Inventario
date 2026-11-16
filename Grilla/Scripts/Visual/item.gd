@@ -1,6 +1,18 @@
 class_name ItemGrilla
 extends Sprite2D
 
+const ICONOS_CATEGORIA: Dictionary = {
+	ItemData.CategoriaIcono.ARMA_DISTANCIA: preload("res://Assets/Items/Iconos/arma_rango.tres"),
+	ItemData.CategoriaIcono.ARMA_MELEE: preload("res://Assets/Items/Iconos/arma_mele.tres"),
+	ItemData.CategoriaIcono.CONSUMIBLE_HABILIDAD: preload("res://Assets/Items/Iconos/consumible_habilidad.tres"),
+	ItemData.CategoriaIcono.CONSUMIBLE_SANACION: preload("res://Assets/Items/Iconos/consumible_sanacion.tres"),
+	ItemData.CategoriaIcono.CONSUMIBLE_CREACION: preload("res://Assets/Items/Iconos/consumible_creacion.tres"),
+	ItemData.CategoriaIcono.ARMADURA: preload("res://Assets/Items/Iconos/indumentaria.tres")
+}
+
+#este es para dejarle un margen a los items y que se vean mejor los iconos
+const MARGEN_INTERNO: float = 10.0
+const TAMANIO_ICONOS: int = 24
 const TAMAÑO_SLOT: int = 64
 const DURACION_ROTACION: float = 0.1
 const TAMAÑO_FUENTE: int = 10
@@ -28,6 +40,7 @@ var _tween: Tween
 
 @onready var etiqueta: Label = $Cantidad
 @onready var indicador_tier: GridContainer = $Tier
+@onready var icono_categoria: TextureRect = $IconoCategoria
 
 var dimensiones: Vector2i:
 	get():
@@ -43,9 +56,8 @@ var ancla: Vector2:
 	get():
 		return global_position - tamaño / 2
 
-
 func _ready() -> void:
-	for nodo in [etiqueta, indicador_tier]:
+	for nodo in [etiqueta, indicador_tier, icono_categoria]:
 		nodo.top_level = true
 		nodo.z_as_relative = false
 		nodo.z_index = 1
@@ -57,7 +69,10 @@ func _ready() -> void:
 		cuadrito.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if data and data.texture:
 		texture = data.texture
-		scale = Vector2(data.dimensiones) * TAMAÑO_SLOT / texture.get_size()
+		var area_disponible := Vector2(data.dimensiones) * TAMAÑO_SLOT - Vector2.ONE * (MARGEN_INTERNO * 2.0)
+		scale = area_disponible / texture.get_size()
+	icono_categoria.custom_maximum_size = Vector2i(TAMANIO_ICONOS,TAMANIO_ICONOS)
+	icono_categoria.update_maximum_size()
 	actualizar_indicadores()
 
 
@@ -100,6 +115,7 @@ func agarrar() -> void:
 	z_index = 10
 	etiqueta.z_index = 11
 	indicador_tier.z_index = 11
+	icono_categoria.z_index = 11
 	add_to_group("item_agarrado")
 
 
@@ -109,6 +125,7 @@ func colocar(pos: Vector2i) -> void:
 	z_index = 0
 	etiqueta.z_index = 1
 	indicador_tier.z_index = 1
+	icono_categoria.z_index = 1
 	global_position = Vector2(pos) + tamaño / 2
 	remove_from_group("item_agarrado")
 
@@ -121,6 +138,7 @@ func guardar_en_slot() -> void:
 	z_index = 0
 	etiqueta.z_index = 1
 	indicador_tier.z_index = 1
+	icono_categoria.z_index = 1
 	etiqueta.hide()
 	indicador_tier.hide()
 	hide()
@@ -137,11 +155,19 @@ func actualizar_indicadores() -> void:
 	if not is_node_ready() or data == null:
 		return
 
+	#abajo a la derecha
 	etiqueta.text = str(cantidad)
 	var tamaño_etiqueta := etiqueta.get_combined_minimum_size()
 	etiqueta.global_position = ancla + tamaño - tamaño_etiqueta - Vector2(2, 0)
 	etiqueta.visible = data.stackeable
 
+	#arriba a la derecha
+	var tex_cat: Texture2D = ICONOS_CATEGORIA.get(data.categoria_icono, null)
+	icono_categoria.texture = tex_cat
+	icono_categoria.visible = tex_cat != null
+	icono_categoria.global_position = ancla + Vector2(2, 2)
+	
+	#abajo a la izquierda
 	var cuadritos = indicador_tier.get_children()
 	for i in cuadritos.size():
 		var encendido = ORDEN_LLENADO.find(i) < tier

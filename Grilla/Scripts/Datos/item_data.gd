@@ -2,6 +2,7 @@ class_name ItemData
 extends Resource
 
 enum Tipo { NINGUNO, ARMA, CALZADO, PANTALON, TORSO, SOMBRERO, CONSUMIBLE, EQUIPABLE, MUNICION = 9 }
+enum CategoriaIcono { NINGUNA, ARMA_DISTANCIA, ARMA_MELEE, CONSUMIBLE_HABILIDAD, CONSUMIBLE_SANACION,CONSUMIBLE_CREACION,ARMADURA }
 
 const LIMITE_MAXIMO: int = 64
 const TIER_MAXIMO: int = 4
@@ -17,9 +18,11 @@ const NOMBRES_TIPO: Dictionary = {
 	Tipo.MUNICION: "Munición",
 }
 
+
 @export var nombre: String
 @export_multiline var descripcion: String
 @export var tipo: Tipo = Tipo.NINGUNO
+@export var categoria_icono: CategoriaIcono = CategoriaIcono.NINGUNA
 @export var dimensiones: Vector2i = Vector2i(1, 1)
 @export var texture: Texture2D
 @export var textura_personaje: Texture2D #agrego esta textura para obtener cual aplicar al personaje

@@ -34,3 +34,13 @@ layout_mode = 2
 [node name="ColorRect4" type="ColorRect" parent="Tier" unique_id=2103454786]
 custom_minimum_size = Vector2(6, 6)
 layout_mode = 2
+
+[node name="IconoCategoria" type="TextureRect" parent="." unique_id=563745819]
+texture_filter = 1
+custom_minimum_size = Vector2(8, 8)
+custom_maximum_size = Vector2(32, 32)
+propagate_maximum_size = true
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 5

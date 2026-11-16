@@ -40,11 +40,24 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4a5h"]
 
+[sub_resource type="Resource" id="Resource_p1rba"]
+script = ExtResource("2_rf6od")
+nombre = "Balas 9mm"
+descripcion = "16 balas de pistola."
+tipo = 9
+texture = ExtResource("6_kpfqr")
+stackeable = true
+cantidad_inicial = 18
+dano = 10.0
+calibre = "Pistola"
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
 [sub_resource type="Resource" id="Resource_auoqk"]
 script = ExtResource("2_rf6od")
 nombre = "Pocion Fantasmal"
 descripcion = "Aplica invisibilidad por 3 segundos al consumirla."
 tipo = 6
+categoria_icono = 3
 texture = ExtResource("7_trhmw")
 textura_personaje = ExtResource("7_trhmw")
 stackeable = true
@@ -58,6 +71,7 @@ script = ExtResource("2_rf6od")
 nombre = "Poción Halloween"
 descripcion = "Arrojable. Al impactar aplica un área de 4mts de diámetro que ralentiza a los enemigos un 50% de su velocidad."
 tipo = 1
+categoria_icono = 3
 texture = ExtResource("8_gpstx")
 stackeable = true
 cantidad_inicial = 7
@@ -70,6 +84,7 @@ script = ExtResource("2_rf6od")
 nombre = "Caramelos"
 descripcion = "Cura +15HP de salúd perdida"
 tipo = 6
+categoria_icono = 4
 texture = ExtResource("9_4v8t0")
 textura_personaje = ExtResource("9_4v8t0")
 stackeable = true
@@ -77,11 +92,55 @@ cantidad_inicial = 10
 cura_instantanea = 15
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
+[sub_resource type="Resource" id="Resource_w8k61"]
+script = ExtResource("2_rf6od")
+nombre = "Poción Murciélago"
+descripcion = "Permite saltar de vuelta en el aire durante 20 segundos."
+tipo = 6
+categoria_icono = 3
+texture = ExtResource("10_eo6bj")
+textura_personaje = ExtResource("10_eo6bj")
+stackeable = true
+cantidad_maxima = 8
+cantidad_inicial = 4
+duracion_efecto = 20.0
+efecto_especial = "Doble Salto"
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_i8sdb"]
+script = ExtResource("2_rf6od")
+nombre = "Elixir de Drácula"
+descripcion = "Cura +20HP durante 2 segundos."
+tipo = 6
+categoria_icono = 4
+texture = ExtResource("17_bixgc")
+textura_personaje = ExtResource("17_bixgc")
+stackeable = true
+cantidad_maxima = 8
+cantidad_inicial = 3
+regen_por_segundo = 20
+duracion_efecto = 2.0
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_0lisf"]
+script = ExtResource("2_rf6od")
+nombre = "Bolsa de Caramelos"
+descripcion = "Cura +80HP de salúd perdida"
+tipo = 6
+categoria_icono = 5
+dimensiones = Vector2i(2, 2)
+texture = ExtResource("11_trhmw")
+textura_personaje = ExtResource("11_trhmw")
+cantidad_maxima = 8
+cura_instantanea = 80
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
 [sub_resource type="Resource" id="Resource_rf6od"]
 script = ExtResource("2_rf6od")
 nombre = "Espada Sangrienta"
 descripcion = "Roba 5% del daño realizado a un enemigo, en forma de curación instantanea."
 tipo = 1
+categoria_icono = 2
 dimensiones = Vector2i(1, 2)
 texture = ExtResource("4_rwnsa")
 textura_personaje = ExtResource("3_8bqdx")
@@ -97,7 +156,10 @@ script = ExtResource("2_rf6od")
 nombre = "Pistola"
 descripcion = "Pistola 9mm. Capacidad de cargador: 16 balas."
 tipo = 1
-texture = ExtResource("6_kpfqr")
+categoria_icono = 1
+dimensiones = Vector2i(2, 1)
+texture = ExtResource("16_gvyhe")
+textura_personaje = ExtResource("5_eo6bj")
 tier = 3
 dano = 10.0
 dps = 10.0
@@ -106,49 +168,12 @@ capacidad_cargador = 16
 calibre = "Pistola"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
-[sub_resource type="Resource" id="Resource_w8k61"]
-script = ExtResource("2_rf6od")
-nombre = "Poción Murciélago"
-descripcion = "Permite saltar de vuelta en el aire durante 20 segundos."
-tipo = 6
-texture = ExtResource("10_eo6bj")
-textura_personaje = ExtResource("10_eo6bj")
-stackeable = true
-cantidad_maxima = 8
-cantidad_inicial = 4
-duracion_efecto = 20.0
-efecto_especial = "Doble Salto"
-metadata/_custom_type_script = "uid://x0iaucbqh0di"
-
-[sub_resource type="Resource" id="Resource_0lisf"]
-script = ExtResource("2_rf6od")
-nombre = "Bolsa de Caramelos"
-descripcion = "Cura +80HP de salúd perdida"
-tipo = 6
-dimensiones = Vector2i(2, 2)
-texture = ExtResource("11_trhmw")
-textura_personaje = ExtResource("11_trhmw")
-cantidad_maxima = 8
-cura_instantanea = 80
-metadata/_custom_type_script = "uid://x0iaucbqh0di"
-
-[sub_resource type="Resource" id="Resource_p1rba"]
-script = ExtResource("2_rf6od")
-nombre = "Balas 9mm"
-descripcion = "16 balas de pistola."
-tipo = 9
-texture = ExtResource("6_kpfqr")
-stackeable = true
-cantidad_inicial = 18
-dano = 10.0
-calibre = "Pistola"
-metadata/_custom_type_script = "uid://x0iaucbqh0di"
-
 [sub_resource type="Resource" id="Resource_d5d12"]
 script = ExtResource("2_rf6od")
 nombre = "Rifle de Asalto"
 descripcion = "Rifle de asalto AK-47."
 tipo = 1
+categoria_icono = 1
 dimensiones = Vector2i(2, 1)
 texture = ExtResource("14_kpfqr")
 textura_personaje = ExtResource("13_h0mok")
@@ -164,6 +189,7 @@ script = ExtResource("2_rf6od")
 nombre = "Dagas"
 descripcion = "2 dagas de plata, equipamiento estándar de los cazadores de monstruos."
 tipo = 1
+categoria_icono = 2
 dimensiones = Vector2i(2, 1)
 texture = ExtResource("16_037br")
 textura_personaje = ExtResource("15_b0rd3")
@@ -172,42 +198,15 @@ dps = 20.0
 alcance = 1.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
-[sub_resource type="Resource" id="Resource_a2q78"]
-script = ExtResource("2_rf6od")
-nombre = "M9"
-descripcion = "Pistola 9mm."
-tipo = 1
-texture = ExtResource("16_gvyhe")
-textura_personaje = ExtResource("5_eo6bj")
-dano = 10.0
-dps = 10.0
-disparos_por_segundo = 1.0
-capacidad_cargador = 12
-calibre = "Pistola"
-metadata/_custom_type_script = "uid://x0iaucbqh0di"
-
 [sub_resource type="Resource" id="Resource_o3kor"]
 script = ExtResource("2_rf6od")
 nombre = "Arco"
 descripcion = "Arco"
 tipo = 1
+categoria_icono = 1
 dimensiones = Vector2i(1, 2)
 texture = ExtResource("18_wydpi")
 textura_personaje = ExtResource("16_b0rd3")
-metadata/_custom_type_script = "uid://x0iaucbqh0di"
-
-[sub_resource type="Resource" id="Resource_i8sdb"]
-script = ExtResource("2_rf6od")
-nombre = "Elixir de Drácula"
-descripcion = "Cura +20HP durante 2 segundos."
-tipo = 6
-texture = ExtResource("17_bixgc")
-textura_personaje = ExtResource("17_bixgc")
-stackeable = true
-cantidad_maxima = 8
-cantidad_inicial = 3
-regen_por_segundo = 20
-duracion_efecto = 2.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [sub_resource type="Resource" id="Resource_ne8bb"]
@@ -226,6 +225,7 @@ script = ExtResource("2_rf6od")
 nombre = "Remera"
 descripcion = "Una simple remera."
 tipo = 4
+categoria_icono = 6
 dimensiones = Vector2i(2, 2)
 texture = ExtResource("22_gvyhe")
 textura_personaje = ExtResource("19_rwnsa")
@@ -238,6 +238,7 @@ script = ExtResource("2_rf6od")
 nombre = "Botas de cuero"
 descripcion = "Confiables botas de cuero, aptas para todo tipo de terreno."
 tipo = 2
+categoria_icono = 6
 texture = ExtResource("24_gvyhe")
 textura_personaje = ExtResource("21_kpfqr")
 mod_hp = 5.0
@@ -250,6 +251,7 @@ script = ExtResource("2_rf6od")
 nombre = "Mi sombrero"
 descripcion = "\"¡Pero se me ve bien!\""
 tipo = 5
+categoria_icono = 6
 dimensiones = Vector2i(2, 1)
 texture = ExtResource("26_a2q78")
 textura_personaje = ExtResource("18_gpstx")
@@ -260,6 +262,7 @@ script = ExtResource("2_rf6od")
 nombre = "Pantalones"
 descripcion = "Unos simples pantalones."
 tipo = 3
+categoria_icono = 6
 dimensiones = Vector2i(1, 2)
 texture = ExtResource("28_gvyhe")
 textura_personaje = ExtResource("19_4v8t0")
@@ -274,6 +277,7 @@ nombre = "Anillo Verde"
 descripcion = "(Anillo Dorado)
 Anillo dorado perteneciente a una criatura muy antigua. Cientos de años después, todavía se siente caliente al tacto. +100HP máxima."
 tipo = 7
+categoria_icono = 6
 texture = ExtResource("29_a2q78")
 mod_hp = 100.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
@@ -283,6 +287,7 @@ script = ExtResource("2_rf6od")
 nombre = "Pulsera dentada"
 descripcion = "Aplica +15 de daño a cada golpe con un arma cuerpo a cuerpo."
 tipo = 7
+categoria_icono = 6
 texture = ExtResource("30_a2q78")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
@@ -291,6 +296,7 @@ script = ExtResource("2_rf6od")
 nombre = "Collar de corazón"
 descripcion = "Resguarda una porción de la esencia vital de su usuario. Al recibir un daño fatal, se destruye y cura +50HP instantaneamente."
 tipo = 7
+categoria_icono = 6
 texture = ExtResource("31_80mon")
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
@@ -301,7 +307,6 @@ descripcion = "Escrito en el lenguaje perdido de un reino que jamas existió. Re
 tipo = 7
 dimensiones = Vector2i(2, 2)
 texture = ExtResource("31_m0snj")
-textura_personaje = ExtResource("31_m0snj")
 mod_velocidad = -5.0
 mod_resistencia = -20.0
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
@@ -351,7 +356,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_g4a5h")
 script = ExtResource("1_efp76")
-items = Array[ExtResource("2_rf6od")]([SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_w8k61"), SubResource("Resource_0lisf"), SubResource("Resource_p1rba"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_a2q78"), SubResource("Resource_o3kor"), SubResource("Resource_i8sdb"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx"), SubResource("Resource_o8qx6"), SubResource("Resource_1iarf"), SubResource("Resource_pn52p"), SubResource("Resource_4v8t0"), SubResource("Resource_4vqr3"), SubResource("Resource_m86do")])
+items = Array[ExtResource("2_rf6od")]([SubResource("Resource_p1rba"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_w8k61"), SubResource("Resource_i8sdb"), SubResource("Resource_0lisf"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_o3kor"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx"), SubResource("Resource_o8qx6"), SubResource("Resource_1iarf"), SubResource("Resource_pn52p"), SubResource("Resource_4v8t0"), SubResource("Resource_4vqr3"), SubResource("Resource_m86do")])
 item_scene = ExtResource("2_fq556")
 
 [node name="Grilla" type="GridContainer" parent="Inventario" unique_id=662261994]
