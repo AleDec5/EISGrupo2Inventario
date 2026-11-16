@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://byvh515pm5fek"]
 
+[ext_resource type="Theme" uid="uid://ckq1dggjvsomm" path="res://Assets/UI/Temas/tema_ui.tres" id="1_0lisf"]
 [ext_resource type="Script" uid="uid://bce2s5f0q0hi0" path="res://Menu/Scripts/menu.gd" id="1_nys4u"]
 [ext_resource type="PackedScene" uid="uid://0uq8n5ncl5rg" path="res://Menu/Escenas/Header.tscn" id="2_nys4u"]
 [ext_resource type="PackedScene" uid="uid://dvfmaahcouem" path="res://Menu/Escenas/SeccionInventario.tscn" id="3_e82yi"]
@@ -31,6 +32,7 @@ layout_mode = 2
 
 [node name="HeaderMC" type="MarginContainer" parent="CanvasLayer/ContenedorMenu/ContenedorPrincipal" unique_id=694911191]
 layout_mode = 2
+theme = ExtResource("1_0lisf")
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_bottom = 15
 

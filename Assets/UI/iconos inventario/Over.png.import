@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpfimtd5f3is6"
-path="res://.godot/imported/Over.png-68b83eba50288b49c2e3e6b9520f92a2.ctex"
+path="res://.godot/imported/Over.png-9031387b40b83217c16ced4d6f9d5f4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Over.png"
-dest_files=["res://.godot/imported/Over.png-68b83eba50288b49c2e3e6b9520f92a2.ctex"]
+source_file="res://Assets/UI/iconos inventario/Over.png"
+dest_files=["res://.godot/imported/Over.png-9031387b40b83217c16ced4d6f9d5f4e.ctex"]
 
 [params]
 

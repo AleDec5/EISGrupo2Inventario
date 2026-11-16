@@ -1,0 +1,123 @@
+[gd_resource type="Theme" format=3 uid="uid://ckq1dggjvsomm"]
+
+[ext_resource type="Texture2D" uid="uid://flgrreamj43j" path="res://Assets/UI/Botones/nuevos botones-apuntado_2x.png" id="1_3c231"]
+[ext_resource type="FontFile" uid="uid://clhyxjfp8aisp" path="res://Assets/UI/windows_command_prompt.ttf" id="1_fktu7"]
+[ext_resource type="Texture2D" uid="uid://m0fedbikg58l" path="res://Assets/UI/Botones/nuevos botones-normal_2x.png" id="2_av0kn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lp0ji"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ruku5"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.18039216, 0.27058825, 0.36078432, 1)
+border_width_bottom = 2
+border_color = Color(0.08235294, 0.1254902, 0.16862746, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3c231"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.5568628, 0.26666668, 0.6784314, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.42352942, 0.20392157, 0.5137255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_av0kn"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.13333334, 0.2, 0.26666668, 1)
+border_width_bottom = 2
+border_color = Color(0.08235294, 0.1254902, 0.16862746, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6ubb"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.09803922, 0.14901961, 0.2, 1)
+border_width_bottom = 2
+border_color = Color(0.08235294, 0.1254902, 0.16862746, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ruku5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m6ubb"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_3c231")
+texture_margin_left = 12.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fjhb6"]
+load_path = "res://.godot/imported/nuevos botones-seleccionado_2x.png-c044e582b77f4c16a6113669c8a78aec.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l8tgg"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+texture = SubResource("CompressedTexture2D_fjhb6")
+texture_margin_left = 12.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fktu7"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+texture = ExtResource("2_av0kn")
+texture_margin_left = 12.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qp7pb"]
+load_path = "res://.godot/imported/nuevos botones-seleccionado_2x.png-c044e582b77f4c16a6113669c8a78aec.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_77ad0"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+texture = SubResource("CompressedTexture2D_qp7pb")
+texture_margin_left = 12.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 12.0
+
+[resource]
+default_font = ExtResource("1_fktu7")
+default_font_size = 20
+BotonSecundario/base_type = &"Button"
+BotonSecundario/colors/font_color = Color(0.9019608, 0.5411765, 0.18039216, 1)
+BotonSecundario/colors/font_hover_color = Color(1, 0.6666667, 0.26666668, 1)
+BotonSecundario/colors/font_pressed_color = Color(0.8, 0.4392157, 0.078431375, 1)
+BotonSecundario/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+BotonSecundario/constants/outline_size = 0
+BotonSecundario/styles/focus = SubResource("StyleBoxEmpty_lp0ji")
+BotonSecundario/styles/hover = SubResource("StyleBoxFlat_ruku5")
+BotonSecundario/styles/hover_pressed = SubResource("StyleBoxFlat_3c231")
+BotonSecundario/styles/normal = SubResource("StyleBoxFlat_av0kn")
+BotonSecundario/styles/pressed = SubResource("StyleBoxFlat_m6ubb")
+Button/colors/font_color = Color(0.08627451, 0.13333334, 0.18431373, 1)
+Button/colors/font_hover_color = Color(1, 0.9529412, 0.36078432, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/constants/outline_size = 0
+Button/styles/focus = SubResource("StyleBoxEmpty_ruku5")
+Button/styles/hover = SubResource("StyleBoxTexture_m6ubb")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_l8tgg")
+Button/styles/normal = SubResource("StyleBoxTexture_fktu7")
+Button/styles/pressed = SubResource("StyleBoxTexture_77ad0")

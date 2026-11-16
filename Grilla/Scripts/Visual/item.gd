@@ -24,7 +24,7 @@ const TEXTURAS_TIER: Array[Texture2D] = [
 	preload("res://Assets/Items/Iconos/tiers/naranja.tres"),
 ]
 
-const MARGEN_ESQUINA_CATEGORIA := Vector2(2, 2) 
+const MARGEN_ESQUINA_CATEGORIA := Vector2(3, 1) 
 const MARGEN_ESQUINA_TIER := Vector2(7, 7)      
 const MARGEN_ESQUINA_INF_DER := Vector2(7, 7)
 

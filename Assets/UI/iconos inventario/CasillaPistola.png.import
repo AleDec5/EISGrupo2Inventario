@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc7vob1grrf6d"
-path="res://.godot/imported/CasillaEscudo.png-94aed67360e86a51a83cf46576ea23bd.ctex"
+uid="uid://dsuw0uq42fyob"
+path="res://.godot/imported/CasillaPistola.png-755e7fa94b12dc95d25b1ba16b1eb620.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/CasillaEscudo.png"
-dest_files=["res://.godot/imported/CasillaEscudo.png-94aed67360e86a51a83cf46576ea23bd.ctex"]
+source_file="res://Assets/UI/iconos inventario/CasillaPistola.png"
+dest_files=["res://.godot/imported/CasillaPistola.png-755e7fa94b12dc95d25b1ba16b1eb620.ctex"]
 
 [params]
 

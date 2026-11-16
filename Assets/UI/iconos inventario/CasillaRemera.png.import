@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ryehb1655mmx"
-path="res://.godot/imported/CasillaPantalon.png-e36887b2474ca41c43507b0269317d2b.ctex"
+uid="uid://1adh3j7bt1uu"
+path="res://.godot/imported/CasillaRemera.png-f8828fa6f2ffb77fb91928063bb36c82.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/CasillaPantalon.png"
-dest_files=["res://.godot/imported/CasillaPantalon.png-e36887b2474ca41c43507b0269317d2b.ctex"]
+source_file="res://Assets/UI/iconos inventario/CasillaRemera.png"
+dest_files=["res://.godot/imported/CasillaRemera.png-f8828fa6f2ffb77fb91928063bb36c82.ctex"]
 
 [params]
 

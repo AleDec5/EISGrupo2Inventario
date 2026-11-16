@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1adh3j7bt1uu"
-path="res://.godot/imported/CasillaRemera.png-c7a0530466d9db4ce58c92cce314fc21.ctex"
+uid="uid://m0fedbikg58l"
+path="res://.godot/imported/nuevos botones-normal_2x.png-1248cc150f562be87b460a4ffd30e1c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/CasillaRemera.png"
-dest_files=["res://.godot/imported/CasillaRemera.png-c7a0530466d9db4ce58c92cce314fc21.ctex"]
+source_file="res://Assets/UI/Botones/nuevos botones-normal_2x.png"
+dest_files=["res://.godot/imported/nuevos botones-normal_2x.png-1248cc150f562be87b460a4ffd30e1c4.ctex"]
 
 [params]
 

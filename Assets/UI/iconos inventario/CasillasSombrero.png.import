@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dt13432vukqsl"
-path="res://.godot/imported/CasillasSombrero.png-09b3adb973a53c3d797202107b02df01.ctex"
+path="res://.godot/imported/CasillasSombrero.png-048858bc4bed36b071a4ee9f8dd98e79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/CasillasSombrero.png"
-dest_files=["res://.godot/imported/CasillasSombrero.png-09b3adb973a53c3d797202107b02df01.ctex"]
+source_file="res://Assets/UI/iconos inventario/CasillasSombrero.png"
+dest_files=["res://.godot/imported/CasillasSombrero.png-048858bc4bed36b071a4ee9f8dd98e79.ctex"]
 
 [params]
 

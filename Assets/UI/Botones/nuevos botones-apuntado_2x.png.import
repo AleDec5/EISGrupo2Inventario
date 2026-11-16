@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsuw0uq42fyob"
-path="res://.godot/imported/CasillaPistola.png-a1c14a463dd86d84d14f28b0830ee7b1.ctex"
+uid="uid://flgrreamj43j"
+path="res://.godot/imported/nuevos botones-apuntado_2x.png-397eed23e8b9e09dd629c495713b814c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/CasillaPistola.png"
-dest_files=["res://.godot/imported/CasillaPistola.png-a1c14a463dd86d84d14f28b0830ee7b1.ctex"]
+source_file="res://Assets/UI/Botones/nuevos botones-apuntado_2x.png"
+dest_files=["res://.godot/imported/nuevos botones-apuntado_2x.png-397eed23e8b9e09dd629c495713b814c.ctex"]
 
 [params]
 
