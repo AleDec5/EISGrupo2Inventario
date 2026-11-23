@@ -351,7 +351,8 @@ grow_vertical = 2
 [node name="Inventario" type="PanelContainer" parent="." unique_id=228304042]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
+offset_left = 30.0
+offset_right = 70.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_g4a5h")
 script = ExtResource("1_efp76")
@@ -364,4 +365,4 @@ layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 script = ExtResource("1_fq7lf")
-dimensiones = Vector2i(10, 7)
+dimensiones = Vector2i(8, 6)

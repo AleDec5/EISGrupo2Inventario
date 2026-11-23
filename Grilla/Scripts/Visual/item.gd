@@ -35,7 +35,7 @@ const TAMANIO_ICONO_CATEGORIA: int = 26
 const TAMANIO_ICONO_TIER: int = 6
 const TAMANIO_ICONO_NIVEL: int = 9
 
-const TAMAÑO_SLOT: int = 64
+const TAMAÑO_SLOT: int = 75
 const DURACION_ROTACION: float = 0.1
 const TAMAÑO_FUENTE: int = 10
 const GROSOR_CONTORNO: int = 3

@@ -16,17 +16,25 @@ const TIPOS_ACEPTADOS: Dictionary = {
 	Rol.ARMA_SECUNDARIA: [ItemData.Tipo.ARMA],
 }
 
+const OPACIDAD_PLACEHOLDER: float = 0.25
+const OPACIDAD_OCUPADO: float = 0.6
+
 @export var rol: Rol = Rol.CONSUMIBLE
 
 var item: Node = null
 var data: ItemData = null
 
+var _textura_original: Texture2D
+var _textura_fondo: Texture2D
 var _icono: TextureRect
 var _cantidad: Label
 
 
 func _ready() -> void:
 	add_to_group("slots_equipamiento")
+	self_modulate = Color(1, 1, 1, OPACIDAD_PLACEHOLDER)
+	_textura_original = texture
+	_textura_fondo = _crear_textura_fondo(texture)
 
 	_icono = TextureRect.new()
 	_icono.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 3)
@@ -77,7 +85,8 @@ func poner_atajo(d: ItemData) -> void:
 func vaciar() -> void:
 	item = null
 	data = null
-	self_modulate = Color.WHITE
+	texture = _textura_original
+	self_modulate = Color(1, 1, 1, OPACIDAD_PLACEHOLDER)
 	_icono.texture = null
 	_cantidad.hide()
 	equipo_cambiado.emit(rol, null)
@@ -97,8 +106,18 @@ func obtener_opciones() -> Array[String]:
 func _mostrar(d: ItemData) -> void:
 	data = d
 	_icono.texture = _obtener_textura_ajustada(d)
-	self_modulate = Color(0.3, 0.3, 0.3, 0.25)
+	if _textura_fondo != null:
+		texture = _textura_fondo
+	self_modulate = Color(1, 1, 1, OPACIDAD_OCUPADO)
 	_cantidad.hide()
+
+func _crear_textura_fondo(origen: Texture2D) -> Texture2D:
+	if origen == null:
+		return null
+	var imagen: Image = origen.get_image()
+	imagen.fill(imagen.get_pixel(0, 0))
+	return ImageTexture.create_from_image(imagen)
+
 
 func _obtener_textura_ajustada(d: ItemData) -> Texture2D:
 	if d.texture == null:
