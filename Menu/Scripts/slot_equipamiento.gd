@@ -97,6 +97,12 @@ func mostrar_cantidad(total: int) -> void:
 	_cantidad.position = size - _cantidad.get_combined_minimum_size() - Vector2(2, 0)
 
 
+func mostrar_cargador(actual: int, capacidad: int) -> void:
+	_cantidad.visible = true
+	_cantidad.text = "%d/%d" % [actual, capacidad]
+	_cantidad.position = size - _cantidad.get_combined_minimum_size() - Vector2(2, 0)
+
+
 func obtener_opciones() -> Array[String]:
 	var opciones: Array[String] = []
 	opciones.append("Quitar atajo" if es_atajo() and item == null else "Desequipar")

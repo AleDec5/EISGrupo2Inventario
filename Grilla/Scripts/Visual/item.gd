@@ -17,6 +17,8 @@ const TEXTURAS_NIVEL: Array[Texture2D] = [
 	preload("res://Assets/Items/Iconos/niveles/nivel_4.tres"),
 ]
 
+const ICONO_MUNICION: Texture2D = preload("res://Assets/Items/Iconos/tiers/naranja.tres")
+
 const TEXTURAS_TIER: Array[Texture2D] = [
 	preload("res://Assets/Items/Iconos/tiers/verde.tres"),
 	preload("res://Assets/Items/Iconos/tiers/cian.tres"),
@@ -24,9 +26,9 @@ const TEXTURAS_TIER: Array[Texture2D] = [
 	preload("res://Assets/Items/Iconos/tiers/naranja.tres"),
 ]
 
-const MARGEN_ESQUINA_CATEGORIA := Vector2(3, 1) 
-const MARGEN_ESQUINA_TIER := Vector2(7, 7)      
-const MARGEN_ESQUINA_INF_DER := Vector2(7, 7)
+const MARGEN_ESQUINA_CATEGORIA := Vector2(4, 2) 
+const MARGEN_ESQUINA_TIER := Vector2(10, 10)      
+const MARGEN_ESQUINA_INF_DER := Vector2(10, 10)
 
 const MARGEN_INTERNO: float = 4.0
 const ESCALA_MINIMA: float = 2.0
@@ -43,6 +45,9 @@ const GROSOR_CONTORNO: int = 3
 var data: ItemData = null
 var esta_agarrado: bool = false
 var pasos_rotacion: int = 0
+var balas_cargadas: int = 0
+var municion_cargada: ItemData = null
+var _textura_mostrada: Texture2D = null
 
 var cantidad: int = 1:
 	set(valor):
@@ -95,20 +100,30 @@ func _ready() -> void:
 	icono_nivel.custom_minimum_size = Vector2(TAMANIO_ICONO_NIVEL, TAMANIO_ICONO_NIVEL)
 	icono_nivel.size = Vector2(TAMANIO_ICONO_NIVEL, TAMANIO_ICONO_NIVEL)
 
-	if data and data.texture:
+	if data and _textura_a_mostrar() != null:
 		_ajustar_textura_y_escala()
 
 	actualizar_indicadores()
 
 
+func _textura_a_mostrar() -> Texture2D:
+	if data.tipo == ItemData.Tipo.MUNICION and cantidad < 2 and data.textura_unidad != null:
+		return data.textura_unidad
+	return data.texture
+
+
 func _ajustar_textura_y_escala() -> void:
-	var img := data.texture.get_image()
+	var origen := _textura_a_mostrar()
+	if origen == null:
+		return
+	_textura_mostrada = origen
+	var img := origen.get_image()
 	var rect_usado := img.get_used_rect()
 
 	if rect_usado.has_area():
 		texture = ImageTexture.create_from_image(img.get_region(rect_usado))
 	else:
-		texture = data.texture
+		texture = origen
 
 	var tamano_celdas := Vector2(data.dimensiones) * TAMAÑO_SLOT
 	var area_disponible := tamano_celdas - Vector2.ONE * (MARGEN_INTERNO * 2.0)
@@ -206,6 +221,9 @@ func actualizar_indicadores() -> void:
 	if not is_node_ready() or data == null:
 		return
 
+	if _textura_a_mostrar() != _textura_mostrada:
+		_ajustar_textura_y_escala()
+
 	var es_municion := data.tipo == ItemData.Tipo.MUNICION
 	var es_arma := data.tipo == ItemData.Tipo.ARMA
 
@@ -213,7 +231,7 @@ func actualizar_indicadores() -> void:
 	var tamano_sup_izq: int = TAMANIO_ICONO_CATEGORIA
 
 	if es_municion:
-		tex_sup_izq = TEXTURAS_TIER[tier - 1]
+		tex_sup_izq = ICONO_MUNICION
 		tamano_sup_izq = TAMANIO_ICONO_TIER
 	else:
 		tex_sup_izq = ICONOS_CATEGORIA.get(data.categoria_icono, null)
@@ -231,7 +249,8 @@ func actualizar_indicadores() -> void:
 	icono_nivel.global_position = _pos_abajo_derecha(icono_nivel.size)
 
 	etiqueta.text = str(cantidad)
-	etiqueta.visible = data.stackeable and not es_arma
+	var es_unidad_suelta := es_municion and cantidad < 2 and data.textura_unidad != null
+	etiqueta.visible = data.stackeable and not es_arma and not es_unidad_suelta
 	etiqueta.global_position = _pos_abajo_derecha(etiqueta.get_combined_minimum_size())
 
 func es_mismo_item(otro: Node) -> bool:

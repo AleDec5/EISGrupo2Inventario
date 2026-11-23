@@ -4,4 +4,4 @@
 
 [resource]
 atlas = ExtResource("1_tespd")
-region = Rect2(0, 16, 3, 3)
+region = Rect2(0, 19, 3, 3)

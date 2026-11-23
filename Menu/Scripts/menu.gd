@@ -35,6 +35,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	var item_agarrado = get_tree().get_first_node_in_group("item_agarrado")
 
+	if event is InputEventMouseButton and gestor_equipamiento != null and gestor_equipamiento.mouse_sobre_debug():
+		return
+
 	# --- 0. CLIC DERECHO: ABRIR EL MENÚ DEL ITEM ---
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		ocultar_info()

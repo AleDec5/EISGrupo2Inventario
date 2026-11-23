@@ -2,6 +2,7 @@ class_name GestorEquipamiento
 extends MarginContainer
 
 const MARGEN_BOTON_DEBUG := Vector2(8, 8)
+const OPACIDAD_PANEL_DEBUG: float = 0.85
 
 @onready var capa_pantalon: TextureRect = $Equipamiento2/PersonajeYSalud/ContenerdorPersonaje/CapaPantalon
 @onready var capa_torso: TextureRect = $Equipamiento2/PersonajeYSalud/ContenerdorPersonaje/CapaTorso
@@ -16,6 +17,9 @@ var simulando_tiempo: bool = false
 
 var _panel_stats: PanelContainer
 var _etiqueta_stats: Label
+var _etiqueta_municion: Label
+var _etiqueta_mensaje: Label
+var _mensaje_debug: String = ""
 var _boton_debug: Button
 var _texto_anterior: String = ""
 
@@ -81,7 +85,10 @@ func _process(delta: float) -> void:
 		if slot.esta_vacio():
 			continue
 		if slot.item != null:
-			slot.mostrar_cantidad(slot.item.cantidad)
+			if slot.item.data.capacidad_cargador > 0:
+				slot.mostrar_cargador(slot.item.balas_cargadas, slot.item.data.capacidad_cargador)
+			else:
+				slot.mostrar_cantidad(slot.item.cantidad)
 		elif slot.es_atajo():
 			var total: int = grilla.contar_item(slot.data)
 			if total == 0:
@@ -96,13 +103,51 @@ func _crear_panel_stats() -> void:
 	_panel_stats.z_index = 90
 	_panel_stats.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_panel_stats.hide()
-	_etiqueta_stats = Label.new()
-	_etiqueta_stats.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_etiqueta_stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_etiqueta_stats.custom_minimum_size.x = 260
-	_etiqueta_stats.add_theme_font_size_override("font_size", 12)
-	_panel_stats.add_child(_etiqueta_stats)
+	var caja := VBoxContainer.new()
+	caja.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_panel_stats.add_child(caja)
+	_etiqueta_stats = _crear_etiqueta_debug()
+	caja.add_child(_etiqueta_stats)
+	caja.add_child(HSeparator.new())
+	_etiqueta_municion = _crear_etiqueta_debug()
+	caja.add_child(_etiqueta_municion)
+	var boton_recargar := Button.new()
+	boton_recargar.text = "Recargar arma equipada"
+	boton_recargar.focus_mode = Control.FOCUS_NONE
+	boton_recargar.pressed.connect(recargar_arma_principal)
+	caja.add_child(boton_recargar)
+	var boton_tipo := Button.new()
+	boton_tipo.text = "Cambiar tipo de bala"
+	boton_tipo.focus_mode = Control.FOCUS_NONE
+	boton_tipo.pressed.connect(cambiar_tipo_bala)
+	caja.add_child(boton_tipo)
+	_etiqueta_mensaje = _crear_etiqueta_debug()
+	_etiqueta_mensaje.add_theme_color_override("font_color", Color.YELLOW)
+	_etiqueta_mensaje.hide()
+	caja.add_child(_etiqueta_mensaje)
 	add_child(_panel_stats)
+	_subir_opacidad_panel_debug()
+
+
+func _subir_opacidad_panel_debug() -> void:
+	var base := _panel_stats.get_theme_stylebox("panel")
+	var estilo: StyleBoxFlat
+	if base is StyleBoxFlat:
+		estilo = base.duplicate()
+	else:
+		estilo = StyleBoxFlat.new()
+		estilo.bg_color = Color(0.1, 0.1, 0.1)
+	estilo.bg_color.a = OPACIDAD_PANEL_DEBUG
+	_panel_stats.add_theme_stylebox_override("panel", estilo)
+
+
+func _crear_etiqueta_debug() -> Label:
+	var etiqueta := Label.new()
+	etiqueta.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	etiqueta.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	etiqueta.custom_minimum_size.x = 260
+	etiqueta.add_theme_font_size_override("font_size", 12)
+	return etiqueta
 
 
 func _crear_boton_debug() -> void:
@@ -128,9 +173,14 @@ func _actualizar_panel_stats() -> void:
 		return
 	var texto := estadisticas.a_texto()
 	texto += "\n\nTiempo: %s\n(F4 tiempo, F5 -20 HP, F6 +Arma, F7 +Poción)" % ("simulando" if simulando_tiempo else "en pausa")
-	if texto != _texto_anterior:
-		_texto_anterior = texto
+	var texto_municion := _texto_municion()
+	var combinado := texto + "\n" + texto_municion + "\n" + _mensaje_debug
+	if combinado != _texto_anterior:
+		_texto_anterior = combinado
 		_etiqueta_stats.text = texto
+		_etiqueta_municion.text = texto_municion
+		_etiqueta_mensaje.text = _mensaje_debug
+		_etiqueta_mensaje.visible = _mensaje_debug != ""
 		_panel_stats.reset_size()
 
 
@@ -146,6 +196,123 @@ func _actualizar_bonus_equipo() -> void:
 			acumulado["pct"] += modificadores[stat]["pct"]
 			bonus[stat] = acumulado
 	estadisticas.establecer_bonus_equipo(bonus)
+
+
+func mouse_sobre_debug() -> bool:
+	var mouse := get_global_mouse_position()
+	if _boton_debug.get_global_rect().has_point(mouse):
+		return true
+	return _panel_stats.visible and _panel_stats.get_global_rect().has_point(mouse)
+
+
+func _inventario() -> Node:
+	return get_tree().get_first_node_in_group("inventario")
+
+
+func _slot_principal() -> SlotEquipamiento:
+	for slot in _slots():
+		if slot.rol == SlotEquipamiento.Rol.ARMA_PRINCIPAL:
+			return slot
+	return null
+
+
+func _arma_principal() -> ItemGrilla:
+	var slot := _slot_principal()
+	if slot == null or slot.item == null:
+		return null
+	return slot.item as ItemGrilla
+
+
+func _municiones_compatibles(arma: ItemGrilla) -> Array[ItemData]:
+	var inventario := _inventario()
+	if inventario == null:
+		return []
+	return inventario.municiones_compatibles(arma.data)
+
+
+func _preparar_municion(arma: ItemGrilla) -> void:
+	if arma.municion_cargada != null:
+		return
+	var compatibles := _municiones_compatibles(arma)
+	if not compatibles.is_empty():
+		arma.municion_cargada = compatibles[0]
+
+
+func _texto_municion() -> String:
+	var arma := _arma_principal()
+	if arma == null:
+		return "Arma principal: ninguna equipada.\nEquipá un arma con cargador para ver su munición."
+	if not arma.data.es_arma_recargable():
+		return "%s no tiene cargador." % arma.data.nombre
+	_preparar_municion(arma)
+	var nombre_bala := "sin munición compatible"
+	var disponibles: int = 0
+	if arma.municion_cargada != null:
+		nombre_bala = arma.municion_cargada.nombre
+		var inventario := _inventario()
+		if inventario != null:
+			disponibles = inventario.contar_municion(arma.municion_cargada)
+	return "Arma: %s\nBala: %s\nCargador: %d/%d\nEn inventario: %d" % [arma.data.nombre, nombre_bala, arma.balas_cargadas, arma.data.capacidad_cargador, disponibles]
+
+
+func recargar_arma_principal() -> void:
+	var arma := _arma_principal()
+	if arma == null:
+		_mensaje_debug = "No hay un arma equipada en el slot principal."
+		return
+	if not arma.data.es_arma_recargable():
+		_mensaje_debug = "%s no tiene cargador." % arma.data.nombre
+		return
+	_preparar_municion(arma)
+	if arma.municion_cargada == null:
+		_mensaje_debug = "No hay un tipo de munición compatible con %s." % arma.data.nombre
+		return
+	var falta: int = arma.data.capacidad_cargador - arma.balas_cargadas
+	if falta <= 0:
+		_mensaje_debug = "El cargador ya está lleno."
+		return
+	var inventario := _inventario()
+	if inventario == null:
+		return
+	var consumidas: int = inventario.consumir_municion(arma.municion_cargada, falta)
+	if consumidas == 0:
+		_mensaje_debug = "No hay %s en el inventario." % arma.municion_cargada.nombre
+		return
+	arma.balas_cargadas += consumidas
+	_mensaje_debug = "Se recargaron %d balas. Cargador %d/%d." % [consumidas, arma.balas_cargadas, arma.data.capacidad_cargador]
+	if consumidas < falta:
+		_mensaje_debug += " No alcanzaron las balas para llenarlo."
+
+
+func cambiar_tipo_bala() -> void:
+	var arma := _arma_principal()
+	if arma == null:
+		_mensaje_debug = "No hay un arma equipada en el slot principal."
+		return
+	if not arma.data.es_arma_recargable():
+		_mensaje_debug = "%s no tiene cargador." % arma.data.nombre
+		return
+	_preparar_municion(arma)
+	var compatibles := _municiones_compatibles(arma)
+	if compatibles.size() < 2:
+		_mensaje_debug = "No hay otro tipo de bala compatible con %s." % arma.data.nombre
+		return
+	var indice: int = 0
+	for i in compatibles.size():
+		if compatibles[i].es_mismo(arma.municion_cargada):
+			indice = i
+	var siguiente: ItemData = compatibles[(indice + 1) % compatibles.size()]
+	var devueltas: int = arma.balas_cargadas
+	if devueltas > 0:
+		var inventario := _inventario()
+		if inventario == null or not inventario.agregar_municion(arma.municion_cargada, devueltas):
+			_mensaje_debug = "No hay lugar en el inventario para devolver las balas del cargador."
+			return
+		arma.balas_cargadas = 0
+	arma.municion_cargada = siguiente
+	_mensaje_debug = "Tipo de bala: %s." % siguiente.nombre
+	if devueltas > 0:
+		_mensaje_debug += " Se devolvieron %d balas al inventario." % devueltas
 
 
 func _grilla() -> Node:

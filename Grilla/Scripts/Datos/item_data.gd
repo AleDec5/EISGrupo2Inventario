@@ -65,6 +65,8 @@ const NOMBRES_TIPO: Dictionary = {
 @export var alcance: float = 0.0
 @export var capacidad_cargador: int = 0
 @export var calibre: String = ""
+@export var tiempo_recarga: float = 0.0
+@export var textura_unidad: Texture2D
 
 @export_group("Efecto al consumir")
 @export var cura_instantanea: int = 0
@@ -82,6 +84,18 @@ const NOMBRES_TIPO: Dictionary = {
 
 func es_consumible() -> bool:
 	return tipo == Tipo.CONSUMIBLE
+
+
+func es_municion() -> bool:
+	return tipo == Tipo.MUNICION
+
+
+func es_arma_recargable() -> bool:
+	return tipo == Tipo.ARMA and capacidad_cargador > 0
+
+
+func acepta_municion(otra: ItemData) -> bool:
+	return otra != null and otra.es_municion() and calibre != "" and calibre.nocasecmp_to(otra.calibre) == 0
 
 
 func se_puede_equipar() -> bool:

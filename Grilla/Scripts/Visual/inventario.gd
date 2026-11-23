@@ -24,6 +24,91 @@ func agregar_item(item_data: ItemData) -> void:
 	if not exito:
 		nuevo_item.queue_free()
 
+func _es_pila_de(item: Node, data_municion: ItemData) -> bool:
+	return not item.esta_agarrado and item.data.es_municion() and item.data.es_mismo(data_municion)
+
+
+func contar_municion(data_municion: ItemData) -> int:
+	var total: int = 0
+	for item in grilla_item.obtener_items():
+		if _es_pila_de(item, data_municion):
+			total += item.cantidad
+	return total
+
+
+func consumir_municion(data_municion: ItemData, cantidad_pedida: int) -> int:
+	var pilas: Array[Node] = []
+	for item in grilla_item.obtener_items():
+		if _es_pila_de(item, data_municion):
+			pilas.append(item)
+	pilas.sort_custom(func(a: Node, b: Node) -> bool: return a.cantidad < b.cantidad)
+	var restante: int = cantidad_pedida
+	for pila in pilas:
+		if restante <= 0:
+			break
+		var toma: int = mini(restante, pila.cantidad)
+		restante -= toma
+		if toma >= pila.cantidad:
+			grilla_item.sacar_item_de_data_casilla(pila)
+			pila.queue_free()
+		else:
+			pila.cantidad -= toma
+	return cantidad_pedida - restante
+
+
+func agregar_municion(data_municion: ItemData, total: int) -> bool:
+	var restante: int = total
+	var incrementos: Array = []
+	for item in grilla_item.obtener_items():
+		if restante <= 0:
+			break
+		if not _es_pila_de(item, data_municion):
+			continue
+		var cabe: int = mini(data_municion.cantidad_maxima - item.cantidad, restante)
+		if cabe > 0:
+			item.cantidad += cabe
+			incrementos.append([item, cabe])
+			restante -= cabe
+	var nuevos: Array[Node] = []
+	while restante > 0:
+		var nuevo = item_scene.instantiate()
+		nuevo.data = data_municion
+		nuevo.cantidad = mini(restante, data_municion.cantidad_maxima)
+		nuevo.tier = data_municion.tier
+		nuevo.nivel = data_municion.nivel
+		add_child(nuevo)
+		if not grilla_item.intentar_agregar_item_data(nuevo):
+			nuevo.queue_free()
+			for creado in nuevos:
+				grilla_item.sacar_item_de_data_casilla(creado)
+				creado.queue_free()
+			for par in incrementos:
+				par[0].cantidad -= par[1]
+			return false
+		nuevos.append(nuevo)
+		restante -= nuevo.cantidad
+	return true
+
+
+func municiones_compatibles(arma: ItemData) -> Array[ItemData]:
+	var candidatas: Array[ItemData] = []
+	candidatas.append_array(items)
+	for item in grilla_item.obtener_items():
+		candidatas.append(item.data)
+	var resultado: Array[ItemData] = []
+	for candidata in candidatas:
+		if not arma.acepta_municion(candidata):
+			continue
+		var repetida := false
+		for existente in resultado:
+			if existente.es_mismo(candidata):
+				repetida = true
+				break
+		if not repetida:
+			resultado.append(candidata)
+	return resultado
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return

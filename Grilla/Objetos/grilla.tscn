@@ -153,7 +153,7 @@ metadata/_custom_type_script = "uid://x0iaucbqh0di"
 [sub_resource type="Resource" id="Resource_egqu4"]
 script = ExtResource("2_rf6od")
 nombre = "Pistola"
-descripcion = "Pistola 9mm. Capacidad de cargador: 16 balas."
+descripcion = "Pistola 9mm. Capacidad de cargador: 9 balas."
 tipo = 1
 categoria_icono = 1
 dimensiones = Vector2i(2, 1)
@@ -163,7 +163,7 @@ tier = 3
 dano = 10.0
 dps = 10.0
 disparos_por_segundo = 1.0
-capacidad_cargador = 16
+capacidad_cargador = 9
 calibre = "Pistola"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
@@ -304,6 +304,7 @@ script = ExtResource("2_rf6od")
 nombre = "Libro maldito"
 descripcion = "Escrito en el lenguaje perdido de un reino que jamas existió. Resiliencia Infernal: cada vez que recibís daño, recuperás un 12% del daño recibido en forma de regeneración, durante 3 segundos."
 tipo = 7
+categoria_icono = 6
 dimensiones = Vector2i(2, 2)
 texture = ExtResource("31_m0snj")
 mod_velocidad = -5.0
@@ -338,6 +339,21 @@ nombre = "Munición incendiaria"
 descripcion = "Envuelve en llamas al objetivo durante 4 segundos. La quemadura causa en el enemigo una reducción del 25% de su daño, reduce en 30% su defensa, y lo daña por el 2% de su vida actual por segundo. El DPS es acumulable (5 stacks máximo). Cada bala aumenta en un 10% la duración del efecto."
 tipo = 9
 texture = ExtResource("3_fyf55")
+stackeable = true
+cantidad_inicial = 5
+calibre = "Rifle"
+metadata/_custom_type_script = "uid://x0iaucbqh0di"
+
+[sub_resource type="Resource" id="Resource_n0rml"]
+script = ExtResource("2_rf6od")
+nombre = "Munición normal"
+descripcion = "Munición estándar de fusil. Sin efectos especiales."
+tipo = 9
+texture = ExtResource("3_a2q78")
+stackeable = true
+cantidad_inicial = 12
+dano = 20.0
+calibre = "Rifle"
 metadata/_custom_type_script = "uid://x0iaucbqh0di"
 
 [node name="InventarioGrilla" type="Control" unique_id=639028448]
@@ -356,7 +372,7 @@ offset_right = 70.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_g4a5h")
 script = ExtResource("1_efp76")
-items = Array[ExtResource("2_rf6od")]([SubResource("Resource_p1rba"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_w8k61"), SubResource("Resource_i8sdb"), SubResource("Resource_0lisf"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_o3kor"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx"), SubResource("Resource_o8qx6"), SubResource("Resource_1iarf"), SubResource("Resource_pn52p"), SubResource("Resource_4v8t0"), SubResource("Resource_4vqr3"), SubResource("Resource_m86do")])
+items = Array[ExtResource("2_rf6od")]([SubResource("Resource_p1rba"), SubResource("Resource_auoqk"), SubResource("Resource_s6ksn"), SubResource("Resource_qxa1s"), SubResource("Resource_w8k61"), SubResource("Resource_i8sdb"), SubResource("Resource_0lisf"), SubResource("Resource_rf6od"), SubResource("Resource_egqu4"), SubResource("Resource_d5d12"), SubResource("Resource_tgggm"), SubResource("Resource_o3kor"), SubResource("Resource_ne8bb"), SubResource("Resource_8iw6o"), SubResource("Resource_8bqdx"), SubResource("Resource_eo6bj"), SubResource("Resource_trhmw"), SubResource("Resource_gpstx"), SubResource("Resource_o8qx6"), SubResource("Resource_1iarf"), SubResource("Resource_pn52p"), SubResource("Resource_4v8t0"), SubResource("Resource_4vqr3"), SubResource("Resource_m86do"), SubResource("Resource_n0rml")])
 item_scene = ExtResource("2_fq556")
 
 [node name="Grilla" type="GridContainer" parent="Inventario" unique_id=662261994]
